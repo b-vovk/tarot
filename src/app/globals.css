@@ -128,7 +128,7 @@ body, button, select, input, textarea { font-family: var(--font-inter), ui-sans-
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: url("/images/sunburst-deco.svg") center/cover no-repeat;
+  background: url("/images/compass-deco.svg") center/cover no-repeat;
   opacity: 0.18;
 }
 
@@ -184,7 +184,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
 
 /* Three unique backs */
 .cardBack-0 {
-  background-image: url("/images/lunar-wave.svg");
+  background-image: url("/images/moon-phase-deco.svg");
 }
 .cardBack-1 {
   background-image: url("/images/mystic-star.svg");
@@ -192,6 +192,11 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardBack-2 {
   background-image: url("/images/sunburst-deco.svg");
 }
+/* Additional backs in the same style */
+.cardBack-3 { background-image: url("/images/eclipse-deco.svg"); }
+.cardBack-4 { background-image: url("/images/constellation-deco.svg"); }
+.cardBack-5 { background-image: url("/images/moon-phase-deco.svg"); }
+.cardBack-6 { background-image: url("/images/compass-deco.svg"); }
 
 /* FRONT */
 .cardFront {
@@ -246,6 +251,16 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
 .helper {
   color: var(--muted);
   font-size: 12px;
+}
+
+/* Main emblem above cards */
+.emblemMain {
+  width: 180px;
+  height: 180px;
+  margin: 8px auto 18px;
+  background: url("/images/arcane-sigil.svg") center/contain no-repeat;
+  filter: drop-shadow(0 10px 28px rgba(0,0,0,0.38));
+  opacity: 0.95;
 }
 
 /* Staggered entrance states for cards */
