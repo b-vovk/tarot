@@ -123,6 +123,15 @@ body, button, select, input, textarea { font-family: var(--font-inter), ui-sans-
   padding: 24px 20px 40px;
 }
 
+/* Home background image layer */
+.homeBg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("/images/sunburst-deco.svg") center/cover no-repeat;
+  opacity: 0.18;
+}
+
 h1 { font-size: 28px; margin: 0 0 8px; }
 p  { color: var(--muted); margin: 0 0 24px; }
 

@@ -8,6 +8,7 @@ export default function HomePage() {
 
   return (
     <>
+      <div className="homeBg" aria-hidden="true" />
       <h1>{t("title")}</h1>
       <p>{t("subtitle")}</p>
       <ThreeCardReveal />
