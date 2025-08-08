@@ -2,6 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "./providers";
 import ClientHeader from "@/components/ClientHeader";
+import { Inter, Cormorant_Garamond } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
   title: "Tarot Daily – Reveal your fortune",
@@ -19,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
        
       </head>
       {/* Ignore client-only attrs inserted by extensions */}
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className={`${inter.variable} ${cormorant.variable}`}>
         <Providers>
           <header className="siteHeader">
             <nav className="nav">

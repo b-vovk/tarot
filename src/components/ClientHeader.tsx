@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
@@ -10,7 +11,9 @@ export default function ClientHeader() {
 
   return (
     <>
-      <Link href="/" className="navLink">{t("home")}</Link>
+      <Link href="/" className="brand" aria-label={t("home")}>
+        <Image src="/logo.svg" alt="" className="brandLogo" width={36} height={36} priority aria-hidden />
+      </Link>
       <div className="langSwitcher">
         <label htmlFor="lang-select" className="langLabel"></label>
         <select
