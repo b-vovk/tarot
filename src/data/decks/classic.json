@@ -1,0 +1,8 @@
+[
+  { "id": "major_00_the_fool", "name": "The Fool", "upright": "New beginnings, innocence, free spirit", "reversed": "Recklessness, holding back, risk without plan" },
+  { "id": "major_01_the_magician", "name": "The Magician", "upright": "Manifestation, resourcefulness, power, inspired action", "reversed": "Manipulation, poor planning, untapped talents" },
+  { "id": "major_02_the_high_priestess", "name": "The High Priestess", "upright": "Intuition, inner voice, sacred knowledge", "reversed": "Secrets, withdrawn, disconnected from intuition" },
+  { "id": "cups_ace", "name": "Ace of Cups", "upright": "Love, new feelings, creative flow", "reversed": "Emotional block, repressed feelings" },
+  { "id": "swords_ace", "name": "Ace of Swords", "upright": "Breakthrough, clarity, fresh ideas", "reversed": "Confusion, clouded judgment, misinformation" },
+  { "id": "wands_ace", "name": "Ace of Wands", "upright": "Inspiration, opportunity, growth", "reversed": "Delays, lack of direction" }
+]
