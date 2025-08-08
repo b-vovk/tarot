@@ -43,7 +43,7 @@ export default function ThreeCardReveal() {
   useEffect(() => {
     if (!cards) return;
     setEntered([false, false, false]);
-    const timers: NodeJS.Timeout[] = [];
+    const timers: Array<ReturnType<typeof setTimeout>> = [];
     [0, 1, 2].forEach((i) => {
       timers.push(
         setTimeout(() => {

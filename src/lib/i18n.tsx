@@ -13,16 +13,20 @@ const DICTS: Record<Lang, Dict> = {
     clickToReveal: "Click to reveal",
     reversed: "(reversed)",
     drawAgain: "Draw again",
-    helper: "Reveal all three to draw again."
+    helper: "Reveal all three to draw again.",
+    languageLabel: "Language:",
+    languageAria: "Language selector"
   },
   uk: {
-    home: "Tаро щоднний",
+    home: "Щоденне Таро",
     title: "Три карти Таро",
-    subtitle: "Клікай на кожну карту, щоб відкрити. Без логіну, без API, без БД.",
+    subtitle: "Клікніть на кожну карту, щоб відкрити. Без логіну, без API, без БД.",
     clickToReveal: "Клікніть, щоб відкрити",
     reversed: "(перевернута)",
     drawAgain: "Тягнути знову",
-    helper: "Відкрий усі три, щоб тягнути знову."
+    helper: "Відкрийте всі три, щоб тягнути знову.",
+    languageLabel: "Мова:",
+    languageAria: "Вибір мови"
   }
 };
 

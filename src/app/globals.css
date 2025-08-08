@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* app/globals.css */
 :root {
   --bg: #0f1115;
@@ -6,7 +8,6 @@
   --text: #e6e8f0;
   --muted: #9aa0aa;
 }
-
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -46,10 +47,30 @@ body {
   border-color: rgba(255,255,255,0.06);
 }
 
+/* Language switcher */
+.langSwitcher {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.langLabel {
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.langSelect {
+  background: #1a2030;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
 .container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 24px 16px 40px;
+  padding: 16px 12px 28px;
 }
 
 h1 { font-size: 28px; margin: 0 0 8px; }
@@ -181,5 +202,69 @@ button.primary:hover { filter: brightness(0.95); }
     transition: none !important;
     transform: none !important;
   }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .langLabel { display: none; }
+
+  .container {
+    padding: 14px 12px 24px;
+  }
+
+  .deck {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .cardTitle {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .cardBody {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .actions {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    padding: 9px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .deck {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .siteHeader { position: static; }
+
+  h1 { font-size: 22px; }
+  p  { font-size: 14px; }
+}
+
+@media (max-width: 360px) {
+  .deck {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .navLink { padding: 6px 8px; }
 }
 
