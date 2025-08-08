@@ -10,12 +10,10 @@ export default function Header() {
   return (
     <header className="border-b bg-white">
       <div className="max-w-5xl mx-auto p-3 flex items-center gap-3">
-        <Link href="/" className="font-semibold">Tarot</Link>
+        <Link href="/" className="font-semibold">Tarot Daily</Link>
         <nav className="ml-auto flex items-center gap-2 text-sm">
           <LinkItem href="/">Головна</LinkItem>
           <LinkItem href="/login">Увійти</LinkItem>
-          <LinkItem href="/dashboard">Кабінет</LinkItem>
-          <LinkItem href="/deep">Глибокий розклад</LinkItem>
         </nav>
       </div>
     </header>

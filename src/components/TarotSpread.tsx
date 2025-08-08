@@ -20,22 +20,22 @@ export default function TarotSpread() {
   useEffect(() => {
     if (spread && revealedCount === 3) {
       const payload = {
-        type:'daily',
+        type: 'daily',
         date: new Date().toISOString(),
-        cards: spread.map(s => ({ id:s.card.id, name:s.card.name, reversed:s.reversed, position:s.position })),
+        cards: spread.map(s => ({ id: s.card.id, name: s.card.name, reversed: s.reversed, position: s.position })),
         resultText: summary,
-        isPaid:false,
+        isPaid: false,
       };
       pushLocal(payload);
       persistIfLoggedIn(payload);
     }
   }, [revealedCount, spread, pushLocal, summary]);
 
-  async function persistIfLoggedIn(payload:any) {
+  async function persistIfLoggedIn(payload: any) {
     try {
       await fetch('/api/spreads', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
     } catch {}
@@ -56,7 +56,8 @@ export default function TarotSpread() {
             key={idx}
             data={s.card}
             reversed={s.reversed}
-            onReveal={() => setRevealedCount(c => Math.min(3, c+1))}
+            isRevealed={idx < revealedCount}
+            onReveal={() => setRevealedCount(c => Math.min(3, c + 1))}
           />
         ))}
       </div>
@@ -66,13 +67,10 @@ export default function TarotSpread() {
       </div>
 
       <button
-        className="px-3 py-2 text-sm rounded border border-zinc-300 hover:bg-zinc-50"
-        onClick={() => {
-          setSpread(drawThree());
-          setRevealedCount(0);
-        }}
+        className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100 transition"
+        onClick={() => setRevealedCount(0)}
       >
-        Новий розклад
+        Очистити
       </button>
     </div>
   );
