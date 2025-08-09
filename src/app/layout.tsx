@@ -9,7 +9,7 @@ const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "600"
 
 export const metadata: Metadata = {
   title: "Tarot Daily – Reveal your fortune",
-  description: "Simple 3-card tarot reveal on click",
+  description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/images/lunar-wave.svg" />
         <link rel="preload" as="image" href="/images/moon-phase-deco.svg" />
         <link rel="preload" as="image" href="/images/compass-deco.svg" />
+        <link rel="preload" as="image" href="/images/logo-deco.svg" />
        
       </head>
       {/* Ignore client-only attrs inserted by extensions */}
@@ -33,6 +34,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </header>
           <main className="container">{children}</main>
+          <footer className="siteFooter">
+            <div className="container">
+              © {new Date().getFullYear()} Tarot Daily
+            </div>
+          </footer>
         </Providers>
       </body>
     </html>

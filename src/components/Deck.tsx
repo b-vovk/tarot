@@ -24,7 +24,7 @@ function drawThree(source: Card[]): DrawnCard[] {
   }));
 }
 
-export default function ThreeCardReveal() {
+export default function Deck() {
   const { t } = useI18n();
 
   const [cards, setCards] = useState<DrawnCard[] | null>(null);
@@ -88,6 +88,9 @@ export default function ThreeCardReveal() {
             : "…";
 
           const enterClass = entered[idx] ? "entered" : "enter";
+          const frontImageClass = card?.id 
+            ? `cardFront-${card.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`
+            : "";
 
           return (
             <div
@@ -106,18 +109,20 @@ export default function ThreeCardReveal() {
                 <div className={`cardFace cardBack cardBack-${idx}`} />
 
                 {/* FRONT */}
-                <div className="cardFace cardFront">
-                  <div className="cardTitle">
-                    {card ? (
-                      <>
-                        {card.name}{" "}
-                        {card.position === "reversed" ? t("reversed") : ""}
-                      </>
-                    ) : (
-                      <>Card</>
-                    )}
+                <div className={`cardFace cardFront ${frontImageClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
+                  <div className="cardContent">
+                    <div className="cardTitle">
+                      {card ? (
+                        <>
+                          {card.name}{" "}
+                          {card.position === "reversed" ? t("reversed") : ""}
+                        </>
+                      ) : (
+                        <>Card</>
+                      )}
+                    </div>
+                    <div className="cardBody">{meaning}</div>
                   </div>
-                  <div className="cardBody">{meaning}</div>
                 </div>
               </div>
             </div>
