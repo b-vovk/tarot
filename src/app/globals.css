@@ -258,11 +258,37 @@ p  { color: var(--muted); margin: 0 0 24px; }
   transition: transform 0.3s ease;
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .cardFront:hover .cardContent,
 .cardFront:focus .cardContent {
   transform: translateY(0);
+}
+
+/* Reversed card styling */
+.cardFront.reversed {
+  transform: rotateY(180deg) rotateZ(180deg);
+}
+
+.cardFront.reversed .cardContent {
+  bottom: auto;
+  top: 0;
+  transform: translateY(-100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+  justify-content: flex-start;
+}
+
+.cardFront.reversed:hover .cardContent,
+.cardFront.reversed:focus .cardContent {
+  transform: translateY(0);
+}
+
+.cardFront.reversed .cardTitle,
+.cardFront.reversed .cardBody {
+  transform: rotateZ(180deg);
 }
 
 /* Mobile-friendly: always show content on mobile */
@@ -271,6 +297,18 @@ p  { color: var(--muted); margin: 0 0 24px; }
     transform: translateY(0);
     background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
     padding: 16px 12px 12px;
+  }
+  
+  .cardFront.reversed .cardContent {
+    bottom: auto;
+    top: 0;
+    transform: translateY(0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+  }
+  
+  .cardFront.reversed .cardTitle,
+  .cardFront.reversed .cardBody {
+    transform: rotateZ(180deg);
   }
   
   .cardTitle {
@@ -287,7 +325,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardTitle {
   font-weight: 600;
   font-size: 16px;
-  margin: 0 0 8px;
+  margin: 0;
   text-align: center;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
@@ -295,10 +333,19 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardBody {
   font-size: 13px;
   line-height: 1.4;
-  margin: 0;
+  margin: 0 0 8px;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   opacity: 0.9;
+}
+
+/* Reversed card content spacing */
+.cardFront.reversed .cardBody {
+  margin: 0 0 8px;
+}
+
+.cardFront.reversed .cardTitle {
+  margin: 0;
 }
 
 .actions {

@@ -111,17 +111,17 @@ export default function Deck() {
                 {/* FRONT */}
                 <div className={`cardFace cardFront ${frontImageClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
                   <div className="cardContent">
-                    <div className="cardTitle">
-                      {card ? (
-                        <>
-                          {card.name}{" "}
-                          {card.position === "reversed" ? t("reversed") : ""}
-                        </>
-                      ) : (
-                        <>Card</>
-                      )}
-                    </div>
-                    <div className="cardBody">{meaning}</div>
+                    {card?.position === "reversed" ? (
+                      <>
+                        <div className="cardBody">{meaning}</div>
+                        <div className="cardTitle">{card.name}</div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="cardTitle">{card?.name || "Card"}</div>
+                        <div className="cardBody">{meaning}</div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
