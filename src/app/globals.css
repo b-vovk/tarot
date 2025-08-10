@@ -278,6 +278,9 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardFront-major-02-the-high-priestess { 
   background-image: url("/images/front-high-priestess.svg") !important;
 }
+.cardFront-major-03-the-empress {
+  background-image: url("/images/front-the-empress.svg") !important;
+}
 .cardFront-major-04-the-emperor {
   background-image: url("/images/front-the-emperor.svg") !important;
 }
@@ -305,13 +308,170 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardFront-major-21-the-world {
   background-image: url("/images/front-the-world.svg") !important;
 }
-.cardFront-cups-ace { 
+.cardFront-major-07-the-chariot {
+  background-image: url("/images/front-the-chariot.svg") !important;
+}
+.cardFront-major-08-strength {
+  background-image: url("/images/front-strength.svg") !important;
+}
+.cardFront-major-09-the-hermit {
+  background-image: url("/images/front-the-hermit.svg") !important;
+}
+.cardFront-major-10-wheel-of-fortune {
+  background-image: url("/images/front-wheel-of-fortune.svg") !important;
+}
+.cardFront-major-11-justice {
+  background-image: url("/images/front-justice.svg") !important;
+}
+.cardFront-major-16-the-tower {
+  background-image: url("/images/front-the-tower.svg") !important;
+}
+.cardFront-major-17-the-star {
+  background-image: url("/images/front-the-star.svg") !important;
+}
+.cardFront-major-18-the-moon {
+  background-image: url("/images/front-the-moon.svg") !important;
+}
+.cardFront-major-20-judgement {
+  background-image: url("/images/front-judgement.svg") !important;
+}
+
+/* Minor Arcana — Wands (explicit per-card mappings) */
+.cardFront-wands-01-ace-of-wands {
+  background-image: url("/images/front-ace-of-wands.svg") !important;
+}
+.cardFront-wands-02-two-of-wands {
+  background-image: url("/images/front-two-of-wands.svg") !important;
+}
+.cardFront-wands-03-three-of-wands {
+  background-image: url("/images/front-three-of-wands.svg") !important;
+}
+.cardFront-wands-04-four-of-wands {
+  background-image: url("/images/front-four-of-wands.svg") !important;
+}
+.cardFront-wands-05-five-of-wands {
+  background-image: url("/images/front-five-of-wands.svg") !important;
+}
+.cardFront-wands-06-six-of-wands {
+  background-image: url("/images/front-six-of-wands.svg") !important;
+}
+.cardFront-wands-07-seven-of-wands {
+  background-image: url("/images/front-seven-of-wands.svg") !important;
+}
+.cardFront-wands-08-eight-of-wands {
+  background-image: url("/images/front-eight-of-wands.svg") !important;
+}
+.cardFront-wands-09-nine-of-wands {
+  background-image: url("/images/front-nine-of-wands.svg") !important;
+}
+.cardFront-wands-10-ten-of-wands {
+  background-image: url("/images/front-ten-of-wands.svg") !important;
+}
+
+/* Minor Arcana — Cups (explicit per-card mappings) */
+.cardFront-cups-01-ace-of-cups {
+  background-image: url("/images/front-ace-of-cups.svg") !important;
+}
+.cardFront-cups-02-two-of-cups {
+  background-image: url("/images/front-two-of-cups.svg") !important;
+}
+.cardFront-cups-03-three-of-cups {
+  background-image: url("/images/front-three-of-cups.svg") !important;
+}
+.cardFront-cups-04-four-of-cups {
+  background-image: url("/images/front-four-of-cups.svg") !important;
+}
+.cardFront-cups-05-five-of-cups {
+  background-image: url("/images/front-five-of-cups.svg") !important;
+}
+.cardFront-cups-06-six-of-cups {
+  background-image: url("/images/front-six-of-cups.svg") !important;
+}
+.cardFront-cups-07-seven-of-cups {
+  background-image: url("/images/front-seven-of-cups.svg") !important;
+}
+.cardFront-cups-08-eight-of-cups {
+  background-image: url("/images/front-eight-of-cups.svg") !important;
+}
+.cardFront-cups-09-nine-of-cups {
+  background-image: url("/images/front-nine-of-cups.svg") !important;
+}
+.cardFront-cups-10-ten-of-cups {
+  background-image: url("/images/front-ten-of-cups.svg") !important;
+}
+
+/* Minor Arcana — Swords (explicit per-card mappings) */
+.cardFront-swords-01-ace-of-swords {
+  background-image: url("/images/front-ace-of-swords.svg") !important;
+}
+.cardFront-swords-02-two-of-swords {
+  background-image: url("/images/front-two-of-swords.svg") !important;
+}
+.cardFront-swords-03-three-of-swords {
+  background-image: url("/images/front-three-of-swords.svg") !important;
+}
+.cardFront-swords-04-four-of-swords {
+  background-image: url("/images/front-four-of-swords.svg") !important;
+}
+.cardFront-swords-05-five-of-swords {
+  background-image: url("/images/front-five-of-swords.svg") !important;
+}
+.cardFront-swords-06-six-of-swords {
+  background-image: url("/images/front-six-of-swords.svg") !important;
+}
+.cardFront-swords-07-seven-of-swords {
+  background-image: url("/images/front-seven-of-swords.svg") !important;
+}
+.cardFront-swords-08-eight-of-swords {
+  background-image: url("/images/front-eight-of-swords.svg") !important;
+}
+.cardFront-swords-09-nine-of-swords {
+  background-image: url("/images/front-nine-of-swords.svg") !important;
+}
+.cardFront-swords-10-ten-of-swords {
+  background-image: url("/images/front-ten-of-swords.svg") !important;
+}
+
+/* Minor Arcana — Pentacles (explicit per-card mappings) */
+.cardFront-pentacles-01-ace-of-pentacles {
+  background-image: url("/images/front-ace-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-02-two-of-pentacles {
+  background-image: url("/images/front-two-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-03-three-of-pentacles {
+  background-image: url("/images/front-three-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-04-four-of-pentacles {
+  background-image: url("/images/front-four-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-05-five-of-pentacles {
+  background-image: url("/images/front-five-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-06-six-of-pentacles {
+  background-image: url("/images/front-six-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-07-seven-of-pentacles {
+  background-image: url("/images/front-seven-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-08-eight-of-pentacles {
+  background-image: url("/images/front-eight-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-09-nine-of-pentacles {
+  background-image: url("/images/front-nine-of-pentacles.svg") !important;
+}
+.cardFront-pentacles-10-ten-of-pentacles {
+  background-image: url("/images/front-ten-of-pentacles.svg") !important;
+}
+
+/* Optional generic Aces (legacy) */
+.cardFront-cups-ace {
   background-image: url("/images/front-ace-cups.svg") !important;
 }
-.cardFront-swords-ace { 
+.cardFront-swords-ace {
   background-image: url("/images/front-ace-swords.svg") !important;
 }
-.cardFront-wands-ace { 
+.cardFront-wands-ace {
   background-image: url("/images/front-ace-wands.svg") !important;
 }
 
