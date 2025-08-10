@@ -238,6 +238,12 @@ export default function Deck() {
           const frontImageClass = card?.id 
             ? `cardFront-${card.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`
             : "";
+          const suitClass = card?.id
+            ? (() => {
+                const suit = card.id.split("_")[0];
+                return `suit-${suit}`;
+              })()
+            : "";
 
           return (
             <div
@@ -268,7 +274,7 @@ export default function Deck() {
                 <div className={`cardFace cardBack cardBack-${idx}`} />
 
                 {/* FRONT */}
-                <div className={`cardFace cardFront ${frontImageClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
+                <div className={`cardFace cardFront ${frontImageClass} ${suitClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
                   <div
                     className="cardTitleFixed"
                     onClick={(e) => handleTitleClick(e, idx)}
@@ -308,6 +314,12 @@ export default function Deck() {
             const frontImageClass = modalCard?.id
               ? `cardFront-${modalCard.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`
               : "";
+            const suitClass = modalCard?.id
+              ? (() => {
+                  const suit = modalCard.id.split("_")[0];
+                  return `suit-${suit}`;
+                })()
+              : "";
             const meaning = modalCard
               ? modalCard.position === "upright"
                 ? modalCard.description?.upright ?? modalCard.upright
@@ -315,7 +327,7 @@ export default function Deck() {
               : "";
             return (
               <div
-                className={`mobileModalCard cardFront ${frontImageClass} ${modalCard?.position === "reversed" ? "reversed" : ""}`}
+                className={`mobileModalCard cardFront ${frontImageClass} ${suitClass} ${modalCard?.position === "reversed" ? "reversed" : ""}`}
                 onClick={closeModal}
               >
                 <div className="cardTitleFixed">{modalCard?.name || "Card"}</div>
