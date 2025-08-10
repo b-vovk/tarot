@@ -289,7 +289,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 100%);
   color: white;
   padding: 72px 16px 16px; /* start content below fixed title */
   transform: translateY(100%);
@@ -317,7 +317,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
   bottom: auto;
   top: 0;
   transform: translateY(-100%);
-  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, transparent 100%);
   justify-content: flex-end; /* anchor near visual top (CSS bottom) */
   padding: 16px 16px 72px; /* keep space above bottom-fixed title */
 }
@@ -440,6 +440,74 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
   font-size: 12px;
 }
 
+  /* Mobile modal for card details */
+  .mobileModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+  }
+  /* No explicit close button; tap anywhere closes */
+  .mobileModalCard {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    transform: none !important;
+    backface-visibility: visible !important;
+  }
+  /* In modal, keep reversed text upright and anchored at top */
+  .mobileModalCard.reversed { transform: none !important; }
+  .mobileModalCard.cardFront.reversed .cardContent,
+  .mobileModalCard.cardFront.reversed .cardTitleFixed,
+  .mobileModalCard.cardFront.reversed .cardTitle,
+  .mobileModalCard.cardFront.reversed .cardBody { transform: none !important; }
+  /* Remove per-card close buttons; using global close at top-right */
+  /* Persist overlay content styles in modal on touch */
+  .mobileModalCard .cardContent,
+  .mobileModalCard.cardFront.reversed .cardContent {
+    display: flex !important;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    height: 100%;
+    width: 100%;
+    /* Always use bottom-up gradient in modal */
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.98) 100%) !important;
+  }
+  .mobileModalCard .cardTitle {
+    color: #dabb67 !important;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-shadow: none;
+  }
+  .mobileModalCard .cardTitleFixed {
+    color: #dabb67 !important;
+    z-index: 30 !important;
+    opacity: 1 !important;
+    display: block !important;
+    top: calc(16px + env(safe-area-inset-top));
+    bottom: auto;
+    padding: 0 16px;
+    font-size: clamp(14px, 4.2vw, 20px);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6);
+  }
+  .mobileModalCard.reversed .cardTitleFixed { top: calc(16px + env(safe-area-inset-top)); bottom: auto; }
+  .mobileModalCard .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
+  .mobileModalCard.cardFront.reversed .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
+  @media (max-width: 768px) {
+    .mobileModalOverlay.isOpen { display: flex; }
+  }
+
 /* Main emblem above cards */
 .emblemMain {
   width: 180px;
@@ -520,7 +588,8 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
     gap: 12px;
   }
 
-  .siteHeader { position: static; }
+  /* Keep header visible on mobile */
+  .siteHeader { position: sticky; top: 0; z-index: 10; }
 
   h1 { font-size: 22px; }
   p  { font-size: 14px; }

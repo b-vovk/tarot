@@ -36,6 +36,8 @@ export default function Deck() {
   const [cards, setCards] = useState<DrawnCard[] | null>(null);
   const [revealed, setRevealed] = useState<[boolean, boolean, boolean]>([false, false, false]);
   const [entered, setEntered] = useState<[boolean, boolean, boolean]>([false, false, false]);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
 
   const didMount = useRef(false);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
@@ -83,6 +85,18 @@ export default function Deck() {
     setCards(drawThree(safeDeck));
   }, []);
 
+  // Track mobile environment (touch/no-hover or small screen)
+  useEffect(() => {
+    const updateIsMobile = () => {
+      const noHover = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: none)").matches;
+      const small = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+      setIsMobile(Boolean(noHover || small));
+    };
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
   useEffect(() => {
     if (!cards) return;
     setEntered([false, false, false]);
@@ -114,9 +128,58 @@ export default function Deck() {
     const safeDeck = (deck as Card[]).filter(Boolean);
     setCards(drawThree(safeDeck));
     setRevealed([false, false, false]);
+    setModalIndex(null);
   }
 
   const placeholders = [0, 1, 2];
+
+  function handleTitleClick(e: React.MouseEvent<HTMLDivElement>, index: number) {
+    if (!cards) return;
+    if (isMobile) {
+      e.stopPropagation();
+      if (revealed[index]) {
+        setModalIndex(index);
+      }
+    }
+  }
+
+  function handleTitleKeyDown(e: React.KeyboardEvent<HTMLDivElement>, index: number) {
+    if ((e.key === "Enter" || e.key === " ") && isMobile && revealed[index]) {
+      e.preventDefault();
+      e.stopPropagation();
+      setModalIndex(index);
+    }
+  }
+
+  function closeModal() {
+    setModalIndex(null);
+  }
+
+  // Close modal on Escape
+  useEffect(() => {
+    if (modalIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setModalIndex(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [modalIndex]);
+
+  // Lock body scroll when modal open on mobile
+  useEffect(() => {
+    if (!(isMobile && modalIndex !== null)) return;
+    const prevBody = document.body.style.overflow;
+    const prevHtml = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevBody;
+      document.documentElement.style.overflow = prevHtml;
+    };
+  }, [isMobile, modalIndex]);
 
   return (
     <>
@@ -140,7 +203,13 @@ export default function Deck() {
               key={idx}
               className={`card ${enterClass} ${isRevealed ? "revealed" : ""}`}
               ref={(el) => { cardRefs.current[idx] = el; }}
-              onClick={() => reveal(idx)}
+              onClick={() => {
+                if (isMobile && isRevealed) {
+                  setModalIndex(idx);
+                } else {
+                  reveal(idx);
+                }
+              }}
               onKeyDown={(e) =>
                 (e.key === "Enter" || e.key === " ") && reveal(idx)
               }
@@ -154,7 +223,16 @@ export default function Deck() {
 
                 {/* FRONT */}
                 <div className={`cardFace cardFront ${frontImageClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
-                  <div className="cardTitleFixed">{card?.name || "Card"}</div>
+                  <div
+                    className="cardTitleFixed"
+                    onClick={(e) => handleTitleClick(e, idx)}
+                    onKeyDown={(e) => handleTitleKeyDown(e, idx)}
+                    role={isMobile ? "button" : undefined}
+                    tabIndex={isMobile ? 0 : -1}
+                    aria-label={card ? `${card.name} details` : "Card details"}
+                  >
+                    {card?.name || "Card"}
+                  </div>
                   <div className="cardContent">
                     <div className="cardBody">{meaning}</div>
                   </div>
@@ -175,6 +253,35 @@ export default function Deck() {
         </button>
         {!allRevealed && <span className="helper">{t("helper")}</span>}
       </div>
+
+      {/* Mobile-only modal */}
+      {isMobile && modalIndex !== null && cards && (
+        <div className="mobileModalOverlay isOpen" role="dialog" aria-modal="true" onClick={closeModal}>
+          {(() => {
+            const modalCard = cards[modalIndex];
+            const frontImageClass = modalCard?.id
+              ? `cardFront-${modalCard.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`
+              : "";
+            const meaning = modalCard
+              ? modalCard.position === "upright"
+                ? modalCard.description?.upright ?? modalCard.upright
+                : modalCard.description?.reversed ?? modalCard.reversed
+              : "";
+            return (
+              <div
+                className={`mobileModalCard cardFront ${frontImageClass} ${modalCard?.position === "reversed" ? "reversed" : ""}`}
+                onClick={closeModal}
+              >
+                <div className="cardTitleFixed">{modalCard?.name || "Card"}</div>
+                <div className="cardContent">
+                  <div className="cardTitle">{modalCard?.name || "Card"}</div>
+                  <div className="cardBody">{meaning}</div>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      )}
     </>
   );
 }
