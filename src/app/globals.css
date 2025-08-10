@@ -156,6 +156,10 @@ p  { color: var(--muted); margin: 0 0 24px; }
   gap: clamp(16px, 3vw, 28px);
   align-items: start;
 }
+/* During instant reset, temporarily disable transforms/transitions to avoid flicker */
+/* Hide fronts for unrevealed cards only when a new set just mounted */
+.deck.fresh .card:not(.revealed) .cardFront { visibility: hidden; }
+.deck.fresh .card:not(.revealed) .cardBack { visibility: visible; }
 
 .card {
   width: 100%;

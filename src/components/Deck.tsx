@@ -38,9 +38,13 @@ export default function Deck() {
   const [entered, setEntered] = useState<[boolean, boolean, boolean]>([false, false, false]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [modalIndex, setModalIndex] = useState<number | null>(null);
+  const [isResetting, setIsResetting] = useState<boolean>(false);
+  const [isFresh, setIsFresh] = useState<boolean>(false);
 
   const didMount = useRef(false);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
+  const skipNextEntranceRef = useRef<boolean>(false);
+  const pendingFlipBackCountRef = useRef<number>(0);
 
   // Fit the fixed card title on one line without ellipsis by shrinking font-size on mobile
   useEffect(() => {
@@ -99,6 +103,16 @@ export default function Deck() {
 
   useEffect(() => {
     if (!cards) return;
+    if (skipNextEntranceRef.current) {
+      // Show instantly without entrance animation
+      skipNextEntranceRef.current = false;
+      setEntered([true, true, true]);
+      setIsFresh(true);
+      // clear fresh flag after paint so normal flips show fronts as needed
+      const id = setTimeout(() => setIsFresh(false), 0);
+      return () => clearTimeout(id);
+      return;
+    }
     setEntered([false, false, false]);
     const timers: Array<ReturnType<typeof setTimeout>> = [];
     [0, 1, 2].forEach((i) => {
@@ -125,10 +139,36 @@ export default function Deck() {
   }
 
   function reset() {
-    const safeDeck = (deck as Card[]).filter(Boolean);
-    setCards(drawThree(safeDeck));
-    setRevealed([false, false, false]);
     setModalIndex(null);
+    setIsResetting(true);
+    // Wait for all currently revealed cards to flip back before drawing anew
+    const flipsToWaitFor = revealed.filter(Boolean).length;
+    pendingFlipBackCountRef.current = flipsToWaitFor;
+    setRevealed([false, false, false]);
+    if (flipsToWaitFor === 0) {
+      finalizeReset();
+    }
+  }
+
+  function finalizeReset() {
+    const safeDeck = (deck as Card[]).filter(Boolean);
+    // Prevent entrance animation on the new set
+    skipNextEntranceRef.current = true;
+    setCards(drawThree(safeDeck));
+    setIsResetting(false);
+  }
+
+  function handleFlipTransitionEnd(index: number, e: React.TransitionEvent<HTMLDivElement>) {
+    // Only care about the transform transition of the flip, and only while resetting
+    if (e.propertyName !== "transform" || !isResetting) return;
+    // Ensure this card is now in the back state
+    if (revealed[index]) return;
+    if (pendingFlipBackCountRef.current > 0) {
+      pendingFlipBackCountRef.current -= 1;
+      if (pendingFlipBackCountRef.current === 0) {
+        finalizeReset();
+      }
+    }
   }
 
   const placeholders = [0, 1, 2];
@@ -137,6 +177,7 @@ export default function Deck() {
     if (!cards) return;
     if (isMobile) {
       e.stopPropagation();
+      if (isResetting) return;
       if (revealed[index]) {
         setModalIndex(index);
       }
@@ -147,7 +188,7 @@ export default function Deck() {
     if ((e.key === "Enter" || e.key === " ") && isMobile && revealed[index]) {
       e.preventDefault();
       e.stopPropagation();
-      setModalIndex(index);
+      if (!isResetting) setModalIndex(index);
     }
   }
 
@@ -183,7 +224,7 @@ export default function Deck() {
 
   return (
     <>
-      <div className="deck">
+      <div className={`deck ${isResetting ? "resetting" : ""} ${isFresh ? "fresh" : ""}`}>
         {placeholders.map((idx) => {
           const isRevealed = revealed[idx];
           const card = cards?.[idx] ?? null;
@@ -204,6 +245,7 @@ export default function Deck() {
               className={`card ${enterClass} ${isRevealed ? "revealed" : ""}`}
               ref={(el) => { cardRefs.current[idx] = el; }}
               onClick={() => {
+                if (isResetting) return;
                 if (isMobile && isRevealed) {
                   setModalIndex(idx);
                 } else {
@@ -217,7 +259,11 @@ export default function Deck() {
               tabIndex={0}
               aria-label={`Reveal card ${idx + 1}`}
             >
-              <div className="cardInner">
+              <div
+                className="cardInner"
+                onTransitionEnd={(e) => handleFlipTransitionEnd(idx, e)}
+              >
+                {/* Listen for the end of the flip-back transition */}
                 {/* BACK — unique image per card */}
                 <div className={`cardFace cardBack cardBack-${idx}`} />
 
