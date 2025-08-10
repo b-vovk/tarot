@@ -1,8 +1,62 @@
 [
-  { "id": "major_00_the_fool", "name": "The Fool", "upright": "New beginnings, innocence, free spirit", "reversed": "Recklessness, holding back, risk without plan" },
-  { "id": "major_01_the_magician", "name": "The Magician", "upright": "Manifestation, resourcefulness, power, inspired action", "reversed": "Manipulation, poor planning, untapped talents" },
-  { "id": "major_02_the_high_priestess", "name": "The High Priestess", "upright": "Intuition, inner voice, sacred knowledge", "reversed": "Secrets, withdrawn, disconnected from intuition" },
-  { "id": "cups_ace", "name": "Ace of Cups", "upright": "Love, new feelings, creative flow", "reversed": "Emotional block, repressed feelings" },
-  { "id": "swords_ace", "name": "Ace of Swords", "upright": "Breakthrough, clarity, fresh ideas", "reversed": "Confusion, clouded judgment, misinformation" },
-  { "id": "wands_ace", "name": "Ace of Wands", "upright": "Inspiration, opportunity, growth", "reversed": "Delays, lack of direction" }
+  { 
+    "id": "major_00_the_fool", 
+    "name": "The Fool", 
+    "upright": "New beginnings, innocence, free spirit", 
+    "reversed": "Recklessness, holding back, risk without plan",
+    "description": {
+      "upright": "The Fool represents the beginning of a journey, both literal and spiritual. This card embodies pure potential, unlimited possibilities, and the courage to step into the unknown. The Fool carries a white rose symbolizing purity and innocence, while the white dog at their feet represents loyalty and protection. The mountains in the background suggest challenges ahead, but the Fool approaches them with joy and optimism. This card encourages you to embrace new opportunities with childlike wonder and trust in the universe's guidance. When The Fool appears, it's a sign to take that leap of faith, start that new project, or begin that journey you've been contemplating. Trust in your innocence and the universe will guide your steps.",
+      "reversed": "When The Fool appears reversed, it suggests you may be acting recklessly or taking unnecessary risks without proper consideration. You might be holding back from opportunities due to fear or overthinking. The reversed Fool can also indicate a need to reconnect with your inner child and rediscover the joy of spontaneity. Consider whether you're being too cautious or if you need to plan more carefully before taking action. This position often warns against impulsive decisions while also encouraging you to examine what fears might be holding you back from pursuing your dreams. It's a call to find balance between spontaneity and wisdom."
+    }
+  },
+  { 
+    "id": "major_01_the_magician", 
+    "name": "The Magician", 
+    "upright": "Manifestation, resourcefulness, power, inspired action", 
+    "reversed": "Manipulation, poor planning, untapped talents", 
+    "description": {
+      "upright": "The Magician represents your ability to manifest your desires through focused willpower and the mastery of the four elements. The tools on the table—the cup, sword, wand, and pentacle—symbolize all the resources you need are already available to you. The infinity symbol above the Magician's head represents unlimited potential and the connection between the spiritual and material worlds. This card empowers you to take action, use your skills effectively, and create the reality you envision through determination and resourcefulness. When The Magician appears, it's a powerful reminder that you have everything you need to succeed. Your talents, skills, and resources are all present—now is the time to use them with confidence and purpose.",
+      "reversed": "The reversed Magician suggests you may be misusing your power or talents, perhaps manipulating others or situations for personal gain. You might feel disconnected from your abilities or be failing to recognize the resources available to you. This position often indicates a need to reassess your approach, develop better planning skills, or reconnect with your authentic self rather than trying to control external circumstances. The reversed Magician can also point to untapped potential that you're not utilizing, or a lack of focus that's preventing you from achieving your goals. It's a call to examine your motivations and ensure you're using your power for positive purposes."
+    }
+  },
+  { 
+    "id": "major_02_the_high_priestess", 
+    "name": "The High Priestess", 
+    "upright": "Intuition, inner voice, sacred knowledge", 
+    "reversed": "Secrets, withdrawn, disconnected from intuition", 
+    "description": {
+      "upright": "The High Priestess sits between two pillars representing duality and balance, with the crescent moon at her feet symbolizing intuition and the subconscious mind. She holds the Torah scroll, representing sacred knowledge and wisdom. This card encourages you to trust your inner voice, listen to your intuition, and access the deep wisdom within. The High Priestess represents the power of stillness, meditation, and connecting with your higher self to find answers that lie beyond rational thought. When she appears, it's a sign to quiet your mind, listen to your inner guidance, and trust the wisdom that comes from within. She reminds you that the answers you seek are already present in your subconscious mind.",
+      "reversed": "When the High Priestess appears reversed, you may be ignoring your intuition or feeling disconnected from your inner wisdom. You might be keeping secrets from yourself or others, or withdrawing too much from the world. This position suggests a need to reconnect with your intuitive abilities, perhaps through meditation, journaling, or spending time in nature. It may also indicate that you're being too secretive or need to share your knowledge with others. The reversed High Priestess can also suggest that you're overthinking things or relying too heavily on logic when you should be trusting your gut instincts. It's a call to balance rational thought with intuitive wisdom."
+    }
+  },
+  { 
+    "id": "cups_ace", 
+    "name": "Ace of Cups", 
+    "upright": "Love, new feelings, creative flow", 
+    "reversed": "Emotional block, repressed feelings", 
+    "description": {
+      "upright": "The Ace of Cups represents the pure essence of love, emotion, and spiritual connection. The dove descending with the sacred host symbolizes divine love and blessings pouring into your life. The five streams flowing from the cup represent the five senses and the abundance of emotional experiences available to you. This card heralds new beginnings in love, creativity, and spiritual growth. It encourages you to open your heart, embrace new emotional experiences, and trust in the flow of love and inspiration. When the Ace of Cups appears, it's a sign that love is flowing freely in your life, whether that's romantic love, self-love, or creative inspiration. This is a time to be open to new emotional experiences and trust in the abundance of love that surrounds you.",
+      "reversed": "The reversed Ace of Cups suggests emotional blocks or repressed feelings that are preventing you from experiencing love and joy fully. You might be closing yourself off from new relationships or creative opportunities due to past hurts or fear of vulnerability. This position indicates a need to heal emotional wounds, release past baggage, and open yourself to the love and abundance that surrounds you. The reversed Ace of Cups can also suggest that you're not recognizing the love that's already present in your life, or that you're blocking the flow of creative energy. It's a call to examine what might be preventing you from experiencing emotional fulfillment and to work on healing those blocks."
+    }
+  },
+  { 
+    "id": "swords_ace", 
+    "name": "Ace of Swords", 
+    "upright": "Breakthrough, clarity, fresh ideas", 
+    "reversed": "Confusion, clouded judgment, misinformation", 
+    "description": {
+      "upright": "The Ace of Swords represents mental clarity, breakthrough insights, and the power of truth. The sword piercing through the crown symbolizes cutting through confusion and achieving mental mastery. The hand emerging from the clouds represents divine inspiration and the sudden clarity that comes from above. This card brings fresh ideas, mental breakthroughs, and the ability to see situations with crystal-clear perspective. It empowers you to speak your truth, make decisive choices, and cut through mental obstacles. When the Ace of Swords appears, it's a sign that you're experiencing a moment of mental clarity and breakthrough thinking. Your mind is sharp and focused, and you have the ability to cut through confusion and see the truth of any situation. This is a powerful time for making decisions and speaking your truth.",
+      "reversed": "The reversed Ace of Swords indicates mental confusion, clouded judgment, or the spread of misinformation. You might be struggling to think clearly or make decisions, or you could be receiving conflicting information that's creating doubt. This position suggests a need to slow down, gather more facts, and avoid making hasty decisions until you have greater clarity. The reversed Ace of Swords can also suggest that you're not seeing the truth clearly, or that you're being influenced by others' opinions rather than thinking for yourself. It's a call to clear your mind, seek out accurate information, and trust your own judgment once you have all the facts."
+    }
+  },
+  { 
+    "id": "wands_ace", 
+    "name": "Ace of Wands", 
+    "upright": "Inspiration, opportunity, growth", 
+    "reversed": "Delays, lack of direction", 
+    "description": {
+      "upright": "The Ace of Wands represents the spark of inspiration, new opportunities, and the beginning of creative or spiritual growth. The wand emerging from the ground symbolizes new life and potential, while the castle in the background represents the goals and achievements you can reach. This card brings fresh energy, creative inspiration, and the motivation to pursue your passions. It encourages you to seize new opportunities, trust your creative instincts, and take action on your ideas. When the Ace of Wands appears, it's a sign that you're being given a new creative spark or opportunity. This could be the beginning of a new project, a burst of creative inspiration, or a new direction in your life. The energy is fresh and exciting, and you have the motivation to pursue your dreams with enthusiasm and determination.",
+      "reversed": "The reversed Ace of Wands suggests delays in your plans, lack of direction, or feeling uninspired. You might be experiencing creative blocks or feeling uncertain about which path to take. This position indicates a need to reconnect with your passion, clarify your goals, or wait for the right timing before moving forward. It may also suggest that you need to rest and recharge before taking action. The reversed Ace of Wands can also point to missed opportunities or a lack of follow-through on your ideas. It's a call to examine what might be preventing you from acting on your inspiration and to work on removing those obstacles so you can move forward with your creative vision."
+    }
+  }
 ]

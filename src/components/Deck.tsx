@@ -4,7 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import deck from "@/data/decks/classic.json";
 import { useI18n } from "@/lib/i18n";
 
-type Card = { id: string; name: string; upright?: string; reversed?: string };
+type Card = {
+  id: string;
+  name: string;
+  upright?: string;
+  reversed?: string;
+  description?: { upright?: string; reversed?: string };
+};
 type DrawnCard = Card & { position: "upright" | "reversed" };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -32,6 +38,43 @@ export default function Deck() {
   const [entered, setEntered] = useState<[boolean, boolean, boolean]>([false, false, false]);
 
   const didMount = useRef(false);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
+
+  // Fit the fixed card title on one line without ellipsis by shrinking font-size on mobile
+  useEffect(() => {
+    function fitTitles() {
+      const isMobile = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+      const maxFontSize = isMobile ? 16 : 24; // cap for mobile to match CSS clamp upper-bound
+      const minFontSize = isMobile ? 11 : 14; // lower-bound for mobile
+
+      cardRefs.current.forEach((cardEl) => {
+        if (!cardEl) return;
+        const titles = cardEl.querySelectorAll<HTMLElement>(".cardTitleFixed");
+        if (!titles.length) return;
+        const availableWidth = Math.max(0, cardEl.clientWidth - 20);
+
+        titles.forEach((titleEl) => {
+          titleEl.style.fontSize = `${maxFontSize}px`;
+          const currentScrollWidth = titleEl.scrollWidth;
+          if (currentScrollWidth > availableWidth && availableWidth > 0) {
+            let nextSize = Math.floor((availableWidth / currentScrollWidth) * maxFontSize);
+            nextSize = Math.max(nextSize, minFontSize);
+            titleEl.style.fontSize = `${nextSize}px`;
+            let guard = 20;
+            while (titleEl.scrollWidth > availableWidth && nextSize > minFontSize && guard-- > 0) {
+              nextSize -= 1;
+              titleEl.style.fontSize = `${nextSize}px`;
+            }
+          }
+        });
+      });
+    }
+
+    fitTitles();
+    const onResize = () => fitTitles();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [cards, revealed, entered]);
 
   useEffect(() => {
     if (didMount.current) return;
@@ -83,8 +126,8 @@ export default function Deck() {
           const card = cards?.[idx] ?? null;
           const meaning = card
             ? card.position === "upright"
-              ? card.upright
-              : card.reversed
+              ? card.description?.upright ?? card.upright
+              : card.description?.reversed ?? card.reversed
             : "…";
 
           const enterClass = entered[idx] ? "entered" : "enter";
@@ -96,6 +139,7 @@ export default function Deck() {
             <div
               key={idx}
               className={`card ${enterClass} ${isRevealed ? "revealed" : ""}`}
+              ref={(el) => { cardRefs.current[idx] = el; }}
               onClick={() => reveal(idx)}
               onKeyDown={(e) =>
                 (e.key === "Enter" || e.key === " ") && reveal(idx)
@@ -110,18 +154,9 @@ export default function Deck() {
 
                 {/* FRONT */}
                 <div className={`cardFace cardFront ${frontImageClass} ${card?.position === "reversed" ? "reversed" : ""}`}>
+                  <div className="cardTitleFixed">{card?.name || "Card"}</div>
                   <div className="cardContent">
-                    {card?.position === "reversed" ? (
-                      <>
-                        <div className="cardBody">{meaning}</div>
-                        <div className="cardTitle">{card.name}</div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="cardTitle">{card?.name || "Card"}</div>
-                        <div className="cardBody">{meaning}</div>
-                      </>
-                    )}
+                    <div className="cardBody">{meaning}</div>
                   </div>
                 </div>
               </div>
