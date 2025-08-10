@@ -10,6 +10,9 @@ const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "600"
 export const metadata: Metadata = {
   title: "Tarot Daily – Reveal your fortune",
   description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

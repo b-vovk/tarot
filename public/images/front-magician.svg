@@ -14,30 +14,50 @@
   <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
   <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
 
-  <!-- The Magician motif: infinity halo, tools, radiant burst -->
-  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <!-- infinity halo -->
-    <path d="M-42,0 C-42,-22, 0,-22, 0,0 C0,22, 42,22, 42,0 C42,-22, 0,-22, 0,0 C0,22, -42,22, -42,0"/>
-    
+  <!-- The Magician motif: lemniscate, radiant burst, altar with the four tools -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- lemniscate above -->
+    <path d="M-36,-120 C-36,-136 0,-136 0,-120 C0,-104 36,-104 36,-120 C36,-136 0,-136 0,-120 C0,-104 -36,-104 -36,-120"/>
+
     <!-- radiant burst -->
-    <g opacity="0.85">
-      <line x1="0" y1="-70" x2="0" y2="-48"/>
-      <line x1="0" y1="70" x2="0" y2="48"/>
-      <line x1="-70" y1="0" x2="-48" y2="0"/>
-      <line x1="70" y1="0" x2="48" y2="0"/>
-      <line x1="50" y1="-50" x2="34" y2="-34"/>
-      <line x1="50" y1="50" x2="34" y2="34"/>
-      <line x1="-50" y1="50" x2="-34" y2="34"/>
-      <line x1="-50" y1="-50" x2="-34" y2="-34"/>
+    <g opacity="0.9">
+      <line x1="0" y1="-96" x2="0" y2="-64"/>
+      <line x1="0" y1="96" x2="0" y2="64"/>
+      <line x1="-96" y1="0" x2="-64" y2="0"/>
+      <line x1="96" y1="0" x2="64" y2="0"/>
+      <line x1="68" y1="-68" x2="44" y2="-44"/>
+      <line x1="68" y1="68" x2="44" y2="44"/>
+      <line x1="-68" y1="68" x2="-44" y2="44"/>
+      <line x1="-68" y1="-68" x2="-44" y2="-44"/>
     </g>
-    
-    <!-- tools aligned around -->
-    <path d="M-58,12 h18 v10 h-18 z"/> <!-- cup -->
-    <path d="M12,-20 v22"/> <!-- sword -->
-    <circle cx="38" cy="4" r="6"/> <!-- pentacle -->
-    <path d="M-16,-8 l12,-12"/> <!-- wand -->
-    
-    <!-- center dot -->
+
+    <!-- as above, so below (triangles) -->
+    <path d="M0,-70 l16,28 h-32 z"/>
+    <path d="M0,70 l-16,-28 h32 z"/>
+
+    <!-- altar/table -->
+    <path d="M-110,22 H110"/>
+    <path d="M-100,22 v16 M100,22 v16" opacity="0.7"/>
+
+    <!-- the four tools on the altar -->
+    <!-- cup (left) -->
+    <path d="M-84,4 h28 c0,12 -8,20 -20,20 c12,0 20,-8 20,-20 h-28 z"/>
+    <path d="M-70,24 v10"/>
+    <path d="M-80,36 h20"/>
+
+    <!-- sword (center) -->
+    <path d="M0,-36 v64"/>
+    <path d="M-10,0 h20"/>
+    <path d="M0,-44 v8"/>
+
+    <!-- wand (diagonal) -->
+    <path d="M14,-10 l26,54"/>
+
+    <!-- pentacle (right) -->
+    <circle cx="70" cy="8" r="14"/>
+    <path d="M70,-4 L75,18 L56,6 L84,6 L65,18 Z"/>
+
+    <!-- center spark -->
     <circle cx="0" cy="0" r="4" fill="#dabb67"/>
   </g>
 

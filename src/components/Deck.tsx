@@ -16,9 +16,26 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 function drawThree(source: Card[]): DrawnCard[] {
-  const picked = shuffle(source).slice(0, 3);
-  return picked.map((c) => ({
-    ...c,
+  const deck = source.slice();
+  const initial = shuffle(deck).slice(0, Math.min(3, deck.length));
+
+  // Ensure at least one Major Arcana is present
+  const containsMajor = initial.some((card) => card.id.startsWith("major_"));
+  let picked = initial;
+  if (!containsMajor) {
+    const majorsAvailable = deck.filter(
+      (c) => c.id.startsWith("major_") && !initial.some((p) => p.id === c.id)
+    );
+    if (majorsAvailable.length > 0) {
+      const replacementIndex = Math.floor(Math.random() * initial.length);
+      const major = majorsAvailable[Math.floor(Math.random() * majorsAvailable.length)];
+      picked = initial.slice();
+      picked[replacementIndex] = major;
+    }
+  }
+
+  return picked.map((card) => ({
+    ...card,
     position: Math.random() < 0.5 ? "reversed" : "upright",
   }));
 }

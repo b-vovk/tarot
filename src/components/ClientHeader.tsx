@@ -28,7 +28,7 @@ export default function ClientHeader() {
         <Image src="/logo.svg" alt="" className="brandLogo" width={36} height={36} priority aria-hidden />
       </Link>
       <div className="langSwitcher">
-        <label htmlFor="lang-select" className="langLabel">{t("languageLabel")}</label>
+        <label htmlFor="lang-select" className="langLabel"></label>
         <select
           id="lang-select"
           value={lang}
