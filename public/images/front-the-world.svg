@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- The World motif: laurel wreath, dancer with ribbons, four corner emblems -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- laurel wreath -->
+    <ellipse cx="0" cy="0" rx="96" ry="136"/>
+    <g opacity="0.8">
+      <path d="M0,-136 c-28,24 -52,48 -72,76"/>
+      <path d="M0,-136 c28,24 52,48 72,76"/>
+      <path d="M0,136 c-28,-24 -52,-48 -72,-76"/>
+      <path d="M0,136 c28,-24 52,-48 72,-76"/>
+    </g>
+
+    <!-- dancer -->
+    <circle cx="0" cy="-28" r="10" fill="#dabb67"/>
+    <path d="M0,-18 v56"/>
+    <path d="M-16,6 c12,10 32,10 44,0"/>
+    <!-- ribbons -->
+    <path d="M-12,-8 c-18,10 -28,24 -24,40"/>
+    <path d="M12,-8 c18,10 28,24 24,40"/>
+
+    <!-- corner emblems: man, eagle, lion, bull (simplified icons) -->
+    <g opacity="0.9">
+      <circle cx="-96" cy="-160" r="10"/>
+      <path d="M-96,-146 v10"/>
+      <path d="M96,-160 l12,8 l-12,8 l-12,-8 z"/>
+      <path d="M-96,160 l12,-8 l-12,-8 l-12,8 z"/>
+      <path d="M96,160 h16 l-8,-12 z"/>
+    </g>
+
+    <!-- ground/horizon -->
+    <path d="M-120,110 H120" opacity="0.7"/>
+  </g>
+
+  <title>Tarot Front - The World</title>
+</svg>
+
+

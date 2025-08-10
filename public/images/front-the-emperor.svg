@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- The Emperor motif: throne, crown, scepter & orb, mountains, rams -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- crown -->
+    <path d="M-40,-170 h80 l-8,20 -14,-14 -18,18 -18,-18 -14,14 z"/>
+    <circle cx="0" cy="-150" r="3" fill="#dabb67"/>
+
+    <!-- scepter (right) and orb (left) -->
+    <path d="M50,-110 v80"/>
+    <circle cx="50" cy="-120" r="8"/>
+    <circle cx="-50" cy="-68" r="12"/>
+    <path d="M-50,-80 v50"/>
+
+    <!-- throne back -->
+    <rect x="-84" y="-130" width="168" height="200" rx="12" ry="12"/>
+    <!-- seat -->
+    <rect x="-90" y="40" width="180" height="24" rx="6"/>
+
+    <!-- armrests -->
+    <path d="M-90,-40 v80"/>
+    <path d="M90,-40 v80"/>
+
+    <!-- stylized ram heads on armrests -->
+    <g>
+      <path d="M-90,-30 c-16,-10 -28,8 -16,18 c10,8 22,-2 18,-12"/>
+      <path d="M90,-30 c16,-10 28,8 16,18 c-10,8 -22,-2 -18,-12"/>
+    </g>
+
+    <!-- figure (geometric) -->
+    <circle cx="0" cy="-86" r="12" fill="#dabb67"/>
+    <path d="M0,-74 v72"/>
+    <path d="M-26,-40 h52"/>
+    <path d="M-18,0 h36"/>
+
+    <!-- mountains / order at base -->
+    <g opacity="0.85">
+      <path d="M-120,120 L-70,70 L-30,110 L10,80 L50,120 L100,90"/>
+      <path d="M-120,128 h240"/>
+    </g>
+
+    <!-- laurel/structure lines -->
+    <g opacity="0.5">
+      <path d="M-70,-130 v200"/>
+      <path d="M70,-130 v200"/>
+      <path d="M-84,-10 h168"/>
+    </g>
+  </g>
+
+  <title>Tarot Front - The Emperor</title>
+</svg>
+
+

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Death motif: scythe, white rose, rising sun, river -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- simplified helm/skull -->
+    <circle cx="0" cy="-96" r="12" fill="#dabb67"/>
+    <path d="M-10,-92 h20"/>
+
+    <!-- scythe -->
+    <path d="M-70,-140 c-6,80 8,160 20,236"/>
+    <path d="M-70,-140 c60,-4 106,6 140,26"/>
+
+    <!-- banner with white rose emblem (outlined) -->
+    <rect x="-12" y="-56" width="24" height="40" rx="2"/>
+    <circle cx="0" cy="-36" r="8"/>
+    <path d="M0,-44 c6,6 6,12 0,16 c-6,-4 -6,-10 0,-16z"/>
+
+    <!-- rising sun on horizon -->
+    <circle cx="78" cy="72" r="14" fill="#dabb67"/>
+    <path d="M50,72 h56"/>
+    <path d="M78,44 v14 M62,50 l10,10 M94,50 l-10,10"/>
+
+    <!-- river of transition -->
+    <path d="M-120,96 c40,-10 60,-10 100,0 c40,10 60,10 100,0" opacity="0.8"/>
+
+    <!-- white rose on ground (stylized) -->
+    <g transform="translate(-40,70)">
+      <circle cx="0" cy="0" r="10"/>
+      <path d="M0,-10 c8,6 8,14 0,20 c-8,-6 -8,-14 0,-20z"/>
+      <path d="M-10,0 h20"/>
+    </g>
+
+    <!-- ground line -->
+    <path d="M-120,110 H120" opacity="0.7"/>
+  </g>
+
+  <title>Tarot Front - Death</title>
+</svg>
+
+

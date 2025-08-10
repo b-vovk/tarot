@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Temperance motif: angel, pouring cups, triangle, sun, water/land -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- halo/sun -->
+    <circle cx="0" cy="-120" r="16"/>
+    <g opacity="0.8">
+      <line x1="0" y1="-146" x2="0" y2="-136"/>
+      <line x1="0" y1="-104" x2="0" y2="-114"/>
+      <line x1="-16" y1="-120" x2="-26" y2="-120"/>
+      <line x1="16" y1="-120" x2="26" y2="-120"/>
+    </g>
+
+    <!-- angel wings -->
+    <path d="M-64,-96 c-18,18 -24,40 -10,54 c18,-6 30,-20 34,-38"/>
+    <path d="M64,-96 c18,18 24,40 10,54 c-18,-6 -30,-20 -34,-38"/>
+
+    <!-- torso and head -->
+    <circle cx="0" cy="-92" r="10" fill="#dabb67"/>
+    <path d="M0,-82 v64"/>
+
+    <!-- triangle on chest (balance) -->
+    <path d="M-12,-56 L12,-56 L0,-34 Z"/>
+
+    <!-- cups and flowing water between -->
+    <path d="M-30,-36 l-14,10"/>
+    <path d="M30,-36 l14,10"/>
+    <path d="M-44,-26 c24,8 36,8 58,0"/>
+
+    <!-- stance: one foot on land, one in water -->
+    <path d="M-10,0 h20"/>
+    <path d="M-6,0 v28"/>
+    <path d="M6,0 v20"/>
+
+    <!-- water and land at base -->
+    <g opacity="0.85">
+      <path d="M-120,96 c40,-10 60,-10 100,0 c40,10 60,10 100,0"/>
+      <path d="M-120,120 H-20"/>
+      <path d="M20,120 H120"/>
+    </g>
+
+    <!-- iris/flowers (moderation) -->
+    <g opacity="0.6">
+      <circle cx="-70" cy="84" r="4"/>
+      <circle cx="70" cy="84" r="4"/>
+    </g>
+  </g>
+
+  <title>Tarot Front - Temperance</title>
+</svg>
+
+

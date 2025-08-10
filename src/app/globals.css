@@ -278,6 +278,33 @@ p  { color: var(--muted); margin: 0 0 24px; }
 .cardFront-major-02-the-high-priestess { 
   background-image: url("/images/front-high-priestess.svg") !important;
 }
+.cardFront-major-04-the-emperor {
+  background-image: url("/images/front-the-emperor.svg") !important;
+}
+.cardFront-major-15-the-devil {
+  background-image: url("/images/front-the-devil.svg") !important;
+}
+.cardFront-major-13-death {
+  background-image: url("/images/front-death.svg") !important;
+}
+.cardFront-major-12-the-hanged-man {
+  background-image: url("/images/front-the-hanged-man.svg") !important;
+}
+.cardFront-major-14-temperance {
+  background-image: url("/images/front-temperance.svg") !important;
+}
+.cardFront-major-06-the-lovers {
+  background-image: url("/images/front-the-lovers.svg") !important;
+}
+.cardFront-major-05-the-hierophant {
+  background-image: url("/images/front-the-hierophant.svg") !important;
+}
+.cardFront-major-19-the-sun {
+  background-image: url("/images/front-the-sun.svg") !important;
+}
+.cardFront-major-21-the-world {
+  background-image: url("/images/front-the-world.svg") !important;
+}
 .cardFront-cups-ace { 
   background-image: url("/images/front-ace-cups.svg") !important;
 }
