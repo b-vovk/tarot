@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Strength motif: woman with lion, infinity halo, gentle touch -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- infinity halo -->
+    <path d="M-30,-120 C-30,-136, 0,-136, 0,-120 C0,-104, 30,-104, 30,-120 C30,-136, 0,-136, 0,-120 C0,-104, -30,-104, -30,-120"/>
+
+    <!-- woman -->
+    <circle cx="-10" cy="-86" r="10" fill="#dabb67"/>
+    <path d="M-10,-76 v48"/>
+    <path d="M-24,-56 c8,8 20,8 30,0"/>
+
+    <!-- lion head and mane -->
+    <circle cx="22" cy="-54" r="12"/>
+    <path d="M10,-50 c12,14 20,14 32,0"/>
+
+    <!-- gentle touch -->
+    <path d="M-4,-56 c14,6 16,6 24,0"/>
+
+    <!-- ground line -->
+    <path d="M-120,110 H120" opacity="0.7"/>
+  </g>
+
+  <title>Tarot Front - Strength</title>
+</svg>
+
+

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Judgement motif: angel with trumpet, rising figures, banner -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- angel head -->
+    <circle cx="0" cy="-140" r="10" fill="#dabb67"/>
+    <!-- trumpet -->
+    <path d="M0,-140 h30 l10,6 l-10,6 h-30"/>
+    <!-- banner -->
+    <rect x="14" y="-126" width="28" height="14" rx="2"/>
+
+    <!-- rising figures -->
+    <circle cx="-36" cy="-40" r="6"/>
+    <path d="M-36,-34 v24"/>
+    <circle cx="36" cy="-40" r="6"/>
+    <path d="M36,-34 v24"/>
+    <circle cx="0" cy="-34" r="6"/>
+    <path d="M0,-28 v24"/>
+
+    <!-- coffins/waves -->
+    <g opacity="0.85">
+      <path d="M-60,0 h120"/>
+      <path d="M-80,10 h160"/>
+      <path d="M-120,110 H120"/>
+    </g>
+  </g>
+
+  <title>Tarot Front - Judgement</title>
+</svg>
+
+

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- The Tower motif: struck tower, lightning, falling crowns/bricks -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- tower -->
+    <rect x="-36" y="-110" width="72" height="160" rx="4"/>
+    <path d="M-36,-110 h72"/>
+    <path d="M-28,-96 h56"/>
+
+    <!-- lightning -->
+    <path d="M40,-160 l-14,36 l22,-8 l-14,36"/>
+
+    <!-- falling crown/bricks -->
+    <path d="M-48,-80 l-10,-6 l10,-6 l10,6 z"/>
+    <rect x="-70" y="-60" width="10" height="6" rx="1"/>
+    <rect x="60" y="-64" width="10" height="6" rx="1"/>
+
+    <!-- ground line -->
+    <path d="M-120,110 H120" opacity="0.7"/>
+  </g>
+
+  <title>Tarot Front - The Tower</title>
+</svg>
+
+
