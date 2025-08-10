@@ -1,16 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import deck from "@/data/decks/classic.json";
 import { useI18n } from "@/lib/i18n";
-
-type Card = {
-  id: string;
-  name: string;
-  upright?: string;
-  reversed?: string;
-  description?: { upright?: string; reversed?: string };
-};
+import { loadClassicDeck } from "@/data/decks";
+import type { Card } from "@/data/decks";
 type DrawnCard = Card & { position: "upright" | "reversed" };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -31,7 +24,7 @@ function drawThree(source: Card[]): DrawnCard[] {
 }
 
 export default function Deck() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   const [cards, setCards] = useState<DrawnCard[] | null>(null);
   const [revealed, setRevealed] = useState<[boolean, boolean, boolean]>([false, false, false]);
@@ -40,6 +33,7 @@ export default function Deck() {
   const [modalIndex, setModalIndex] = useState<number | null>(null);
   const [isResetting, setIsResetting] = useState<boolean>(false);
   const [isFresh, setIsFresh] = useState<boolean>(false);
+  const [fullDeck, setFullDeck] = useState<Card[] | null>(null);
 
   const didMount = useRef(false);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
@@ -82,12 +76,38 @@ export default function Deck() {
     return () => window.removeEventListener("resize", onResize);
   }, [cards, revealed, entered]);
 
+  // Load deck per language and keep current drawn cards' ids while updating their text
   useEffect(() => {
-    if (didMount.current) return;
-    didMount.current = true;
-    const safeDeck = (deck as Card[]).filter(Boolean);
-    setCards(drawThree(safeDeck));
-  }, []);
+    let cancelled = false;
+    async function load() {
+      const loaded = await loadClassicDeck(lang);
+      if (cancelled) return;
+      setFullDeck(loaded);
+      setCards((prev) => {
+        if (!prev || prev.length === 0) {
+          return drawThree(loaded.filter(Boolean));
+        }
+        const idToCard: Record<string, Card> = Object.fromEntries(
+          loaded.map((c) => [c.id, c])
+        );
+        return prev.map((dc) => {
+          const updated = idToCard[dc.id];
+          if (!updated) return dc;
+          return {
+            ...dc,
+            name: updated.name,
+            upright: updated.upright,
+            reversed: updated.reversed,
+            description: updated.description,
+          };
+        });
+      });
+    }
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [lang]);
 
   // Track mobile environment (touch/no-hover or small screen)
   useEffect(() => {
@@ -151,7 +171,7 @@ export default function Deck() {
   }
 
   function finalizeReset() {
-    const safeDeck = (deck as Card[]).filter(Boolean);
+    const safeDeck = (fullDeck ?? []).filter(Boolean);
     // Prevent entrance animation on the new set
     skipNextEntranceRef.current = true;
     setCards(drawThree(safeDeck));
@@ -263,7 +283,7 @@ export default function Deck() {
               }
               role="button"
               tabIndex={0}
-              aria-label={`Reveal card ${idx + 1}`}
+              aria-label={`${t("revealCard")} ${idx + 1}`}
             >
               <div
                 className="cardInner"
@@ -281,9 +301,9 @@ export default function Deck() {
                     onKeyDown={(e) => handleTitleKeyDown(e, idx)}
                     role={isMobile ? "button" : undefined}
                     tabIndex={isMobile ? 0 : -1}
-                    aria-label={card ? `${card.name} details` : "Card details"}
+                    aria-label={card ? `${card.name} ${t("details")}` : t("cardDetails")}
                   >
-                    {card?.name || "Card"}
+                    {card?.name || t("card")}
                   </div>
                   <div className="cardContent">
                     <div className="cardBody">{meaning}</div>
@@ -330,9 +350,9 @@ export default function Deck() {
                 className={`mobileModalCard cardFront ${frontImageClass} ${suitClass} ${modalCard?.position === "reversed" ? "reversed" : ""}`}
                 onClick={closeModal}
               >
-                <div className="cardTitleFixed">{modalCard?.name || "Card"}</div>
+                <div className="cardTitleFixed">{modalCard?.name || t("card")}</div>
                 <div className="cardContent">
-                  <div className="cardTitle">{modalCard?.name || "Card"}</div>
+                  <div className="cardTitle">{modalCard?.name || t("card")}</div>
                   <div className="cardBody">{meaning}</div>
                 </div>
               </div>

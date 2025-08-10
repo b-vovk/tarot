@@ -15,18 +15,26 @@ const DICTS: Record<Lang, Dict> = {
     drawAgain: "Draw again",
     helper: "Reveal all three to draw again.",
     languageLabel: "Language:",
-    languageAria: "Language selector"
+    languageAria: "Language selector",
+    revealCard: "Reveal card",
+    details: "details",
+    card: "Card",
+    cardDetails: "Card details"
   },
   uk: {
     home: "Щоденне Таро",
-    title: "Три карти Таро",
-    subtitle: "Клікніть на кожну карту, щоб відкрити. Без логіну, без API, без БД.",
-    clickToReveal: "Клікніть, щоб відкрити",
+    title: "Щоденне Таро — Відкрий свою долю",
+    subtitle: "Карти тримають твою долю. У їхніх символах — твій шлях, твої вибори і те, що ще попереду.",
+    clickToReveal: "Натисніть, щоб відкрити",
     reversed: "(перевернута)",
     drawAgain: "Тягнути знову",
     helper: "Відкрийте всі три, щоб тягнути знову.",
     languageLabel: "Мова:",
-    languageAria: "Вибір мови"
+    languageAria: "Вибір мови",
+    revealCard: "Відкрити карту",
+    details: "деталі",
+    card: "Карта",
+    cardDetails: "Деталі карти"
   }
 };
 
@@ -48,6 +56,13 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof window !== "undefined") window.localStorage.setItem("lang", lang);
+  }, [lang]);
+
+  // Keep the document <html lang> in sync for accessibility and SEO hints
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang;
+    }
   }, [lang]);
 
   const t = useMemo(() => {
