@@ -265,6 +265,8 @@ export default function Deck() {
         {placeholders.map((idx) => {
           const isRevealed = revealed[idx];
           const card = cards?.[idx] ?? null;
+          const aspectLabels = [t("love"), t("life"), t("career")];
+          const backLabel = aspectLabels[idx] ?? "";
           const meaning = card
             ? card.position === "upright"
               ? card.description?.upright ?? card.upright
@@ -308,7 +310,9 @@ export default function Deck() {
               >
                 {/* Listen for the end of the flip-back transition */}
                 {/* BACK — unique image per card */}
-                <div className={`cardFace cardBack cardBack-${idx}`} />
+                <div className={`cardFace cardBack cardBack-${idx}`}>
+                  <div className="cardBackLabel" aria-hidden="true">{backLabel}</div>
+                </div>
 
                 {/* FRONT */}
                 <div className={`cardFace cardFront ${frontImageClass} ${suitClass} ${card?.position === "reversed" ? "reversed" : ""}`}>

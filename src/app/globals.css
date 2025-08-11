@@ -3,6 +3,7 @@
 /* app/globals.css */
 :root {
   /* Mystic deck theme */
+  --header-h: 56px;
   --bg-start: #171a2f;    /* deep indigo */
   --bg-end:   #0b0f1a;    /* space black */
   --card: #141a2b;        /* dark surface */
@@ -157,6 +158,264 @@ p  { color: var(--muted); margin: 0 0 24px; }
   gap: clamp(16px, 3vw, 28px);
   align-items: start;
 }
+
+/* Single page layout: card + info */
+.singleGrid {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(260px, 1fr);
+  gap: clamp(16px, 3vw, 28px);
+  align-items: start;
+}
+.singleGrid .deck {
+  grid-template-columns: minmax(240px, 340px);
+  justify-content: center;
+}
+.singleInfo {
+  background: rgba(14, 20, 34, 0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.singleHeading { margin: 0 0 8px; font-weight: 700; }
+.singleAspect { color: var(--accent); font-weight: 600; margin: 0 0 10px; }
+.singleBody { color: var(--text); opacity: 0.9; }
+.singleBody p { margin: 0 0 10px; line-height: 1.5; }
+
+.singleHeader { text-align: center; margin: 8px 0 12px; }
+
+/* Two-column row: card left, heading right */
+.singleRow {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: clamp(48px, 10vw, 160px);
+  align-items: start;
+}
+.singleColLeft .deck { grid-template-columns: minmax(240px, 340px); }
+.singleColRight h1 { margin: 0 0 8px; }
+.singleColRight { margin-left: clamp(-40px, -5vw, -18px); }
+.singleColRight p { margin: 0 0 10px; color: var(--muted); }
+.singleColRight .singleExtra p { color: var(--text); opacity: 0.92; }
+
+@media (max-width: 768px) {
+  /* Single card page: full-viewport layout without vertical scroll */
+  body.is-single-page { overflow-y: hidden; }
+  .singlePage {
+    height: calc(100dvh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    margin: -8px 0 0 -7px;
+    padding: 8px 8px calc(20px + env(safe-area-inset-bottom)) 8px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+  }
+  /* Override container padding to avoid extra bottom space on single pages */
+  main.container:has(.singlePage) {
+    padding-bottom: 0;
+    height: calc(100dvh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+  }
+  /* Hide footer on single pages */
+  /* Hide footer on mobile for single pages only */
+  body.is-single-page .siteFooter { display: none !important; }
+  body.is-single-page footer.siteFooter { display: none !important; }
+  .singlePage ~ .siteFooter { display: none !important; }
+  .singlePage + .siteFooter { display: none !important; }
+
+  .singleGrid {
+    grid-template-columns: 1fr;
+  }
+  .singleRow { grid-template-columns: 1fr; gap: 12px; }
+  .singleColLeft .deck { grid-template-columns: minmax(220px, 320px); }
+  .singleColRight { text-align: left; margin-left: 0; }
+  /* Reorder for mobile: title (right column) first, then card, then actions */
+  .singleRow { 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1 1 auto; 
+    min-height: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    gap: 8px;
+  }
+  .singleColRight { order: 1; width: 100%; text-align: left; }
+  .singleColLeft { 
+    order: 2; 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1 1 auto; 
+    min-height: 0;
+    width: 100%;
+    align-items: flex-start;
+    position: relative;
+    justify-content: flex-start;
+  }
+
+  /* Ensure no overflow: scale the card to fit viewport between header and actions */
+  .singleColLeft .deck { 
+    flex: 1 1 auto; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: center; 
+    min-height: 0; 
+    width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateX(-5%) !important;
+  }
+  .singleColLeft .deck > .card { 
+    flex: 0 1 auto; 
+    height: 58vh !important; 
+    width: 75vw !important; 
+    margin: 0 0 0 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    max-width: none !important;
+    min-height: 320px !important;
+    min-width: 200px !important;
+    position: relative !important;
+    z-index: 100 !important;
+    top: 0 !important;
+    overflow: hidden !important;
+    perspective: 2000px !important;
+  }
+  
+  .singleColLeft .deck > .card .cardInner,
+  .singleColLeft .deck > .card .cardFace {
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: none !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  
+
+  .singlePage h1 { margin: 0; font-size: 20px; }
+  .singlePage p { margin: 0; font-size: 13px; color: var(--muted); }
+  /* Hide subtitle below the title on mobile single page */
+  .singlePage .singleColRight > p { display: none; }
+  .singlePage .singleExtra { display: none; }
+
+  /* Actions pinned near bottom, but keep within flow to respect keyboards */
+  .singleColLeft .actions { 
+    margin-top: 32px; 
+    justify-content: flex-start; 
+    margin-bottom: 0;
+    position: absolute;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    left: calc(50% - 37.5vw - 5% + 8px);
+    z-index: 10;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+  }
+  
+  .singleColLeft .actions button {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    max-width: 80px !important;
+    min-width: 80px !important;
+    width: 80px !important;
+    flex-shrink: 0 !important;
+    font-size: 10px !important;
+    text-align: center !important;
+    padding: 8px 4px !important;
+  }
+  
+  .singleColLeft .actions button.primary {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    max-width: 80px !important;
+    min-width: 80px !important;
+    width: 80px !important;
+    flex-shrink: 0 !important;
+    font-size: 10px !important;
+    text-align: center !important;
+    padding: 8px 4px !important;
+  }
+  
+  .singleColLeft .actions .helper {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    max-width: calc(75vw - 100px) !important;
+    flex-shrink: 0 !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Ensure single page truly has no vertical scroll on mobile */
+@media (max-width: 768px) { body.is-single-page main.container { padding-bottom: 0 !important; } }
+
+/* Global footer hiding for single pages - mobile only */
+body.is-single-page .siteFooter,
+body.is-single-page footer.siteFooter,
+.singlePage ~ .siteFooter,
+.singlePage + .siteFooter,
+main.container:has(.singlePage) ~ .siteFooter,
+main.container:has(.singlePage) + .siteFooter,
+main.container:has(.singlePage) .siteFooter,
+/* Footer hiding for single pages - only on mobile */
+.siteFooter:has(+ main.container:has(.singlePage)),
+.siteFooter:has(~ main.container:has(.singlePage)) { 
+  display: none !important; 
+}
+
+/* Show footer on desktop/web for all single page footer hiding rules */
+@media (min-width: 769px) {
+  body.is-single-page .siteFooter,
+  body.is-single-page footer.siteFooter,
+  .singlePage ~ .siteFooter,
+  .singlePage + .siteFooter,
+  main.container:has(.singlePage) ~ .siteFooter,
+  main.container:has(.singlePage) + .siteFooter,
+  main.container:has(.singlePage) .siteFooter,
+  .siteFooter:has(+ main.container:has(.singlePage)),
+  .siteFooter:has(~ main.container:has(.singlePage)) { 
+    display: block !important; 
+  }
+}
+
+/* Alternative footer hiding for single pages - only when singlePage exists, mobile only */
+body:has(.singlePage) .siteFooter,
+html:has(.singlePage) .siteFooter { 
+  display: none !important; 
+}
+
+/* Show footer on desktop/web for single pages */
+@media (min-width: 769px) {
+  .siteFooter:has(+ main.container:has(.singlePage)),
+  .siteFooter:has(~ main.container:has(.singlePage)),
+  body:has(.singlePage) .siteFooter,
+  html:has(.singlePage) .siteFooter { 
+    display: block !important; 
+  }
+  
+  /* Force footer to show on desktop for any single page */
+  main.container:has(.singlePage) ~ .siteFooter,
+  main.container:has(.singlePage) + .siteFooter,
+  .singlePage ~ .siteFooter,
+  .singlePage + .siteFooter,
+  body:has(.singlePage) .siteFooter,
+  html:has(.singlePage) .siteFooter,
+  .siteFooter {
+    display: block !important;
+  }
+}
 /* During instant reset, temporarily disable transforms/transitions to avoid flicker */
 /* Hide fronts for unrevealed cards only when a new set just mounted */
 .deck.fresh .card:not(.revealed) .cardFront { visibility: hidden; }
@@ -169,6 +428,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
   perspective: 1000px;
   cursor: pointer;
   outline: none;
+  font-family: var(--font-serif), serif;
 }
 
 .cardInner {
@@ -205,6 +465,25 @@ p  { color: var(--muted); margin: 0 0 24px; }
   background-position: center;
   background-repeat: no-repeat;
   color: var(--muted);
+  font-family: var(--font-serif), serif;
+}
+
+/* Bottom label on back face: Love / Life / Career */
+.cardBackLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  color: var(--accent);
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: clamp(9px, 2.6vw, 13px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 /* Title on back face uses same positioning */
@@ -237,6 +516,7 @@ p  { color: var(--muted); margin: 0 0 24px; }
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  font-family: var(--font-serif), serif;
 }
 
 /* Fixed title embedded on card */
@@ -654,73 +934,86 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
   font-size: 12px;
 }
 
-  /* Mobile modal for card details */
-  .mobileModalOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    backdrop-filter: blur(6px);
-    overflow: hidden;
-  }
-  /* No explicit close button; tap anywhere closes */
-  .mobileModalCard {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    overflow: hidden;
-    transform: none !important;
-    backface-visibility: visible !important;
-  }
-  /* In modal, keep reversed text upright and anchored at top */
-  .mobileModalCard.reversed { transform: none !important; }
-  .mobileModalCard.cardFront.reversed .cardContent,
-  .mobileModalCard.cardFront.reversed .cardTitleFixed,
-  .mobileModalCard.cardFront.reversed .cardTitle,
-  .mobileModalCard.cardFront.reversed .cardBody { transform: none !important; }
-  /* Remove per-card close buttons; using global close at top-right */
-  /* Persist overlay content styles in modal on touch */
-  .mobileModalCard .cardContent,
-  .mobileModalCard.cardFront.reversed .cardContent {
-    display: flex !important;
-    transform: translateY(0) !important;
-    opacity: 1 !important;
-    height: 100%;
-    width: 100%;
-    /* Always use bottom-up gradient in modal */
-    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.98) 100%) !important;
-  }
-  .mobileModalCard .cardTitle {
-    color: #dabb67 !important;
-    font-weight: 700;
-    margin: 0 0 8px;
-    text-shadow: none;
-  }
-  .mobileModalCard .cardTitleFixed {
-    color: #dabb67 !important;
-    z-index: 30 !important;
-    opacity: 1 !important;
-    display: block !important;
-    top: calc(16px + env(safe-area-inset-top));
-    bottom: auto;
-    padding: 0 16px;
-    font-size: clamp(14px, 4.2vw, 20px);
-    text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6);
-  }
-  .mobileModalCard.reversed .cardTitleFixed { top: calc(16px + env(safe-area-inset-top)); bottom: auto; }
-  .mobileModalCard .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
-  .mobileModalCard.cardFront.reversed .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
-  @media (max-width: 768px) {
-    .mobileModalOverlay.isOpen { display: flex; }
-  }
+/* Mobile modal for card details */
+.mobileModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+/* No explicit close button; tap anywhere closes */
+.mobileModalCard {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  transform: none !important;
+  backface-visibility: visible !important;
+  font-family: var(--font-serif), serif;
+}
+
+/* In modal, keep reversed text upright and anchored at top */
+.mobileModalCard.reversed { transform: none !important; }
+.mobileModalCard.cardFront.reversed .cardContent,
+.mobileModalCard.cardFront.reversed .cardTitleFixed,
+.mobileModalCard.cardFront.reversed .cardTitle,
+.mobileModalCard.cardFront.reversed .cardBody { transform: none !important; }
+
+/* Remove per-card close buttons; using global close at top-right */
+/* Persist overlay content styles in modal on touch */
+.mobileModalCard .cardContent,
+.mobileModalCard.cardFront.reversed .cardContent {
+  display: flex !important;
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  height: 100%;
+  width: 100%;
+  /* Always use bottom-up gradient in modal */
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.98) 100%) !important;
+}
+
+.mobileModalCard .cardTitle {
+  color: #dabb67 !important;
+  font-weight: 700;
+  margin: 0 0 8px;
+  text-shadow: none;
+}
+
+.mobileModalCard .cardTitleFixed {
+  color: #dabb67 !important;
+  z-index: 30 !important;
+  opacity: 1 !important;
+  display: block !important;
+  top: calc(16px + env(safe-area-inset-top));
+  bottom: auto;
+  padding: 0 16px;
+  font-size: clamp(14px, 4.2vw, 20px);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6);
+}
+
+.mobileModalCard.reversed .cardTitleFixed { top: calc(16px + env(safe-area-inset-top)); bottom: auto; }
+.mobileModalCard .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
+.mobileModalCard.cardFront.reversed .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
+
+@media (max-width: 768px) {
+  .mobileModalOverlay.isOpen { display: flex; }
+}
+
+/* Hide the original card when modal is open on single page */
+body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
+  visibility: hidden !important;
+}
 
 /* Main emblem above cards */
 .emblemMain {
@@ -816,5 +1109,39 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
   }
 
   .navLink { padding: 6px 8px; }
+}
+
+/* Final override to ensure footer shows on desktop for single pages */
+@media (min-width: 769px) {
+  .siteFooter {
+    display: block !important;
+  }
+  
+  /* Specific override for single pages */
+  body.is-single-page .siteFooter,
+  .singlePage ~ .siteFooter,
+  .singlePage + .siteFooter {
+    display: block !important;
+  }
+  
+  /* Force footer to show on desktop regardless of other rules */
+  footer.siteFooter,
+  .siteFooter {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Ultimate footer override for desktop */
+@media (min-width: 769px) {
+  .siteFooter,
+  footer.siteFooter,
+  body .siteFooter,
+  html .siteFooter {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 }
 
