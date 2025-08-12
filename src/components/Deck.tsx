@@ -61,8 +61,11 @@ export default function Deck() {
   useEffect(() => {
     function fitTitles() {
       const isMobile = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
-      const maxFontSize = isMobile ? 16 : 24; // cap for mobile to match CSS clamp upper-bound
-      const minFontSize = isMobile ? 11 : 14; // lower-bound for mobile
+      const isSinglePage = typeof window !== "undefined" && (window.location.pathname.includes('/love') || window.location.pathname.includes('/career') || window.location.pathname.includes('/destiny'));
+      
+      // Use appropriate font sizes for single pages
+      const maxFontSize = isSinglePage ? (isMobile ? 18 : 30) : (isMobile ? 18 : 52);
+      const minFontSize = isSinglePage ? (isMobile ? 14 : 30) : (isMobile ? 12 : 18);
 
       cardRefs.current.forEach((cardEl) => {
         if (!cardEl) return;
@@ -82,6 +85,28 @@ export default function Deck() {
               nextSize -= 1;
               titleEl.style.fontSize = `${nextSize}px`;
             }
+          }
+          
+          // Ensure proper centering after font size changes
+          titleEl.style.textAlign = 'center';
+          titleEl.style.left = '0';
+          titleEl.style.right = '0';
+          titleEl.style.transform = 'translateX(0)';
+          
+          // Ensure titles are properly flipped for reversed cards
+          if (titleEl.closest('.reversed')) {
+            titleEl.style.transform = 'translateX(0) scaleY(-1)';
+          }
+          
+          // Also ensure other text elements in reversed cards are properly flipped
+          const cardEl = titleEl.closest('.card');
+          if (cardEl && cardEl.classList.contains('reversed')) {
+            const titleElements = cardEl.querySelectorAll('.cardTitle, .cardBody');
+            titleElements.forEach(el => {
+              if (el instanceof HTMLElement) {
+                el.style.transform = 'scaleY(-1)';
+              }
+            });
           }
         });
       });

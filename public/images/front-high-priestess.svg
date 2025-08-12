@@ -14,26 +14,37 @@
   <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
   <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
 
-  <!-- High Priestess motif: pillars, veil, crescent moon -->
-  <g transform="translate(200,320)" stroke="#8b7cf3" stroke-width="1.6" fill="none" opacity="0.85">
-    <!-- pillars -->
-    <path d="M-78,-120 v240"/>
-    <path d="M78,-120 v240"/>
+  <!-- The High Priestess motif: pillars, veil, crescent moon with subtle details -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.9">
+    <!-- pillars with subtle details -->
+    <path d="M-70,-120 v240" stroke-width="2"/>
+    <path d="M70,-120 v240" stroke-width="2"/>
     
-    <!-- veil -->
-    <path d="M-78,-40 C-26,-80, 26,-80, 78,-40"/>
-    <path d="M-78,40 C-26,80, 26,80, 78,40"/>
+    <!-- pillar caps -->
+    <path d="M-75,-120 h10" stroke-width="1.5"/>
+    <path d="M65,-120 h10" stroke-width="1.5"/>
+    <path d="M-75,120 h10" stroke-width="1.5"/>
+    <path d="M65,120 h10" stroke-width="1.5"/>
     
-    <!-- moon -->
-    <circle cx="0" cy="0" r="34" stroke="#dabb67"/>
-    <path d="M-10,-24 a24,24 0 1,0 0,48 a16,24 0 1,1 0,-48" fill="#dabb67" stroke="none"/>
+    <!-- simple veil with subtle curves -->
+    <path d="M-70,-40 C-25,-75, 0,-80, 25,-75, 70,-40" stroke-width="1.8"/>
+    <path d="M-70,0 C-25,-35, 0,-40, 25,-35, 70,0" stroke-width="1.6"/>
+    <path d="M-70,40 C-25,35, 0,40, 25,35, 70,40" stroke-width="1.8"/>
     
-    <!-- mystical symbols -->
+    <!-- moon with subtle details -->
+    <circle cx="0" cy="0" r="30" stroke="#dabb67" stroke-width="2"/>
+    <path d="M-8,-20 a20,20 0 1,0 0,40 a12,20 0 1,1 0,-40" fill="#dabb67" stroke="none"/>
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#dabb67" stroke-width="1" opacity="0.6"/>
+    
+    <!-- subtle mystical elements -->
     <g opacity="0.7">
-      <circle cx="-40" cy="-60" r="3"/>
-      <circle cx="40" cy="-60" r="3"/>
-      <circle cx="-40" cy="60" r="3"/>
-      <circle cx="40" cy="60" r="3"/>
+      <!-- small stars -->
+      <path d="M-45,-80 L-42,-77 L-48,-77 Z" fill="#dabb67"/>
+      <path d="M45,-80 L42,-77 L48,-77 Z" fill="#dabb67"/>
+      
+      <!-- simple dots -->
+      <circle cx="-40" cy="60" r="2" fill="#dabb67"/>
+      <circle cx="40" cy="60" r="2" fill="#dabb67"/>
     </g>
   </g>
 
