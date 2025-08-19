@@ -144,8 +144,10 @@ export default function SingleCard({ aspect, extra }: { aspect: AspectKey; extra
   const backLabel = t(labelKeyMap[aspect]);
 
   return (
-    <div className="singlePage">
-      <div className="singleRow">
+    <>
+      <div className="homeBg" aria-hidden="true" />
+      <div className="singlePage">
+        <div className="singleRow">
         <div className="singleColLeft">
           <div className={`deck`} style={{ height: "100%" }}>
             <div
@@ -236,6 +238,7 @@ export default function SingleCard({ aspect, extra }: { aspect: AspectKey; extra
         </div>
       )}
     </div>
+    </>
   );
 }
 
