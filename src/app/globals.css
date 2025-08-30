@@ -1083,6 +1083,28 @@ html:has(.singlePage) .siteFooter {
   }
 }
 
+/* Web version spacing - ensure it applies */
+@media (min-width: 769px) {
+  .deck .cardFront .cardContent .cardBody {
+    margin: 0 !important; /* Same as single page */
+    padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+  }
+  
+  .deck .cardFront.reversed .cardContent .cardBody {
+    margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  }
+  
+  /* Force web deck spacing with maximum specificity */
+  body:not(.is-mobile) .deck .cardFront .cardContent .cardBody {
+    margin: 0 !important; /* Same as single page */
+    padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+  }
+  
+  body:not(.is-mobile) .deck .cardFront.reversed .cardContent .cardBody {
+    margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  }
+}
+
 .cardTitle {
   font-weight: 600;
   font-size: 32px !important;
@@ -1095,23 +1117,24 @@ html:has(.singlePage) .siteFooter {
 .deck .cardFront .cardContent .cardBody {
   font-size: 18px !important; /* Reduced from 20px to 18px for better fit */
   line-height: 1.2 !important; /* Reduced from 1.3 to 1.2 for tighter line spacing */
-  margin: 0 0 28px !important; /* Same perfect spacing as single page cards */
-  text-align: justify; /* Keep justify but control word spacing */
-  text-justify: inter-word; /* Better word distribution */
+  margin: 0 !important; /* Same as single page */
+  padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+  text-align: justify !important; /* Keep justify but control word spacing */
+  text-justify: inter-word !important; /* Better word distribution */
   word-spacing: -0.1em !important; /* Reduced spacing reduction between words for better readability */
   letter-spacing: 0.02em !important; /* Increased letter spacing for better readability */
-  white-space: normal; /* Allow text wrapping */
-  hyphens: auto; /* Enable automatic hyphenation */
-  overflow-wrap: break-word; /* Break long words if needed */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
-  opacity: 1;
-  font-weight: 500;
-  color: var(--text);
+  white-space: normal !important; /* Allow text wrapping */
+  hyphens: auto !important; /* Enable automatic hyphenation */
+  overflow-wrap: break-word !important; /* Break long words if needed */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6) !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  color: var(--text) !important;
 }
 
 /* Reversed card content spacing */
 .deck .cardFront.reversed .cardContent .cardBody {
-  margin: 0 0 20px !important; /* Same spacing as normal cards in deck */
+  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
   text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
   opacity: 1;
   font-weight: 500;
@@ -1631,4 +1654,26 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
   The clamp() function ensures the font size is always between the base and max values,
   while the scale factor automatically adjusts based on the viewport width.
 */
+
+/* CRITICAL: Force web deck spacing with maximum specificity */
+.deck .cardFront .cardContent .cardBody {
+  margin: 0 !important; /* Same as single page */
+  padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+}
+
+.deck .cardFront.reversed .cardContent .cardBody {
+  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  margin-bottom: 38px !important; /* Force bottom margin */
+}
+
+/* EXTRA CRITICAL: Force spacing with even higher specificity */
+html body .deck .cardFront .cardContent .cardBody {
+  margin: 0 !important; /* Same as single page */
+  padding: var(--spacing-3) 0 var(--spacing-2) !important; /* Same spacing as single page: 12px top, 8px bottom */
+}
+
+html body .deck .cardFront.reversed .cardContent .cardBody {
+  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  margin-bottom: 38px !important; /* Force bottom margin */
+}
 
