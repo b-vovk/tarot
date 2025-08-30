@@ -43,7 +43,16 @@
   --single-title-size: var(--font-size-3xl);      /* 30px */
   --single-title-size-mobile: var(--font-size-2xl); /* 24px */
   --single-body-size: var(--font-size-base);      /* 16px */
-  --single-body-size-mobile: var(--font-size-sm); /* 14px */
+  --single-body-size-mobile: var(--font-size-base); /* 16px - increased from 14px */
+  
+  /* Responsive card title sizing */
+  /* Automatically scales font size based on viewport width */
+  --card-title-base: 20px;                       /* Base size for mobile - increased from 18px to 20px */
+  --card-title-scale: calc(100vw / 60);          /* Responsive scale factor - adjusted for larger base */
+  --card-title-max: 38px;                        /* Maximum size - increased from 36px to 38px */
+  --grid-title-base: 18px;                       /* Base size for grid deck - increased from 16px to 18px */
+  --grid-title-scale: calc(100vw / 75);          /* Responsive scale for grid - adjusted for larger base */
+  --grid-title-max: 34px;                        /* Maximum size for grid - increased from 32px to 34px */
   
   /* Common typography */
   --h1-size: var(--font-size-4xl);               /* 36px */
@@ -199,6 +208,23 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
   align-items: start;
 }
 
+/* Grid deck cards (3 cards) - fully responsive titles */
+.deck .cardTitleFixed {
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  transform: none !important;
+  max-width: none !important;
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  /* Responsive font sizing using CSS variables */
+  /* Automatically scales from 14px to 28px based on viewport width */
+  /* Ensures 20 characters always fit in card width */
+  font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+}
+
 /* Single page layout: card + info */
 .singleGrid {
   display: grid;
@@ -249,6 +275,16 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
+  }
+  
+  /* Mobile: smaller titles for all contexts */
+  .cardTitleFixed {
+    font-size: clamp(14px, 3vw, 20px) !important;
+  }
+  
+  /* Mobile single page: slightly larger */
+  .singlePage .cardTitleFixed {
+    font-size: clamp(16px, 4vw, 24px) !important;
   }
   /* Override container padding to avoid extra bottom space on single pages */
   main.container:has(.singlePage) {
@@ -411,20 +447,35 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
 }
 
 .singlePage .cardBody {
-  font-size: var(--single-body-size) !important;
-  line-height: 1.4;
+  font-size: 28px !important;
+  line-height: 1.3; /* Reduced from 1.5 to 1.3 for tighter line spacing */
   margin: 0 !important;
-  padding: var(--spacing-5) 0 var(--spacing-2) !important;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  opacity: 0.9;
+  padding: var(--spacing-3) 0 var(--spacing-2) !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  word-spacing: -0.1em !important;
+  letter-spacing: 0.02em !important;
+  white-space: normal !important;
+  hyphens: auto !important;
+  overflow-wrap: break-word !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 1;
+  font-weight: 500;
+  color: var(--text);
 }
 
 .singlePage .cardTitleFixed {
-  font-size: var(--single-title-size) !important;
+  font-size: clamp(24px, 5.5vw, 36px) !important;
   font-weight: 700;
   line-height: 1.1;
 }
+
+/* Additional mobile styles for single page title */
+     @media (max-width: 768px) {
+     .singlePage .cardTitleFixed {
+       font-size: clamp(24px, 5.5vw, 30px) !important;
+     }
+   }
 
 /* Mobile adjustments for single page card fonts */
 @media (max-width: 768px) {
@@ -434,10 +485,32 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
   
   .singlePage .cardBody {
     font-size: var(--single-body-size-mobile) !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    word-spacing: -0.1em !important;
+    letter-spacing: 0.02em !important;
+    white-space: normal !important;
+    hyphens: auto !important;
+    overflow-wrap: break-word !important;
   }
   
   .singlePage .cardTitleFixed {
-    font-size: var(--single-title-size-mobile) !important;
+    font-size: clamp(20px, 5vw, 26px) !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    top: 58px !important; /* Even higher position for mobile */
+  }
+  
+  /* Force mobile styles with maximum specificity */
+  body:has(.singlePage) .singlePage .cardTitleFixed {
+    font-size: clamp(20px, 5vw, 26px) !important;
+    top: 58px !important; /* Even higher position for mobile */
+  }
+  
+  /* Mobile reversed card positioning */
+  body:has(.singlePage) .singlePage .cardFront.reversed .cardTitleFixed {
+    top: auto !important;
+    bottom: 61px !important; /* Same distance as top: 58px for consistent positioning */
   }
 }
 
@@ -607,19 +680,35 @@ html:has(.singlePage) .siteFooter {
   position: absolute;
   left: 0;
   right: 0;
-  top: 32px;
+  top: 70px !important; /* Moved from 60px to 70px - slightly lower for better positioning */
   padding: 0 10px;
   color: var(--accent);
   text-align: center;
   text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6);
   z-index: 11; /* above overlay */
-  font-size: 52px;
+  font-size: clamp(var(--card-title-base), var(--card-title-scale), var(--card-title-max)) !important;
   font-weight: 700;
   line-height: 1.2;
   opacity: 1;
   transform: translateX(0);
   width: 100%;
   box-sizing: border-box;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  transform-origin: center;
+  max-width: none;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.02em;
+  font-size-adjust: 0.5;
+  word-spacing: -0.05em;
+  hyphens: none;
+  font-feature-settings: "liga" 1, "kern" 1;
+  font-stretch: condensed;
+  font-variant: normal;
+  font-kerning: normal;
+  font-synthesis: none;
+  font-display: swap;
 }
 
 /* Match title color to motif on front and remove shadow for a clean gold look */
@@ -630,7 +719,7 @@ html:has(.singlePage) .siteFooter {
 
 .cardFront.reversed .cardTitleFixed {
   top: auto;
-  bottom: 32px;
+  bottom: 68px !important; /* Same distance as top: 70px for consistent positioning */
   transform: scaleY(-1) !important;
 }
 
@@ -847,9 +936,11 @@ html:has(.singlePage) .siteFooter {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 100%);
+  background: 
+    linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 100%),
+    radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.95) 60%, transparent 100%);
   color: white;
-  padding: 72px 16px 16px; /* start content below fixed title */
+  padding: 90px 20px 16px; /* start content below fixed title - reduced padding for more text space */
   transform: translateY(100%);
   transition: transform 0.3s ease;
   cursor: pointer;
@@ -881,9 +972,11 @@ html:has(.singlePage) .siteFooter {
   bottom: auto;
   top: 0;
   transform: translateY(-100%);
-  background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, transparent 100%);
+  background: 
+    linear-gradient(180deg, rgba(0,0,0,0.92) 0%, transparent 100%),
+    radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.95) 60%, transparent 100%);
   justify-content: flex-end; /* anchor near visual top (CSS bottom) */
-  padding: 16px 16px 72px; /* keep space above bottom-fixed title */
+  padding: 16px 20px 70px; /* keep space above bottom-fixed title - reduced bottom padding to move content higher */
 }
 
 /* Fallback front images per suit/arcana when no specific per-card image exists */
@@ -930,9 +1023,15 @@ html:has(.singlePage) .siteFooter {
     transform: scaleY(-1) !important;
   }
   
-  .cardTitle {
-    font-size: 12px;
+  .deck .cardTitle {
+    font-size: clamp(10px, 3vw, 16px) !important;
     margin: 0 0 6px;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 4px !important;
   }
   
   .cardBody {
@@ -941,17 +1040,19 @@ html:has(.singlePage) .siteFooter {
   }
 
   /* Smaller, single-line fixed title on mobile */
-  .cardTitleFixed {
-    font-size: clamp(12px, 3.8vw, 18px);
-    top: 16px;
-    padding: 0 8px;
-    white-space: nowrap;
+  .deck .cardFront .cardTitleFixed {
+    font-size: clamp(8px, 2.5vw, 14px) !important;
+    top: 28px !important;
+    padding: 0 4px !important;
+    white-space: nowrap !important;
     transform: translateX(0);
-    width: 100%;
-    box-sizing: border-box;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
   }
-  .cardFront.reversed .cardTitleFixed { 
-    bottom: 16px; 
+  .deck .cardFront.reversed .cardTitleFixed { 
+    bottom: 28px !important; 
     transform: scaleY(-1) !important;
   }
 }
@@ -972,29 +1073,48 @@ html:has(.singlePage) .siteFooter {
 
 /* Ultra-small screens: tighten title further */
 @media (max-width: 360px) {
-  .cardTitleFixed { font-size: 12px; }
+  .deck .cardFront .cardTitleFixed { 
+    font-size: clamp(8px, 2vw, 12px) !important; 
+  }
+  
+  /* Ultra-small single page */
+  .singlePage .cardTitleFixed { 
+    font-size: clamp(14px, 3vw, 20px) !important; 
+  }
 }
 
 .cardTitle {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 32px !important;
   margin: 0;
   text-align: center;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.cardBody {
-  font-size: 16px;
-  line-height: 1.4;
-  margin: 0 0 8px;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  opacity: 0.9;
+/* Web version card body styles */
+.deck .cardFront .cardContent .cardBody {
+  font-size: 18px !important; /* Reduced from 20px to 18px for better fit */
+  line-height: 1.2 !important; /* Reduced from 1.3 to 1.2 for tighter line spacing */
+  margin: 0 0 28px !important; /* Same perfect spacing as single page cards */
+  text-align: justify; /* Keep justify but control word spacing */
+  text-justify: inter-word; /* Better word distribution */
+  word-spacing: -0.1em !important; /* Reduced spacing reduction between words for better readability */
+  letter-spacing: 0.02em !important; /* Increased letter spacing for better readability */
+  white-space: normal; /* Allow text wrapping */
+  hyphens: auto; /* Enable automatic hyphenation */
+  overflow-wrap: break-word; /* Break long words if needed */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 1;
+  font-weight: 500;
+  color: var(--text);
 }
 
 /* Reversed card content spacing */
-.cardFront.reversed .cardBody {
-  margin: 0 0 8px;
+.deck .cardFront.reversed .cardContent .cardBody {
+  margin: 0 0 20px !important; /* Same spacing as normal cards in deck */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 1;
+  font-weight: 500;
 }
 
 .cardFront.reversed .cardTitle {
@@ -1083,20 +1203,69 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
 
 .mobileModalCard .cardTitle {
   color: #dabb67 !important;
-  font-weight: 700;
-  margin: 0 0 16px;
-  text-shadow: none;
-  font-size: clamp(20px, 6vw, 28px);
-  text-align: center;
+  font-weight: 700 !important;
+  margin: 0 0 8px !important;
+  text-shadow: none !important;
+  font-size: clamp(26px, 5.5vw, 38px) !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: 100% !important;
+  padding: 0 8px !important;
+}
+
+/* Additional mobile modal title styles with maximum specificity */
+.mobileModalOverlay.isOpen .mobileModalCard .cardTitle {
+  font-size: clamp(26px, 5.5vw, 38px) !important;
+  font-weight: 700 !important;
+  color: #dabb67 !important;
+  margin: 0 0 8px !important;
+  text-shadow: none !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: 100% !important;
+  padding: 0 8px !important;
+}
+
+.mobileModalOverlay.isOpen .mobileModalCard .cardTitleFixed {
+  font-size: clamp(28px, 6vw, 42px) !important;
+  font-weight: 700 !important;
+  color: #dabb67 !important;
+  position: absolute !important;
+  z-index: 30 !important;
+  opacity: 1 !important;
+  display: block !important;
+  top: calc(16px + env(safe-area-inset-top)) !important;
+  bottom: auto !important;
+  padding: 0 8px !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6) !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
 }
 
 .mobileModalCard .cardBody {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0 0 12px;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  opacity: 0.9;
+  font-size: 18px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 8px !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  word-spacing: -0.1em !important;
+  letter-spacing: 0.02em !important;
+  white-space: normal !important;
+  hyphens: auto !important;
+  overflow-wrap: break-word !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 1;
+  font-weight: 500;
+  color: var(--text);
+  padding: var(--spacing-3);
 }
 
 .mobileModalCard .cardTitleFixed {
@@ -1105,19 +1274,68 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
   z-index: 30 !important;
   opacity: 1 !important;
   display: block !important;
-  top: calc(16px + env(safe-area-inset-top));
-  bottom: auto;
-  padding: 0 16px;
-  font-size: clamp(18px, 5vw, 24px);
-  text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6);
+  top: calc(16px + env(safe-area-inset-top)) !important;
+  bottom: auto !important;
+  padding: 0 8px !important;
+  font-size: clamp(28px, 6vw, 42px) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.6) !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
 }
 
-.mobileModalCard.reversed .cardTitleFixed { top: calc(16px + env(safe-area-inset-top)); bottom: auto; }
+.mobileModalCard.reversed .cardTitleFixed { 
+  top: calc(16px + env(safe-area-inset-top)) !important; 
+  bottom: auto !important; 
+}
 .mobileModalCard .cardContent { padding: 80px 16px 28px; justify-content: flex-start; }
 .mobileModalCard.cardFront.reversed .cardContent { padding: 80px 16px 28px; justify-content: flex-start; }
 
 @media (max-width: 768px) {
   .mobileModalOverlay.isOpen { display: flex; }
+  
+  /* Mobile modal title styles with higher specificity */
+  .mobileModalCard .cardTitleFixed {
+    font-size: clamp(28px, 6vw, 42px) !important;
+    font-weight: 700 !important;
+    color: #dabb67 !important;
+  }
+  
+  .mobileModalCard .cardTitle {
+    font-size: clamp(26px, 5.5vw, 38px) !important;
+    font-weight: 700 !important;
+    color: #dabb67 !important;
+  }
+  
+  /* Force mobile modal styles with maximum specificity */
+  .mobileModalOverlay.isOpen .mobileModalCard .cardTitle {
+    font-size: clamp(26px, 5.5vw, 38px) !important;
+    font-weight: 700 !important;
+    color: #dabb67 !important;
+  }
+  
+  .mobileModalOverlay.isOpen .mobileModalCard .cardTitleFixed {
+    font-size: clamp(28px, 6vw, 42px) !important;
+    font-weight: 700 !important;
+    color: #dabb67 !important;
+  }
+  
+  /* Mobile modal body text styles */
+  .mobileModalOverlay.isOpen .mobileModalCard .cardBody {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    word-spacing: -0.1em !important;
+    letter-spacing: 0.02em !important;
+    white-space: normal !important;
+    hyphens: auto !important;
+    overflow-wrap: break-word !important;
+  }
 }
 
 /* Hide the original card when modal is open on single page */
@@ -1179,14 +1397,24 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
   }
 
   .cardTitle {
-    font-size: 14px;
+    font-size: clamp(18px, 3.5vw, 24px);
     padding: 8px 10px;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .cardBody {
-    font-size: 12px;
-    padding: 10px;
+    font-size: 20px;
+    padding: 12px;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
+    opacity: 1;
   }
+
+
 
   .actions {
     gap: 10px;
@@ -1210,6 +1438,22 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
 
   h1 { font-size: var(--h1-size-mobile); }
   p  { font-size: var(--p-size-mobile); }
+  
+  /* Medium-small screens: adjust title sizes */
+  .cardTitleFixed {
+    font-size: clamp(13px, 2.8vw, 19px) !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .singlePage .cardTitleFixed {
+    font-size: clamp(15px, 3.5vw, 22px) !important;
+  }
+
+
 }
 
 @media (max-width: 360px) {
@@ -1219,6 +1463,20 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
   }
 
   .navLink { padding: 6px 8px; }
+  
+  /* Very small screens: minimal title sizing */
+  .cardTitleFixed {
+    font-size: clamp(11px, 2.2vw, 16px) !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .singlePage .cardTitleFixed {
+    font-size: clamp(13px, 2.8vw, 18px) !important;
+  }
 }
 
 /* Final override to ensure footer shows on desktop for single pages */
@@ -1241,6 +1499,20 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
     visibility: visible !important;
     opacity: 1 !important;
   }
+  
+  /* Desktop: ensure proper title sizing for 20 characters */
+  .cardTitleFixed {
+    font-size: clamp(var(--card-title-base), var(--card-title-scale), var(--card-title-max)) !important;
+  }
+  
+  /* Desktop grid deck (3 cards) - responsive titles */
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+  
+  .singlePage .cardTitleFixed {
+    font-size: clamp(20px, 4.5vw, 28px) !important;
+  }
 }
 
 /* Ultimate footer override for desktop */
@@ -1254,4 +1526,109 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
     opacity: 1 !important;
   }
 }
+
+/* Large screens: optimize title sizing */
+@media (min-width: 1200px) {
+  .cardTitleFixed {
+    font-size: clamp(var(--card-title-base), var(--card-title-scale), var(--card-title-max)) !important;
+  }
+  
+  /* Large screen grid deck (3 cards) - responsive titles */
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+  
+  .singlePage .cardTitleFixed {
+    font-size: clamp(22px, 5vw, 32px) !important;
+  }
+}
+
+/* Extra large screens: responsive titles */
+@media (min-width: 1400px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Ultra large screens: responsive titles */
+@media (min-width: 1600px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Maximum large screens: responsive titles */
+@media (min-width: 1800px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Ultra maximum screens: responsive titles */
+@media (min-width: 2000px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Maximum ultra screens: responsive titles */
+@media (min-width: 2400px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Ultimate ultra screens: responsive titles */
+@media (min-width: 2800px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Maximum ultimate screens: responsive titles */
+@media (min-width: 3200px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Ultimate maximum screens: responsive titles */
+@media (min-width: 3600px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Maximum ultimate screens: responsive titles */
+@media (min-width: 4000px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* Ultimate maximum screens: responsive titles */
+@media (min-width: 5000px) {
+  .deck .cardTitleFixed {
+    font-size: clamp(var(--grid-title-base), var(--grid-title-scale), var(--grid-title-max)) !important;
+  }
+}
+
+/* 
+  Responsive Font System for Grid Deck Cards:
+  
+  How it works:
+  - Base size: 18px (mobile) - increased for better readability
+  - Scale factor: calc(100vw / 75) - automatically adjusts based on viewport width
+  - Maximum size: 34px (large screens) - increased for better visibility
+  - 20 characters always fit in card width
+  - No need for individual media queries - fully responsive!
+  
+  CSS Variables used:
+  --grid-title-base: 18px (minimum size - increased from 16px to 18px)
+  --grid-title-scale: calc(100vw / 75) (responsive scaling - adjusted for larger base)
+  --grid-title-max: 34px (maximum size - increased from 32px to 34px)
+  
+  The clamp() function ensures the font size is always between the base and max values,
+  while the scale factor automatically adjusts based on the viewport width.
+*/
 

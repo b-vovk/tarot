@@ -95,6 +95,31 @@ export default function SingleCard({ aspect, extra }: { aspect: AspectKey; extra
     setModalOpen(false);
   }
 
+  // Auto-scale card titles to fit
+  useEffect(() => {
+    if (!card || !revealed) return;
+    
+    const titleElement = cardRef.current?.querySelector('.cardTitleFixed') as HTMLElement;
+    if (!titleElement) return;
+    
+    const fitTitle = () => {
+      const cardWidth = cardRef.current?.offsetWidth || 0;
+      const titleWidth = titleElement.scrollWidth;
+      const maxWidth = cardWidth - 20; // Account for padding
+      
+      if (titleWidth > maxWidth) {
+        const scale = maxWidth / titleWidth;
+        titleElement.style.transform = `scale(${Math.min(scale, 1)})`;
+      } else {
+        titleElement.style.transform = 'scale(1)';
+      }
+    };
+    
+    fitTitle();
+    window.addEventListener('resize', fitTitle);
+    return () => window.removeEventListener('resize', fitTitle);
+  }, [card, revealed]);
+
   // Close modal on Escape
   useEffect(() => {
     if (!modalOpen) return;
