@@ -396,7 +396,6 @@ export default function Deck() {
                 className={`mobileModalCard cardFront ${frontImageClass} ${suitClass} ${modalCard?.position === "reversed" ? "reversed" : ""}`}
                 onClick={closeModal}
               >
-                <div className="cardTitleFixed">{modalCard?.name || t("card")}</div>
                 <div className="cardContent">
                   <div className="cardTitle">{modalCard?.name || t("card")}</div>
                   <div className="cardBody">{meaning}</div>

@@ -229,7 +229,6 @@ export default function SingleCard({ aspect, extra }: { aspect: AspectKey; extra
             className={`mobileModalCard cardFront ${frontImageClass} ${suitClass}`}
             onClick={closeModal}
           >
-            <div className="cardTitleFixed">{card?.name || t("card")}</div>
             <div className="cardContent">
               <div className="cardTitle">{card?.name || t("card")}</div>
               <div className="cardBody">{meaning}</div>

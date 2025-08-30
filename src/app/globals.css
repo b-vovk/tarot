@@ -1084,9 +1084,10 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
 .mobileModalCard .cardTitle {
   color: #dabb67 !important;
   font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   text-shadow: none;
-  font-size: 28px;
+  font-size: clamp(20px, 6vw, 28px);
+  text-align: center;
 }
 
 .mobileModalCard .cardBody {
@@ -1099,6 +1100,7 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
 }
 
 .mobileModalCard .cardTitleFixed {
+  position: absolute !important;
   color: #dabb67 !important;
   z-index: 30 !important;
   opacity: 1 !important;
@@ -1111,8 +1113,8 @@ button:focus-visible { outline: none; box-shadow: var(--ring); }
 }
 
 .mobileModalCard.reversed .cardTitleFixed { top: calc(16px + env(safe-area-inset-top)); bottom: auto; }
-.mobileModalCard .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
-.mobileModalCard.cardFront.reversed .cardContent { padding: 120px 16px 28px; justify-content: flex-start; }
+.mobileModalCard .cardContent { padding: 80px 16px 28px; justify-content: flex-start; }
+.mobileModalCard.cardFront.reversed .cardContent { padding: 80px 16px 28px; justify-content: flex-start; }
 
 @media (max-width: 768px) {
   .mobileModalOverlay.isOpen { display: flex; }
