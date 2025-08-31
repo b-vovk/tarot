@@ -53,7 +53,7 @@ export default function Deck() {
   const [isFresh, setIsFresh] = useState<boolean>(false);
   const [fullDeck, setFullDeck] = useState<Card[] | null>(null);
 
-  const didMount = useRef(false);
+  // const didMount = useRef(false); // Removed unused variable
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
   const skipNextEntranceRef = useRef<boolean>(false);
   const pendingFlipBackCountRef = useRef<number>(0);
@@ -164,8 +164,10 @@ export default function Deck() {
       setIsMobile(Boolean(noHover || small));
     };
     updateIsMobile();
-    window.addEventListener("resize", updateIsMobile);
-    return () => window.removeEventListener("resize", updateIsMobile);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", updateIsMobile);
+      return () => window.removeEventListener("resize", updateIsMobile);
+    }
   }, []);
 
   useEffect(() => {

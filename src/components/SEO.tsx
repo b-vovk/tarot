@@ -76,7 +76,7 @@ export default function SEO({
     return () => {
       document.head.removeChild(script);
     };
-  }, [title, description, fullUrl, fullImageUrl, type, publishedTime, modifiedTime, author, section, tags]);
+  }, [title, description, fullUrl, fullImageUrl, type, publishedTime, modifiedTime, author, section, tags, url]);
 
   return (
     <Head>

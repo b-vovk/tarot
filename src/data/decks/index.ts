@@ -34,7 +34,7 @@ export async function loadClassicDeck(lang: Lang): Promise<Card[]> {
       const ukModule = await import("./classic.uk.json");
       const ukOverrides = (ukModule.default ?? []) as PartialCard[];
       return mergeDecks(baseDeck as Card[], ukOverrides);
-    } catch (_e) {
+    } catch {
       // Fallback to English deck if overrides missing
       return baseDeck as Card[];
     }

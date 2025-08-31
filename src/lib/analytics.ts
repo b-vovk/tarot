@@ -65,12 +65,12 @@ export const trackTarotService = (serviceType: string, action: string) => {
 };
 
 // Track user journey
-export const trackUserJourney = (step: string, details?: any) => {
+export const trackUserJourney = (step: string, details?: Record<string, unknown>) => {
   trackEvent('user_journey', 'navigation', step);
   
   // Additional data layer push for GTM
-  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-    (window as any).dataLayer.push({
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
       event: 'user_journey',
       step: step,
       details: details,

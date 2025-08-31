@@ -11,7 +11,7 @@ export default function TestAnalyticsPage() {
   useEffect(() => {
     // Check if gtag and GTM are available
     const checkAnalytics = () => {
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         setGtagAvailable(true);
         addResult('✅ gtag function is available');
       } else {
@@ -19,7 +19,7 @@ export default function TestAnalyticsPage() {
         addResult('❌ gtag function is not available');
       }
 
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      if (typeof window !== 'undefined' && window.dataLayer) {
         setGtmAvailable(true);
         addResult('✅ GTM dataLayer is available');
       } else {
@@ -67,8 +67,8 @@ export default function TestAnalyticsPage() {
   };
 
   const testDataLayer = () => {
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
         event: 'test_data_layer',
         test_data: 'analytics_test',
         timestamp: new Date().toISOString(),
@@ -139,8 +139,8 @@ export default function TestAnalyticsPage() {
           </button>
           <button 
             onClick={() => {
-              if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                (window as any).dataLayer.push({
+              if (typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
                   event: 'gtm_test',
                   gtm_id: 'GTM-WBZBZ894',
                   test_type: 'gtm_integration',
@@ -190,9 +190,9 @@ export default function TestAnalyticsPage() {
         <ol>
           <li>Open <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Google Analytics</a></li>
           <li>Go to your property (G-RRFYRMZH30)</li>
-          <li>Click "Reports" → "Realtime" → "Events"</li>
+          <li>Click &quot;Reports&quot; → &quot;Realtime&quot; → &quot;Events&quot;</li>
           <li>Click the test buttons above and watch for events in real-time</li>
-          <li>You should see events like "test_event", "user_engagement", etc.</li>
+          <li>You should see events like &quot;test_event&quot;, &quot;user_engagement&quot;, etc.</li>
         </ol>
       </div>
 
