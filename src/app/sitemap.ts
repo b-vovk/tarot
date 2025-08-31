@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tarotdaily.club';
+  const baseUrl = 'https://www.tarotdaily.club';
   
   return [
     {

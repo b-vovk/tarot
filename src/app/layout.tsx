@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tarotdaily.club",
+    url: "https://www.tarotdaily.club",
     title: "Tarot Daily – Reveal your fortune",
     description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
     siteName: "Tarot Daily",
@@ -45,8 +45,15 @@ export const metadata: Metadata = {
       { url: "/favicon.ico", sizes: "any" },
       { url: "/logo.svg", type: "image/svg+xml" },
     ],
-    apple: "/logo.svg",
+    apple: [
+      { url: "/logo.svg", sizes: "180x180", type: "image/svg+xml" },
+    ],
     shortcut: "/favicon.ico",
+    other: [
+      { rel: "icon", url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+      { rel: "icon", url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { rel: "icon", url: "/logo.svg", sizes: "any", type: "image/svg+xml" },
+    ],
   },
   verification: {
     google: "googlebb31e28a5bd746cc",
@@ -61,6 +68,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
         <link rel="apple-touch-icon" href="/logo.svg" />
+        <link rel="icon" type="image/x-icon" sizes="16x16" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" sizes="any" href="/logo.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="preload" as="image" href="/images/sunburst-deco.svg" />
         <link rel="preload" as="image" href="/images/mystic-star.svg" />
         <link rel="preload" as="image" href="/images/moon-phase-deco.svg" />

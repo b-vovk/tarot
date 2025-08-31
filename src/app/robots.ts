@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://tarotdaily.club/sitemap.xml',
+    sitemap: 'https://www.tarotdaily.club/sitemap.xml',
   };
 }
