@@ -41,7 +41,12 @@ export const metadata: Metadata = {
     images: ["/images/mystic-star.svg"],
   },
   icons: {
-    icon: "/logo.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
+    apple: "/logo.svg",
+    shortcut: "/favicon.ico",
   },
   verification: {
     google: "googlebb31e28a5bd746cc",
@@ -53,6 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+        <link rel="apple-touch-icon" href="/logo.svg" />
         <link rel="preload" as="image" href="/images/sunburst-deco.svg" />
         <link rel="preload" as="image" href="/images/mystic-star.svg" />
         <link rel="preload" as="image" href="/images/moon-phase-deco.svg" />
