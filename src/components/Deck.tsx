@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { loadClassicDeck } from "@/data/decks";
 import type { Card } from "@/data/decks";
+import { trackTarotReading, trackCardSelection, trackReadingCompletion, trackUserEngagement } from "@/lib/analytics";
 type DrawnCard = Card & { position: "upright" | "reversed" };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -127,7 +128,11 @@ export default function Deck() {
       setFullDeck(loaded);
       setCards((prev) => {
         if (!prev || prev.length === 0) {
-          return drawThree(loaded.filter(Boolean));
+          const newCards = drawThree(loaded.filter(Boolean));
+          // Track new reading start
+          const readingType = getReadingType();
+          trackTarotReading(readingType as 'love' | 'career' | 'destiny');
+          return newCards;
         }
         const idToCard: Record<string, Card> = Object.fromEntries(
           loaded.map((c) => [c.id, c])
@@ -193,14 +198,41 @@ export default function Deck() {
 
   const allRevealed = revealed.every(Boolean);
 
+  // Helper function to determine reading type based on current path
+  function getReadingType(): string {
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname.includes('/love')) return 'love';
+      if (window.location.pathname.includes('/career')) return 'career';
+      if (window.location.pathname.includes('/destiny')) return 'destiny';
+    }
+    return 'general';
+  }
+
   function reveal(index: number) {
     if (!cards) return;
-    setRevealed((r) =>
-      r[index] ? r : (r.map((v, i) => (i === index ? true : v)) as typeof r)
-    );
+    
+    // Track card reveal
+    if (cards[index]) {
+      trackCardSelection(cards[index].name, index + 1);
+    }
+    
+    setRevealed((r) => {
+      const newRevealed = r[index] ? r : (r.map((v, i) => (i === index ? true : v)) as typeof r);
+      
+      // Track reading completion when all cards are revealed
+      if (newRevealed.every(Boolean)) {
+        const readingType = getReadingType();
+        trackReadingCompletion(readingType, 0); // Duration will be calculated separately
+      }
+      
+      return newRevealed;
+    });
   }
 
   function reset() {
+    // Track reset action
+    trackUserEngagement('click', 'draw_again_button');
+    
     setModalIndex(null);
     setIsResetting(true);
     // Wait for all currently revealed cards to flip back before drawing anew
@@ -216,8 +248,13 @@ export default function Deck() {
     const safeDeck = (fullDeck ?? []).filter(Boolean);
     // Prevent entrance animation on the new set
     skipNextEntranceRef.current = true;
-    setCards(drawThree(safeDeck));
+    const newCards = drawThree(safeDeck);
+    setCards(newCards);
     setIsResetting(false);
+    
+    // Track new reading after reset
+    const readingType = getReadingType();
+    trackTarotReading(readingType as 'love' | 'career' | 'destiny');
   }
 
   function handleFlipTransitionEnd(index: number, e: React.TransitionEvent<HTMLDivElement>) {
