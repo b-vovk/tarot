@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tarotdaily.com",
+    url: "https://tarotdaily.club",
     title: "Tarot Daily – Reveal your fortune",
     description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
     siteName: "Tarot Daily",
