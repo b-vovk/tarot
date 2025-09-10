@@ -16,7 +16,14 @@ export function generateSharedReadingMetadata(
 ): Metadata {
   const cardNames = sharedData.cards.map(card => card.name).join(', ');
   const title = `Tarot Reading: ${sharedData.readingType} - ${sharedData.date}`;
-  const description = `Discover your ${sharedData.readingType.toLowerCase()} with ${cardNames}. Get insights into your daily fortune with this personalized tarot spread.`;
+  
+  // Detect language based on reading type and date content
+  const hasCyrillic = /[\u0400-\u04FF]/.test(sharedData.readingType + sharedData.date);
+  const isUkrainian = hasCyrillic;
+  
+  const description = isUkrainian 
+    ? `Відкрийте свою ${sharedData.readingType.toLowerCase()} з ${cardNames}. Отримайте інсайти про свою щоденну долю з цим персоналізованим розкладом таро.`
+    : `Discover your ${sharedData.readingType.toLowerCase()} with ${cardNames}. Get insights into your daily fortune with this personalized tarot spread.`;
   
   const baseUrl = 'https://www.tarotdaily.club';
   const fullShareUrl = `${baseUrl}${shareUrl}`;
@@ -39,7 +46,7 @@ export function generateSharedReadingMetadata(
     robots: 'index, follow',
     openGraph: {
       type: 'website',
-      locale: 'en_US',
+      locale: isUkrainian ? 'uk_UA' : 'en_US',
       url: fullShareUrl,
       title,
       description,
@@ -84,11 +91,19 @@ export function generateStructuredData(
   const baseUrl = 'https://www.tarotdaily.club';
   const fullShareUrl = `${baseUrl}${shareUrl}`;
   
+  // Detect language based on reading type and date content
+  const hasCyrillic = /[\u0400-\u04FF]/.test(sharedData.readingType + sharedData.date);
+  const isUkrainian = hasCyrillic;
+  
+  const description = isUkrainian 
+    ? `Відкрийте свою ${sharedData.readingType.toLowerCase()} з ${sharedData.cards.map(card => card.name).join(', ')}. Отримайте інсайти про свою щоденну долю з цим персоналізованим розкладом таро.`
+    : `Discover your ${sharedData.readingType.toLowerCase()} with ${sharedData.cards.map(card => card.name).join(', ')}. Get insights into your daily fortune with this personalized tarot spread.`;
+  
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: `Tarot Reading: ${sharedData.readingType} - ${sharedData.date}`,
-    description: `Discover your ${sharedData.readingType.toLowerCase()} with ${sharedData.cards.map(card => card.name).join(', ')}. Get insights into your daily fortune with this personalized tarot spread.`,
+    description,
     url: fullShareUrl,
     image: `${baseUrl}/images/mystic-star.svg`,
     datePublished: sharedData.date,
