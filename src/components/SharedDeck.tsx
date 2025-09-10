@@ -306,8 +306,8 @@ export default function SharedDeck({ cards, readingType, date }: SharedDeckProps
       // Create compact format: readingType|date|cards
       const compact = `${readingData.readingType}|${readingData.date}|${cardData}`;
       
-      // Encode the compact data directly to base64
-      const encoded = btoa(compact)
+      // Properly encode Unicode strings before base64 encoding
+      const encoded = btoa(encodeURIComponent(compact))
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
         .replace(/=/g, '');
