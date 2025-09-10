@@ -2498,3 +2498,69 @@ html body .deck .cardFront.reversed .cardContent .cardBody {
   }
 }
 
+/* SEO Content Section Styling - Bottom, Less Prominent */
+.seo-content-bottom {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 4rem auto 2rem;
+  max-width: 700px;
+  padding: 0 1rem;
+  opacity: 0.8;
+}
+
+.seo-content-bottom h2 {
+  color: var(--muted);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.seo-content-bottom h3 {
+  color: var(--muted);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.seo-content-bottom p {
+  margin-bottom: 0.75rem;
+  font-size: var(--font-size-sm);
+}
+
+.seo-content-bottom ul {
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+}
+
+.seo-content-bottom li {
+  margin-bottom: 0.25rem;
+  font-size: var(--font-size-sm);
+}
+
+.seo-content-bottom strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .seo-content-bottom {
+    padding: 0 0.5rem;
+    margin: 3rem auto 1.5rem;
+  }
+  
+  .seo-content-bottom h2 {
+    font-size: var(--font-size-base);
+  }
+  
+  .seo-content-bottom h3 {
+    font-size: var(--font-size-sm);
+  }
+  
+  .seo-content-bottom p,
+  .seo-content-bottom li {
+    font-size: var(--font-size-xs);
+  }
+}
+

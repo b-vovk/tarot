@@ -54,7 +54,7 @@ export default function ShareModal({ isOpen, onClose, shareData }: ShareModalPro
           const monthName = match[2].toLowerCase();
           const year = parseInt(match[3]);
           
-          let month = ukrainianMonths[monthName] ?? englishMonths[monthName];
+          const month = ukrainianMonths[monthName] ?? englishMonths[monthName];
           if (month !== undefined) {
             dateObj = new Date(year, month, day);
           }

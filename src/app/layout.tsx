@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import Providers from "./providers";
 import ClientHeader from "@/components/ClientHeader";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.tarotdaily.club'),
   title: "Tarot Daily – Reveal your fortune",
   description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
-  keywords: ["tarot", "fortune", "daily reading", "love", "career", "destiny", "tarot cards", "divination"],
+  keywords: ["tarot daily", "daily tarot reading", "tarot card of the day", "free daily tarot", "tarot daily guidance", "tarot", "fortune", "daily reading", "love", "career", "destiny", "tarot cards", "divination", "tarot reading online", "daily tarot spread"],
   authors: [{ name: "Tarot Daily" }],
   creator: "Tarot Daily",
   publisher: "Tarot Daily",
@@ -37,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tarot Daily – Reveal your fortune",
-    description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
+    title: "Tarot Daily – Free Daily Tarot Reading & Card of the Day",
+    description: "Get your free daily tarot reading with our 3-card spread. Discover your tarot card of the day for love, career, and destiny guidance. Professional tarot readings updated daily.",
     images: ["/images/mystic-star.svg"],
   },
   icons: {
@@ -72,23 +73,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/images/compass-deco.svg" />
         
         {/* Google Analytics Script */}
-        <script
-          async
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RRFYRMZH30"
+          strategy="afterInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-RRFYRMZH30', {
-                page_title: document.title,
-                page_location: window.location.href,
-              });
-            `,
-          }}
-        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RRFYRMZH30', {
+              page_title: document.title,
+              page_location: window.location.href,
+            });
+          `}
+        </Script>
       </head>
       {/* Ignore client-only attrs inserted by extensions */}
       <body suppressHydrationWarning className={`${inter.variable} ${cormorant.variable}`}>

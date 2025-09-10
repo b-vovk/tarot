@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import SharedDeck from '@/components/SharedDeck';
 import { loadClassicDeck, type Card } from '@/data/decks';
+import type { Lang } from '@/lib/i18n';
 import { generateSharedReadingMetadata, generateStructuredData } from '@/lib/metadata';
 
 interface SharedReading {
@@ -21,9 +22,9 @@ interface SharedReading {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     data: string;
-  };
+  }>;
 }
 
 async function decodeSharedData(dataParam: string): Promise<{
@@ -188,7 +189,7 @@ async function decodeSharedData(dataParam: string): Promise<{
 
 async function enrichSharedReading(
   readingData: { cards: Array<{ id: string; position: 'upright' | 'reversed' }>; readingType: string; date: string },
-  lang: string = 'en'
+  lang: Lang = 'en'
 ): Promise<SharedReading> {
   // Load the full deck to get complete card information
   let fullDeck: Card[];
@@ -276,7 +277,7 @@ export default async function SharePage({ params }: PageProps) {
     const shareUrl = `/share/${resolvedParams.data}`;
     
     // Generate structured data
-    const structuredData = generateStructuredData(readingData, shareUrl);
+    const structuredData = generateStructuredData(sharedReading, shareUrl);
 
     return (
       <>

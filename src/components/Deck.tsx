@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { loadClassicDeck } from "@/data/decks";
 import type { Card } from "@/data/decks";
@@ -59,6 +59,20 @@ export default function Deck() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
   const skipNextEntranceRef = useRef<boolean>(false);
   const pendingFlipBackCountRef = useRef<number>(0);
+
+  // Helper function to determine reading type based on current path
+  const getReadingType = useCallback((): string => {
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname.includes('/love')) return t('love');
+      if (window.location.pathname.includes('/career')) return t('career');
+      if (window.location.pathname.includes('/destiny')) return t('destiny');
+      // For the main page, use a more generic reading type
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        return t('home'); // "Tarot Daily" in English, "Щоденне Таро" in Ukrainian
+      }
+    }
+    return t('life');
+  }, [t]);
 
   // Fit the fixed card title on one line without ellipsis by shrinking font-size on mobile
   useEffect(() => {
@@ -156,7 +170,7 @@ export default function Deck() {
     return () => {
       cancelled = true;
     };
-  }, [lang]);
+  }, [lang, getReadingType]);
 
   // Track mobile environment (touch/no-hover or small screen)
   useEffect(() => {
@@ -202,20 +216,6 @@ export default function Deck() {
 
   const allRevealed = revealed.every(Boolean);
 
-  // Helper function to determine reading type based on current path
-  const getReadingType = (): string => {
-    if (typeof window !== 'undefined') {
-      if (window.location.pathname.includes('/love')) return t('love');
-      if (window.location.pathname.includes('/career')) return t('career');
-      if (window.location.pathname.includes('/destiny')) return t('destiny');
-      // For the main page, use a more generic reading type
-      if (window.location.pathname === '/' || window.location.pathname === '') {
-        return t('home'); // "Tarot Daily" in English, "Щоденне Таро" in Ukrainian
-      }
-    }
-    return t('life');
-  };
-
   // Function to generate share data
   function generateShareData() {
     if (!cards) return null;
@@ -229,12 +229,12 @@ export default function Deck() {
       readingType: getReadingType(),
       date: (() => {
         try {
-          return new Date().toLocaleDateString(t('dateFormat') as any, { 
+          return new Date().toLocaleDateString(t('dateFormat') as string, { 
             year: 'numeric', 
             month: 'long', 
             day: 'numeric' 
           });
-        } catch (error) {
+        } catch {
           // Fallback to English if locale is invalid
           return new Date().toLocaleDateString('en-US', { 
             year: 'numeric', 
