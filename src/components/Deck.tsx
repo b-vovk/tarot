@@ -5,6 +5,7 @@ import { useI18n } from "@/lib/i18n";
 import { loadClassicDeck } from "@/data/decks";
 import type { Card } from "@/data/decks";
 import { trackTarotReading, trackCardSelection, trackReadingCompletion, trackUserEngagement } from "@/lib/analytics";
+import ShareModal from "./ShareModal";
 type DrawnCard = Card & { position: "upright" | "reversed" };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -52,6 +53,7 @@ export default function Deck() {
   const [isResetting, setIsResetting] = useState<boolean>(false);
   const [isFresh, setIsFresh] = useState<boolean>(false);
   const [fullDeck, setFullDeck] = useState<Card[] | null>(null);
+  const [showShareModal, setShowShareModal] = useState<boolean>(false);
 
   // const didMount = useRef(false); // Removed unused variable
   const cardRefs = useRef<Array<HTMLDivElement | null>>([null, null, null]);
@@ -201,13 +203,154 @@ export default function Deck() {
   const allRevealed = revealed.every(Boolean);
 
   // Helper function to determine reading type based on current path
-  function getReadingType(): string {
+  const getReadingType = (): string => {
     if (typeof window !== 'undefined') {
-      if (window.location.pathname.includes('/love')) return 'love';
-      if (window.location.pathname.includes('/career')) return 'career';
-      if (window.location.pathname.includes('/destiny')) return 'destiny';
+      if (window.location.pathname.includes('/love')) return t('love');
+      if (window.location.pathname.includes('/career')) return t('career');
+      if (window.location.pathname.includes('/destiny')) return t('destiny');
+      // For the main page, use a more generic reading type
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        return t('home'); // "Tarot Daily" in English, "Щоденне Таро" in Ukrainian
+      }
     }
-    return 'general';
+    return t('life');
+  };
+
+  // Function to generate share data
+  function generateShareData() {
+    if (!cards) return null;
+    
+    const shareData = {
+      cards: cards.map(card => ({
+        id: card.id,
+        name: card.name,
+        position: card.position,
+      })),
+      readingType: getReadingType(),
+      date: (() => {
+        try {
+          return new Date().toLocaleDateString(t('dateFormat') as any, { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+        } catch (error) {
+          // Fallback to English if locale is invalid
+          return new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+        }
+      })(),
+    };
+
+    // Encode the data for the URL using URL-safe base64
+    const encodedData = encodeForUrl(shareData);
+    if (!encodedData) {
+      console.error('Failed to encode share data');
+      return null;
+    }
+    const shareUrl = `${window.location.origin}/share/${encodedData}`;
+    
+    return {
+      ...shareData,
+      shareUrl,
+    };
+  }
+
+  // Function to safely encode data for URLs with ultra-compact encoding
+  function encodeForUrl(data: unknown): string {
+    try {
+      const readingData = data as { cards: Array<{ id: string; position: 'upright' | 'reversed' }>; readingType: string; date: string };
+      
+      // Create short card ID mapping
+      const cardIdMap: Record<string, string> = {
+        'major_00_the_fool': 'F',
+        'major_01_the_magician': 'M',
+        'major_02_the_high_priestess': 'H',
+        'major_03_the_empress': 'E',
+        'major_04_the_emperor': 'P',
+        'major_05_the_hierophant': 'Y',
+        'major_06_the_lovers': 'L',
+        'major_07_the_chariot': 'C',
+        'major_08_strength': 'S',
+        'major_09_the_hermit': 'R',
+        'major_10_wheel_of_fortune': 'W',
+        'major_11_justice': 'J',
+        'major_12_the_hanged_man': 'N',
+        'major_13_death': 'D',
+        'major_14_temperance': 'T',
+        'major_15_the_devil': 'V',
+        'major_16_the_tower': 'O',
+        'major_17_the_star': 'A',
+        'major_18_the_moon': 'B',
+        'major_19_the_sun': 'U',
+        'major_20_judgement': 'G',
+        'major_21_the_world': 'X',
+        'wands_01_ace_of_wands': 'AW',
+        'wands_02_two_of_wands': '2W',
+        'wands_03_three_of_wands': '3W',
+        'wands_04_four_of_wands': '4W',
+        'wands_05_five_of_wands': '5W',
+        'wands_06_six_of_wands': '6W',
+        'wands_07_seven_of_wands': '7W',
+        'wands_08_eight_of_wands': '8W',
+        'wands_09_nine_of_wands': '9W',
+        'wands_10_ten_of_wands': 'TW',
+        'cups_01_ace_of_cups': 'AC',
+        'cups_02_two_of_cups': '2C',
+        'cups_03_three_of_cups': '3C',
+        'cups_04_four_of_cups': '4C',
+        'cups_05_five_of_cups': '5C',
+        'cups_06_six_of_cups': '6C',
+        'cups_07_seven_of_cups': '7C',
+        'cups_08_eight_of_cups': '8C',
+        'cups_09_nine_of_cups': '9C',
+        'cups_10_ten_of_cups': 'TC',
+        'swords_01_ace_of_swords': 'AS',
+        'swords_02_two_of_swords': '2S',
+        'swords_03_three_of_swords': '3S',
+        'swords_04_four_of_swords': '4S',
+        'swords_05_five_of_swords': '5S',
+        'swords_06_six_of_swords': '6S',
+        'swords_07_seven_of_swords': '7S',
+        'swords_08_eight_of_swords': '8S',
+        'swords_09_nine_of_swords': '9S',
+        'swords_10_ten_of_swords': 'TS',
+        'pentacles_01_ace_of_pentacles': 'AP',
+        'pentacles_02_two_of_pentacles': '2P',
+        'pentacles_03_three_of_pentacles': '3P',
+        'pentacles_04_four_of_pentacles': '4P',
+        'pentacles_05_five_of_pentacles': '5P',
+        'pentacles_06_six_of_pentacles': '6P',
+        'pentacles_07_seven_of_pentacles': '7P',
+        'pentacles_08_eight_of_pentacles': '8P',
+        'pentacles_09_nine_of_pentacles': '9P',
+        'pentacles_10_ten_of_pentacles': 'TP'
+      };
+
+      // Encode cards as short strings
+      const cardData = readingData.cards.map(card => {
+        const shortId = cardIdMap[card.id] || card.id;
+        const position = card.position === 'upright' ? 'U' : 'R';
+        return `${shortId}${position}`;
+      }).join('');
+
+      // Create compact format: readingType|date|cards
+      const compact = `${readingData.readingType}|${readingData.date}|${cardData}`;
+      
+      // Encode the compact data directly to base64
+      const encoded = btoa(compact)
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
+      
+      return encoded;
+    } catch (error) {
+      console.error('Error encoding share data:', error);
+      return '';
+    }
   }
 
   function reveal(index: number) {
@@ -408,6 +551,14 @@ export default function Deck() {
         >
           {t("drawAgain")}
         </button>
+        {allRevealed && cards && (
+          <button
+            className="secondary shareButton"
+            onClick={() => setShowShareModal(true)}
+          >
+            {t("shareReading")}
+          </button>
+        )}
         {!allRevealed && <span className="helper">{t("helper")}</span>}
       </div>
 
@@ -444,6 +595,24 @@ export default function Deck() {
           })()}
         </div>
       )}
+
+      {/* Share Modal */}
+      {showShareModal && cards && (() => {
+        const shareData = generateShareData();
+        if (!shareData) {
+          // If share data generation fails, close modal and show error
+          setShowShareModal(false);
+          alert('Failed to generate share data. Please try again.');
+          return null;
+        }
+        return (
+          <ShareModal
+            isOpen={showShareModal}
+            onClose={() => setShowShareModal(false)}
+            shareData={shareData}
+          />
+        );
+      })()}
     </>
   );
 }

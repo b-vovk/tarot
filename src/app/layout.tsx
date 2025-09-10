@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.tarotdaily.club'),
   title: "Tarot Daily – Reveal your fortune",
   description: "Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.",
   keywords: ["tarot", "fortune", "daily reading", "love", "career", "destiny", "tarot cards", "divination"],
@@ -65,13 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-        <link rel="apple-touch-icon" href="/logo.svg" />
-        <link rel="icon" type="image/x-icon" sizes="16x16" href="/favicon.ico" />
-        <link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" sizes="any" href="/logo.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="preload" as="image" href="/images/sunburst-deco.svg" />
         <link rel="preload" as="image" href="/images/mystic-star.svg" />
         <link rel="preload" as="image" href="/images/moon-phase-deco.svg" />

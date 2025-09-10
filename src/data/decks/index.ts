@@ -13,19 +13,34 @@ type PartialCard = Partial<Card> & { id: string };
 
 function mergeDecks(base: Card[], overrides: PartialCard[] | null): Card[] {
   if (!overrides || overrides.length === 0) return base;
-  const idToOverride: Record<string, PartialCard> = Object.fromEntries(overrides.map((c) => [c.id, c]));
-  return base.map((card) => {
-    const ov = idToOverride[card.id];
-    if (!ov) return card;
-    return {
-      ...card,
-      ...ov,
-      description: {
-        upright: ov.description?.upright ?? card.description?.upright,
-        reversed: ov.description?.reversed ?? card.description?.reversed,
-      },
-    };
-  });
+  
+  try {
+    const idToOverride: Record<string, PartialCard> = Object.fromEntries(
+      overrides.map((c) => [c.id, c]).filter(([id]) => id && typeof id === 'string')
+    );
+    
+    return base.map((card) => {
+      if (!card || !card.id) return card;
+      
+      const ov = idToOverride[card.id];
+      if (!ov) return card;
+      
+      // Safely merge descriptions with null checks
+      const mergedDescription = {
+        upright: ov.description?.upright ?? card.description?.upright ?? '',
+        reversed: ov.description?.reversed ?? card.description?.reversed ?? '',
+      };
+      
+      return {
+        ...card,
+        ...ov,
+        description: mergedDescription,
+      };
+    }).filter(Boolean) as Card[]; // Filter out any undefined cards
+  } catch (error) {
+    console.error('Error merging decks:', error);
+    return base; // Fallback to base deck if merging fails
+  }
 }
 
 export async function loadClassicDeck(lang: Lang): Promise<Card[]> {

@@ -62,7 +62,7 @@
   --small-text: var(--font-size-xs);             /* 12px */
 }
 * { box-sizing: border-box; }
-html, body { height: 100%; overflow-x: hidden; overscroll-behavior: none; }
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 body {
   margin: 0;
   background:
@@ -261,13 +261,17 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
 .singleColRight h1 { margin: 0 0 8px; }
 .singleColRight { margin-left: clamp(-40px, -5vw, -18px); }
 .singleColRight p { margin: 0 0 10px; color: var(--muted); }
-.singleColRight .singleExtra p { color: var(--text); opacity: 0.92; }
+.singleColRight .singleExtra p { 
+  color: var(--text) !important; 
+  opacity: 0.92; 
+  display: block !important;
+  visibility: visible !important;
+}
 
 @media (max-width: 768px) {
-  /* Single card page: full-viewport layout without vertical scroll */
-  body.is-single-page { overflow-y: hidden; }
+  /* Single card page: allow scrolling to show footer */
   .singlePage {
-    height: calc(100dvh - var(--header-h));
+    min-height: calc(100dvh - var(--header-h) - var(--footer-h));
     display: flex;
     flex-direction: column;
     margin: -8px 0 0 -7px;
@@ -286,19 +290,14 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
   .singlePage .cardTitleFixed {
     font-size: clamp(16px, 4vw, 24px) !important;
   }
-  /* Override container padding to avoid extra bottom space on single pages */
+  /* Allow normal container padding for single pages to show footer */
   main.container:has(.singlePage) {
-    padding-bottom: 0;
-    height: calc(100dvh - var(--header-h));
+    padding-bottom: 24px;
+    min-height: calc(100dvh - var(--header-h) - var(--footer-h));
     display: flex;
     flex-direction: column;
   }
-  /* Hide footer on single pages */
-  /* Hide footer on mobile for single pages only */
-  body.is-single-page .siteFooter { display: none !important; }
-  body.is-single-page footer.siteFooter { display: none !important; }
-  .singlePage ~ .siteFooter { display: none !important; }
-  .singlePage + .siteFooter { display: none !important; }
+  /* Show footer on single pages */
 
   .singleGrid {
     grid-template-columns: 1fr;
@@ -335,34 +334,46 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
     flex: 1 1 auto; 
     display: flex; 
     align-items: flex-start; 
-    justify-content: center; 
+    justify-content: flex-start; 
     min-height: 0; 
     width: 100%;
     height: auto;
     margin: 0 !important;
     padding: 0 !important;
-    transform: translateX(-5%) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    transform: none !important;
+    position: relative !important;
   }
   .singleColLeft .deck > .card { 
     flex: 0 1 auto; 
-    height: 58vh !important; 
-    width: 75vw !important; 
+    height: 52vh !important; 
+    width: 100% !important; 
+    max-width: 75vw !important;
     margin: 0 0 0 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
     display: block !important;
     visibility: visible !important;
     background: transparent !important;
     border: none !important;
     border-radius: var(--radius-md) !important;
-    max-width: none !important;
     min-height: 320px !important;
     min-width: 200px !important;
     position: relative !important;
     z-index: 100 !important;
     top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
     overflow: hidden !important;
     perspective: 2000px !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+    transform: translateX(0) !important;
+    float: none !important;
+    clear: none !important;
   }
   
   .singleColLeft .deck > .card .cardInner,
@@ -380,21 +391,29 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
   .singlePage p { margin: 0; font-size: 13px; color: var(--muted); }
   /* Hide subtitle below the title on mobile single page */
   .singlePage .singleColRight > p { display: none; }
-  .singlePage .singleExtra { display: none; }
+  .singlePage .singleExtra { 
+    display: none; 
+  }
+
+  /* Move background image lower on mobile for single pages */
+  .singlePage .homeBg {
+    background-position: center 60% !important;
+  }
 
 
 
   /* Actions pinned near bottom, but keep within flow to respect keyboards */
-  .singleColLeft .actions { 
-    margin-top: 32px; 
-    justify-content: flex-start; 
-    margin-bottom: 0;
-    position: absolute;
-    bottom: calc(20px + env(safe-area-inset-bottom));
-    left: calc(50% - 37.5vw - 5% + 8px);
-    z-index: 10;
-    padding-left: 8px;
-    padding-right: 8px;
+  /* Force button alignment with title - maximum specificity */
+  body .singlePage .singleColLeft .actions { 
+    margin-top: 24px !important; 
+    justify-content: flex-start !important; 
+    margin-bottom: 0 !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10 !important;
+    padding-left: 0 !important;
+    padding-right: 8px !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -403,28 +422,36 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
     flex-wrap: nowrap !important;
   }
   
-  .singleColLeft .actions button {
+  .singlePage .singleColLeft .actions button.primary {
     white-space: nowrap !important;
     overflow: visible !important;
-    max-width: 80px !important;
-    min-width: 80px !important;
-    width: 80px !important;
+    max-width: 160px !important;
+    min-width: 160px !important;
+    width: 160px !important;
     flex-shrink: 0 !important;
-    font-size: 10px !important;
+    font-size: 13px !important;
     text-align: center !important;
-    padding: 8px 4px !important;
+    padding: 12px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2 !important;
   }
   
-  .singleColLeft .actions button.primary {
+  .singlePage .singleColLeft .actions button.secondary {
     white-space: nowrap !important;
     overflow: visible !important;
-    max-width: 80px !important;
-    min-width: 80px !important;
-    width: 80px !important;
+    max-width: 160px !important;
+    min-width: 160px !important;
+    width: 160px !important;
     flex-shrink: 0 !important;
-    font-size: 10px !important;
+    font-size: 13px !important;
     text-align: center !important;
-    padding: 8px 4px !important;
+    padding: 12px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2 !important;
   }
   
   .singleColLeft .actions .helper {
@@ -433,6 +460,57 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
     max-width: calc(75vw - 100px) !important;
     flex-shrink: 0 !important;
     font-size: 11px !important;
+  }
+
+  /* Override desktop centering for mobile single pages */
+  .singlePage .singleColLeft .deck,
+  .singleGrid .deck {
+    justify-content: flex-start !important;
+  }
+  
+  /* Force card alignment with title - using CSS variables */
+  body .singlePage .singleColLeft .deck > .card {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    left: 0 !important;
+    transform: translateX(0) !important;
+    width: 100% !important;
+    max-width: 75vw !important;
+    --card-left: 0 !important;
+    left: var(--card-left) !important;
+  }
+  
+  /* Force deck container alignment - maximum specificity */
+  body .singlePage .singleColLeft .deck {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    transform: translateX(0) !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Override any centering on the singleColLeft container */
+  .singlePage .singleColLeft {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  
+  /* Force card alignment with title - highest specificity for mobile */
+  body .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+  }
+  
+  /* Additional override to ensure card alignment */
+  .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    position: relative !important;
+    transform: translateX(0) !important;
   }
 }
 
@@ -450,7 +528,7 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
   font-size: 28px !important;
   line-height: 1.3; /* Reduced from 1.5 to 1.3 for tighter line spacing */
   margin: 0 !important;
-  padding: var(--spacing-3) 0 var(--spacing-2) !important;
+  padding: var(--spacing-5) 0 var(--spacing-2) !important;
   text-align: justify !important;
   text-justify: inter-word !important;
   word-spacing: -0.1em !important;
@@ -517,19 +595,7 @@ p  { color: var(--muted); margin: 0 0 var(--spacing-6); }
 /* Ensure single page truly has no vertical scroll on mobile */
 @media (max-width: 768px) { body.is-single-page main.container { padding-bottom: 0 !important; } }
 
-/* Global footer hiding for single pages - mobile only */
-body.is-single-page .siteFooter,
-body.is-single-page footer.siteFooter,
-.singlePage ~ .siteFooter,
-.singlePage + .siteFooter,
-main.container:has(.singlePage) ~ .siteFooter,
-main.container:has(.singlePage) + .siteFooter,
-main.container:has(.singlePage) .siteFooter,
-/* Footer hiding for single pages - only on mobile */
-.siteFooter:has(+ main.container:has(.singlePage)),
-.siteFooter:has(~ main.container:has(.singlePage)) { 
-  display: none !important; 
-}
+/* Show footer on single pages */
 
 /* Show footer on desktop/web for all single page footer hiding rules */
 @media (min-width: 769px) {
@@ -546,11 +612,7 @@ main.container:has(.singlePage) .siteFooter,
   }
 }
 
-/* Alternative footer hiding for single pages - only when singlePage exists, mobile only */
-body:has(.singlePage) .siteFooter,
-html:has(.singlePage) .siteFooter { 
-  display: none !important; 
-}
+/* Show footer on single pages */
 
 /* Show footer on desktop/web for single pages */
 @media (min-width: 769px) {
@@ -1087,21 +1149,21 @@ html:has(.singlePage) .siteFooter {
 @media (min-width: 769px) {
   .deck .cardFront .cardContent .cardBody {
     margin: 0 !important; /* Same as single page */
-    padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+    padding: 20px 0 8px !important; /* Reduced top spacing: 20px top, 8px bottom */
   }
   
   .deck .cardFront.reversed .cardContent .cardBody {
-    margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+    margin: 0 0 20px !important; /* Reduced spacing for reversed cards to match upright */
   }
   
   /* Force web deck spacing with maximum specificity */
   body:not(.is-mobile) .deck .cardFront .cardContent .cardBody {
     margin: 0 !important; /* Same as single page */
-    padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+    padding: 20px 0 8px !important; /* Reduced top spacing: 20px top, 8px bottom */
   }
   
   body:not(.is-mobile) .deck .cardFront.reversed .cardContent .cardBody {
-    margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+    margin: 0 0 20px !important; /* Reduced spacing for reversed cards to match upright */
   }
 }
 
@@ -1118,7 +1180,7 @@ html:has(.singlePage) .siteFooter {
   font-size: 18px !important; /* Reduced from 20px to 18px for better fit */
   line-height: 1.2 !important; /* Reduced from 1.3 to 1.2 for tighter line spacing */
   margin: 0 !important; /* Same as single page */
-  padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+  padding: 20px 0 8px !important; /* Reduced top spacing: 20px top, 8px bottom */
   text-align: justify !important; /* Keep justify but control word spacing */
   text-justify: inter-word !important; /* Better word distribution */
   word-spacing: -0.1em !important; /* Reduced spacing reduction between words for better readability */
@@ -1134,7 +1196,7 @@ html:has(.singlePage) .siteFooter {
 
 /* Reversed card content spacing */
 .deck .cardFront.reversed .cardContent .cardBody {
-  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  margin: 0 0 20px !important; /* Reduced spacing for reversed cards to match upright */
   text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.6);
   opacity: 1;
   font-weight: 500;
@@ -1168,6 +1230,16 @@ button.primary {
   box-shadow: var(--shadow-md);
 }
 button.primary:hover { filter: brightness(0.98); }
+button.secondary {
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 14px;
+}
+button.secondary:hover { 
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+}
 button:focus-visible { outline: none; box-shadow: var(--ring); }
 
 .helper {
@@ -1658,11 +1730,11 @@ body:has(.mobileModalOverlay.isOpen) .singlePage .singleColLeft .deck > .card {
 /* CRITICAL: Force web deck spacing with maximum specificity */
 .deck .cardFront .cardContent .cardBody {
   margin: 0 !important; /* Same as single page */
-  padding: 50px 0 8px !important; /* Very large top spacing: 50px top, 8px bottom */
+  padding: 20px 0 8px !important; /* Reduced top spacing: 20px top, 8px bottom */
 }
 
 .deck .cardFront.reversed .cardContent .cardBody {
-  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  margin: 0 0 20px !important; /* Reduced spacing for reversed cards to match upright */
   margin-bottom: 38px !important; /* Force bottom margin */
 }
 
@@ -1673,7 +1745,756 @@ html body .deck .cardFront .cardContent .cardBody {
 }
 
 html body .deck .cardFront.reversed .cardContent .cardBody {
-  margin: 0 0 38px !important; /* Optimal spacing for reversed cards - 2px higher */
+  margin: 0 0 20px !important; /* Reduced spacing for reversed cards to match upright */
   margin-bottom: 38px !important; /* Force bottom margin */
+}
+
+/* Share Modal Styles */
+.shareModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+}
+
+
+.shareModal {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+/* Add dotted background to share modal content */
+.shareModal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  border-radius: var(--radius-md);
+  z-index: 1;
+}
+
+.shareModal::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(218, 187, 103, 0.3) 0%, transparent 50%);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shareModal::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(139, 124, 243, 0.25) 0%, transparent 50%);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shareModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.shareModalHeader h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: var(--title);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+.sharePreview {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 2;
+}
+
+.sharePreviewTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--title);
+  margin-bottom: 8px;
+}
+
+.sharePreviewDate {
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+  margin-bottom: 16px;
+}
+
+.sharePreviewCards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.sharePreviewCards.singleCard {
+  justify-content: center;
+}
+
+.sharePreviewCard {
+  text-align: center;
+  flex: 1;
+  max-width: 320px;
+}
+
+.sharePreviewCards.singleCard .sharePreviewCard {
+  flex: none;
+  max-width: 200px;
+}
+
+.shareCardImage {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.shareCardImage img {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.shareCardReversed {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--accent);
+  color: #0b0b0e;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.shareCardName {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  padding: 0 10px;
+  color: #dabb67;
+  text-align: center;
+  text-shadow: none;
+  z-index: 11;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(10px, 1.8vw, 14px);
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.shareOptions {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.shareOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+}
+
+.shareOption:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.shareOption svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.shareOption.telegram:hover {
+  background: rgba(0, 136, 204, 0.2);
+  border-color: #0088cc;
+}
+
+.shareOption.facebook:hover {
+  background: rgba(66, 103, 178, 0.2);
+  border-color: #4267b2;
+}
+
+.shareOption.twitter:hover {
+  background: rgba(29, 161, 242, 0.2);
+  border-color: #1da1f2;
+}
+
+.shareOption.instagram:hover {
+  background: linear-gradient(45deg, rgba(225, 48, 108, 0.2), rgba(245, 96, 64, 0.2));
+  border-color: #e1306c;
+}
+
+.shareOption.copyLink:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #22c55e;
+}
+
+.shareOption.copyLink.copied {
+  background: rgba(34, 197, 94, 0.3);
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.shareOption.downloadImage:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: #a855f7;
+}
+
+.shareOption:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shareWebsite {
+  color: #dabb67;
+  font-family: var(--font-serif), serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Shared Deck Styles - Now uses main page styles */
+
+/* Ensure shared single card page has same spacing as regular single page */
+@media (max-width: 768px) {
+  .singlePage .singleColLeft .actions {
+    margin-top: 24px !important;
+  }
+  
+  /* Ensure shared single card page has same positioning as regular single page */
+  .singlePage {
+    margin: -8px 0 0 -7px !important;
+    padding: 8px 8px calc(20px + env(safe-area-inset-bottom)) 8px !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  
+  /* Ensure shared single card page container has same treatment */
+  main.container:has(.singlePage) {
+    padding-bottom: 24px !important;
+    min-height: calc(100dvh - var(--header-h) - var(--footer-h)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* Style the shared deck button to match main page buttons */
+.actions .primary {
+  background: linear-gradient(180deg, var(--accent-2) 0%, #6f5bd7 100%);
+  color: #0b0b0e;
+  border: none;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.actions .primary:hover {
+  filter: brightness(0.98);
+}
+
+.actions .helper {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.actions .helper:hover {
+  color: var(--text);
+}
+
+/* Shared deck labels - ensure they're visible on front of cards */
+.sharedDeckLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px !important;
+  text-align: center;
+  color: var(--accent);
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: clamp(9px, 2.6vw, 13px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Shared deck labels - upright cards show label at bottom */
+.sharedDeckLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  color: var(--accent);
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: clamp(9px, 2.6vw, 13px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Reversed cards show label at top */
+.card.reversed .sharedDeckLabel,
+.cardFront.reversed .sharedDeckLabel,
+.deck .cardFront.reversed .sharedDeckLabel {
+  bottom: auto !important;
+  top: 14px !important;
+  position: absolute !important;
+  /* Counter-rotate the label to appear right-side up on reversed cards */
+  transform: scaleY(-1) !important;
+  /* Force normal text orientation */
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  direction: ltr !important;
+  backface-visibility: visible !important;
+}
+
+
+
+/* Loading and Error States */
+.loadingContainer,
+.errorContainer {
+  text-align: center;
+  padding: 60px 20px;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer h1 {
+  color: #ef4444;
+  margin-bottom: 16px;
+}
+
+.errorContainer p {
+  color: var(--muted);
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.backToHomeButton {
+  background: var(--accent-2);
+  color: #0b0b0e;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.backToHomeButton:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .shareModal {
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+    max-width: calc(100vw - 20px);
+  }
+  
+  /* Prevent mobile browser URL bar from hiding during copy operations */
+  .shareModal .shareOption.copyLink {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
+  
+  /* Mobile-specific styling for all share options */
+  .shareModal .shareOption {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
+  
+  /* Ensure Telegram button works on mobile */
+  .shareModal .shareOption.telegram {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
+  
+  .shareModal .shareOption.telegram:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Ensure copy button works on mobile by preventing viewport changes */
+  .shareModal .shareOption.copyLink:active {
+    transform: none;
+    transition: none;
+    background: rgba(34, 197, 94, 0.3) !important;
+  }
+  
+  /* Mobile-specific copy button styling */
+  .shareModal .shareOption.copyLink.copied {
+    background: rgba(34, 197, 94, 0.4) !important;
+    border-color: #22c55e !important;
+    color: #22c55e !important;
+    animation: copySuccess 0.3s ease-in-out;
+  }
+  
+  @keyframes copySuccess {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Mobile fallback URL input */
+  .mobileUrlFallback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    z-index: 1000;
+    max-width: 90vw;
+    width: 400px;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .mobileUrlFallback p {
+    margin: 0 0 12px;
+    color: var(--text);
+    font-size: 14px;
+  }
+  
+  .mobileUrlFallback .urlInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 12px;
+    font-family: monospace;
+    margin-bottom: 12px;
+  }
+  
+  .mobileUrlFallback .closeFallback {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .shareModalHeader {
+    padding: 16px 20px 12px;
+  }
+  
+  .sharePreview {
+    padding: 16px 20px;
+  }
+  
+  .shareOptions {
+    padding: 16px 20px;
+    gap: 8px;
+  }
+  
+  .sharePreviewCards {
+    gap: 8px;
+  }
+  
+  .sharePreviewCards.singleCard {
+    justify-content: center;
+  }
+  
+  .sharePreviewCard {
+    max-width: 100px;
+  }
+  
+  .sharePreviewCards.singleCard .sharePreviewCard {
+    flex: none;
+    max-width: 120px;
+  }
+  
+  .shareCardImage {
+    position: relative !important;
+    width: 80px !important;
+    height: 120px !important;
+  }
+  
+  .shareCardImage img {
+    width: 80px;
+    height: 120px;
+  }
+  
+  .shareCardName {
+    position: absolute !important;
+    top: 15px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    font-size: clamp(6px, 1.5vw, 10px) !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: 0 2px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .shareWebsite {
+    font-size: 12px;
+  }
+  
+  .sharedDeckHeader h1 {
+    font-size: var(--h1-size-mobile);
+  }
+  
+  .sharedDeckInfo {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* CRITICAL: Force single page alignment - highest priority */
+@media (max-width: 768px) {
+  /* Target the specific deck with inline style */
+  .singlePage .singleColLeft .deck[style*="height"] > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+  }
+  
+  .singlePage .singleColLeft .actions {
+    left: 0 !important;
+    padding-left: 0 !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+  }
+  
+  /* Also target the deck container */
+  .singlePage .singleColLeft .deck[style*="height"] {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    justify-content: flex-start !important;
+  }
+  
+  /* ULTIMATE OVERRIDE: Force card alignment with maximum specificity */
+  body .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    float: none !important;
+    clear: none !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+  }
+  
+  /* Force deck container to not center its content */
+  body .singlePage .singleColLeft .deck {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Force the card to be the first item and align to the left */
+  body .singlePage .singleColLeft .deck > .card:first-child {
+    order: -1 !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+  }
+  
+  /* FINAL OVERRIDE: Force card to align with title using absolute positioning */
+  .singlePage .singleColLeft .deck > .card {
+    position: relative !important;
+    left: 0 !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    transform: translateX(0) !important;
+    float: none !important;
+    clear: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 75vw !important;
+  }
+  
+  /* ULTIMATE FINAL OVERRIDE: Force alignment with maximum specificity */
+  html body .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    width: 100% !important;
+    max-width: 75vw !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+  }
+  
+  /* NUCLEAR OPTION: Force alignment with !important on everything */
+  .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    width: 100% !important;
+    max-width: 75vw !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+    float: none !important;
+    clear: none !important;
+    display: block !important;
+  }
+  
+  /* FINAL NUCLEAR OPTION: Force alignment with maximum specificity */
+  html body .singlePage .singleColLeft .deck > .card {
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    width: 100% !important;
+    max-width: 75vw !important;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+    float: none !important;
+    clear: none !important;
+    display: block !important;
+  }
 }
 
