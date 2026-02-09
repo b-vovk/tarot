@@ -6,6 +6,7 @@ import ClientHeader from "@/components/ClientHeader";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import SEO from "@/components/SEO";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               © {new Date().getFullYear()} Tarot Daily
             </div>
           </footer>
+          <Analytics />
         </Providers>
       </body>
     </html>
