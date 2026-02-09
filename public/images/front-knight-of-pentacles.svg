@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Knight of Pentacles motif: knight on horse with pentacle, farmland background -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- horse silhouette -->
+    <path d="M-40,60 c-20,-40 -10,-60 0,-80"/>
+    <path d="M40,60 c20,-40 10,-60 0,-80"/>
+    <path d="M-40,60 c-10,20 -10,40 0,60"/>
+    <path d="M40,60 c10,20 10,40 0,60"/>
+    <path d="M-35,-20 l-10,-15"/>
+    <path d="M35,-20 l10,-15"/>
+    <path d="M-35,80 l-10,15"/>
+    <path d="M35,80 l10,15"/>
+    
+    <!-- knight figure -->
+    <circle cx="0" cy="-60" r="10"/>
+    <path d="M0,-50 v25"/>
+    <path d="M-6,-40 h12"/>
+    <path d="M-4,-25 h8"/>
+    <path d="M-2,-10 h4"/>
+    
+    <!-- arm holding pentacle -->
+    <path d="M-6,-40 l-25,-5"/>
+    
+    <!-- pentacle -->
+    <circle cx="-31" cy="-45" r="12"/>
+    <path d="M-31,-57 L-27,-45 L-35,-45 L-25,-39 L-37,-39 L-31,-27 L-25,-39 L-37,-39 L-35,-45 L-27,-45 L-31,-57 Z"/>
+    
+    <!-- farmland/fields -->
+    <path d="M-120,90 c40,10 60,10 100,0 c40,10 60,10 100,0" opacity="0.7"/>
+    <path d="M-100,100 c30,8 50,8 80,0 c30,8 50,8 80,0" opacity="0.5"/>
+    
+    <!-- field rows -->
+    <path d="M-120,70 c25,5 50,5 75,0 c25,5 50,5 75,0" opacity="0.4"/>
+    <path d="M-110,60 c20,4 40,4 60,0 c20,4 40,4 60,0" opacity="0.3"/>
+    <path d="M-100,50 c15,3 30,3 45,0 c15,3 30,3 45,0" opacity="0.3"/>
+    
+    <!-- crops/plants -->
+    <path d="M-100,85 v-10 M-95,75 h10" opacity="0.6"/>
+    <path d="M-60,85 v-10 M-55,75 h10" opacity="0.6"/>
+    <path d="M-20,85 v-10 M-15,75 h10" opacity="0.6"/>
+    <path d="M20,85 v-10 M25,75 h10" opacity="0.6"/>
+    <path d="M60,85 v-10 M65,75 h10" opacity="0.6"/>
+    <path d="M100,85 v-10 M105,75 h10" opacity="0.6"/>
+    
+    <!-- distant hills -->
+    <path d="M-120,10 c40,15 80,15 120,0 c40,15 80,15 120,0" opacity="0.5"/>
+    <path d="M-100,25 c30,10 60,10 90,0 c30,10 60,10 90,0" opacity="0.4"/>
+    
+    <!-- trees/farm buildings -->
+    <path d="M-110,20 v15 M-108,20 l4,0" opacity="0.4"/>
+    <path d="M110,20 v15 M112,20 l4,0" opacity="0.4"/>
+    
+    <!-- barn/farm building -->
+    <path d="M-80,30 v20 h20 v-20" opacity="0.4"/>
+    <path d="M-70,30 l10,-10 l10,10" opacity="0.4"/>
+  </g>
+
+  <title>Tarot Front - Knight of Pentacles</title>
+</svg>

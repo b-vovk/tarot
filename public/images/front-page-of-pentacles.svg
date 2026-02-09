@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Page of Pentacles motif: young figure with pentacle, garden/field background -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- figure silhouette -->
+    <circle cx="0" cy="-80" r="12"/>
+    <path d="M0,-68 v40"/>
+    <path d="M-8,-50 h16"/>
+    <path d="M-6,-30 h12"/>
+    <path d="M-4,-10 h8"/>
+    
+    <!-- arm holding pentacle -->
+    <path d="M-8,-50 l-25,-8"/>
+    
+    <!-- pentacle -->
+    <circle cx="-33" cy="-58" r="15"/>
+    <path d="M-33,-73 L-28,-58 L-43,-58 L-23,-48 L-38,-48 L-33,-33 L-28,-48 L-23,-48 L-38,-58 L-43,-58 L-28,-58 Z"/>
+    
+    <!-- ground/field -->
+    <path d="M-120,50 c40,8 60,8 100,0 c40,8 60,8 100,0" opacity="0.7"/>
+    <path d="M-100,60 c30,6 50,6 80,0 c30,6 50,6 80,0" opacity="0.5"/>
+    
+    <!-- garden/field rows -->
+    <path d="M-120,40 c20,3 40,3 60,0 c20,3 40,3 60,0" opacity="0.4"/>
+    <path d="M-110,35 c15,2 30,2 45,0 c15,2 30,2 45,0" opacity="0.3"/>
+    <path d="M-100,30 c10,1 20,1 30,0 c10,1 20,1 30,0" opacity="0.3"/>
+    
+    <!-- plants/growth -->
+    <path d="M-90,45 v-8 M-85,37 h10" opacity="0.6"/>
+    <path d="M-60,45 v-8 M-55,37 h10" opacity="0.6"/>
+    <path d="M-30,45 v-8 M-25,37 h10" opacity="0.6"/>
+    <path d="M0,45 v-8 M5,37 h10" opacity="0.6"/>
+    <path d="M30,45 v-8 M35,37 h10" opacity="0.6"/>
+    <path d="M60,45 v-8 M65,37 h10" opacity="0.6"/>
+    <path d="M90,45 v-8 M95,37 h10" opacity="0.6"/>
+    
+    <!-- distant hills -->
+    <path d="M-120,-20 c40,12 80,12 120,0 c40,12 80,12 120,0" opacity="0.5"/>
+    <path d="M-100,-10 c30,9 60,9 90,0 c30,9 60,9 90,0" opacity="0.4"/>
+    
+    <!-- trees in background -->
+    <path d="M-110,-30 v20 M-108,-30 l4,0" opacity="0.4"/>
+    <path d="M110,-30 v20 M112,-30 l4,0" opacity="0.4"/>
+  </g>
+
+  <title>Tarot Front - Page of Pentacles</title>
+</svg>

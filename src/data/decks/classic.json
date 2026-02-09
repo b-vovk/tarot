@@ -619,6 +619,166 @@
           "upright": "The Ten of Pentacles represents lasting success, security, and the legacy you build over time. Upright, it speaks to family harmony, generational wealth, and the fulfillment of long-term goals. This is a card of lasting stability and the rewards of sustained effort.",
           "reversed": "Reversed, the Ten of Pentacles can indicate instability, family disagreements, or loss of security. It asks you to address underlying issues and ensure your foundations are strong."
         }
+      },
+      {
+        "id": "cups_11_page_of_cups",
+        "name": "Page of Cups",
+        "upright": "Intuitive messages, creative inspiration, emotional exploration",
+        "reversed": "Emotional immaturity, blocked creativity, ignoring intuition",
+        "description": {
+          "upright": "The Page of Cups represents the beginning of emotional or creative journeys. Upright, it signals intuitive messages, artistic inspiration, and the willingness to explore feelings openly. This card encourages you to trust your emotions and embrace your creative side.",
+          "reversed": "Reversed, the Page of Cups can indicate emotional immaturity, blocked creativity, or ignoring important intuitive messages. It may be time to reconnect with your feelings and creative impulses."
+        }
+      },
+      {
+        "id": "cups_12_knight_of_cups",
+        "name": "Knight of Cups",
+        "upright": "Romance, charm, following your heart",
+        "reversed": "Emotional manipulation, moodiness, unrealistic expectations",
+        "description": {
+          "upright": "The Knight of Cups represents emotional action and romantic pursuit. Upright, it signals following your heart, expressing feelings openly, and pursuing what inspires you. This knight brings charm, creativity, and emotional courage to your endeavors.",
+          "reversed": "Reversed, the Knight of Cups can indicate emotional manipulation, moodiness, or unrealistic romantic expectations. It may be time to ground your emotions and be more practical in your approach."
+        }
+      },
+      {
+        "id": "cups_13_queen_of_cups",
+        "name": "Queen of Cups",
+        "upright": "Emotional balance, intuition, compassion",
+        "reversed": "Emotional instability, codependency, blocked intuition",
+        "description": {
+          "upright": "The Queen of Cups represents emotional mastery and intuitive wisdom. Upright, she embodies compassion, emotional balance, and deep intuitive understanding. This queen encourages you to trust your feelings and use your emotional intelligence wisely.",
+          "reversed": "Reversed, the Queen of Cups can indicate emotional instability, codependency, or blocked intuition. It may be time to establish healthier emotional boundaries and reconnect with your inner wisdom."
+        }
+      },
+      {
+        "id": "cups_14_king_of_cups",
+        "name": "King of Cups",
+        "upright": "Emotional maturity, diplomacy, compassion",
+        "reversed": "Emotional manipulation, moodiness, lack of self-control",
+        "description": {
+          "upright": "The King of Cups represents emotional mastery and diplomatic leadership. Upright, he embodies compassion, emotional intelligence, and the ability to lead with both heart and wisdom. This king shows how to balance emotions with reason.",
+          "reversed": "Reversed, the King of Cups can indicate emotional manipulation, moodiness, or lack of emotional self-control. It may be time to address emotional issues and develop healthier coping strategies."
+        }
+      },
+      {
+        "id": "wands_11_page_of_wands",
+        "name": "Page of Wands",
+        "upright": "New opportunities, enthusiasm, creative potential",
+        "reversed": "Lack of direction, delayed plans, creative blocks",
+        "description": {
+          "upright": "The Page of Wands represents the spark of new creative energy and opportunities. Upright, it signals enthusiasm for new ventures, creative potential, and the courage to pursue your passions. This page brings fresh energy and optimism to your projects.",
+          "reversed": "Reversed, the Page of Wands can indicate lack of direction, delayed plans, or creative blocks. It may be time to reassess your approach and find new sources of inspiration."
+        }
+      },
+      {
+        "id": "wands_12_knight_of_wands",
+        "name": "Knight of Wands",
+        "upright": "Adventure, passion, bold action",
+        "reversed": "Impulsiveness, lack of follow-through, restlessness",
+        "description": {
+          "upright": "The Knight of Wands represents bold action and passionate pursuit of goals. Upright, it signals adventure, enthusiasm, and the courage to take risks for what you believe in. This knight brings energy and determination to your endeavors.",
+          "reversed": "Reversed, the Knight of Wands can indicate impulsiveness, lack of follow-through, or restlessness. It may be time to slow down, plan more carefully, and see projects through to completion."
+        }
+      },
+      {
+        "id": "wands_13_queen_of_wands",
+        "name": "Queen of Wands",
+        "upright": "Confidence, independence, determination",
+        "reversed": "Insecurity, jealousy, lack of confidence",
+        "description": {
+          "upright": "The Queen of Wands represents confident leadership and passionate independence. Upright, she embodies determination, charisma, and the ability to inspire others through her own example. This queen shows how to lead with passion and authenticity.",
+          "reversed": "Reversed, the Queen of Wands can indicate insecurity, jealousy, or lack of confidence. It may be time to work on self-esteem and develop your own sense of personal power."
+        }
+      },
+      {
+        "id": "wands_14_king_of_wands",
+        "name": "King of Wands",
+        "upright": "Natural leader, vision, inspiration",
+        "reversed": "Impulsiveness, poor judgment, lack of vision",
+        "description": {
+          "upright": "The King of Wands represents visionary leadership and inspiring authority. Upright, he embodies charisma, natural leadership ability, and the vision to guide others toward success. This king shows how to lead with passion and inspire others to action.",
+          "reversed": "Reversed, the King of Wands can indicate impulsiveness, poor judgment, or lack of clear vision. It may be time to develop better leadership skills and create a more structured approach to your goals."
+        }
+      },
+      {
+        "id": "swords_11_page_of_swords",
+        "name": "Page of Swords",
+        "upright": "New ideas, curiosity, mental agility",
+        "reversed": "Gossip, hasty judgments, mental blocks",
+        "description": {
+          "upright": "The Page of Swords represents the beginning of intellectual or communicative endeavors. Upright, it signals new ideas, mental curiosity, and the willingness to explore different perspectives. This page encourages you to stay mentally agile and open to learning.",
+          "reversed": "Reversed, the Page of Swords can indicate gossip, hasty judgments, or mental blocks. It may be time to slow down your thinking and be more careful with your words and ideas."
+        }
+      },
+      {
+        "id": "swords_12_knight_of_swords",
+        "name": "Knight of Swords",
+        "upright": "Direct action, truth-seeking, intellectual pursuits",
+        "reversed": "Rash decisions, aggression, lack of tact",
+        "description": {
+          "upright": "The Knight of Swords represents intellectual courage and direct communication. Upright, it signals truth-seeking, direct action, and the willingness to cut through confusion with clear thinking. This knight brings mental sharpness and determination to your pursuits.",
+          "reversed": "Reversed, the Knight of Swords can indicate rash decisions, aggression, or lack of tact. It may be time to slow down, think more carefully, and consider the impact of your words and actions."
+        }
+      },
+      {
+        "id": "swords_13_queen_of_swords",
+        "name": "Queen of Swords",
+        "upright": "Clear thinking, independence, honest communication",
+        "reversed": "Coldness, harshness, lack of empathy",
+        "description": {
+          "upright": "The Queen of Swords represents intellectual mastery and honest communication. Upright, she embodies clear thinking, independence, and the ability to communicate truth with wisdom and compassion. This queen shows how to balance intellect with emotional intelligence.",
+          "reversed": "Reversed, the Queen of Swords can indicate coldness, harshness, or lack of empathy. It may be time to soften your approach and consider the emotional impact of your words and decisions."
+        }
+      },
+      {
+        "id": "swords_14_king_of_swords",
+        "name": "King of Swords",
+        "upright": "Mental clarity, fair judgment, authority",
+        "reversed": "Manipulation, cruelty, abuse of power",
+        "description": {
+          "upright": "The King of Swords represents intellectual authority and fair judgment. Upright, he embodies mental clarity, logical thinking, and the ability to make decisions based on truth and reason. This king shows how to lead with wisdom and integrity.",
+          "reversed": "Reversed, the King of Swords can indicate manipulation, cruelty, or abuse of intellectual power. It may be time to examine your motivations and ensure you're using your mental abilities for positive purposes."
+        }
+      },
+      {
+        "id": "pentacles_11_page_of_pentacles",
+        "name": "Page of Pentacles",
+        "upright": "Learning, new opportunities, practical focus",
+        "reversed": "Lack of focus, procrastination, unrealistic goals",
+        "description": {
+          "upright": "The Page of Pentacles represents the beginning of practical endeavors and learning new skills. Upright, it signals new opportunities for growth, practical focus, and the willingness to work hard for your goals. This page encourages you to be patient and persistent in your efforts.",
+          "reversed": "Reversed, the Page of Pentacles can indicate lack of focus, procrastination, or unrealistic goals. It may be time to reassess your approach and develop a more practical plan for achieving your objectives."
+        }
+      },
+      {
+        "id": "pentacles_12_knight_of_pentacles",
+        "name": "Knight of Pentacles",
+        "upright": "Reliability, methodical approach, patience",
+        "reversed": "Lack of ambition, stubbornness, resistance to change",
+        "description": {
+          "upright": "The Knight of Pentacles represents steady progress and reliable effort. Upright, it signals methodical work, patience, and the determination to see projects through to completion. This knight brings stability and persistence to your endeavors.",
+          "reversed": "Reversed, the Knight of Pentacles can indicate lack of ambition, stubbornness, or resistance to change. It may be time to be more flexible and open to new approaches and opportunities."
+        }
+      },
+      {
+        "id": "pentacles_13_queen_of_pentacles",
+        "name": "Queen of Pentacles",
+        "upright": "Practical abundance, nurturing, resourcefulness",
+        "reversed": "Financial insecurity, neglect, lack of self-care",
+        "description": {
+          "upright": "The Queen of Pentacles represents practical mastery and abundant nurturing. Upright, she embodies resourcefulness, practical wisdom, and the ability to create abundance through careful management. This queen shows how to balance material security with emotional well-being.",
+          "reversed": "Reversed, the Queen of Pentacles can indicate financial insecurity, neglect, or lack of self-care. It may be time to focus on practical matters and develop better habits for managing your resources and well-being."
+        }
+      },
+      {
+        "id": "pentacles_14_king_of_pentacles",
+        "name": "King of Pentacles",
+        "upright": "Financial security, practical leadership, abundance",
+        "reversed": "Greed, workaholism, poor financial management",
+        "description": {
+          "upright": "The King of Pentacles represents material mastery and practical leadership. Upright, he embodies financial security, practical wisdom, and the ability to create lasting abundance. This king shows how to lead with stability and create prosperity for yourself and others.",
+          "reversed": "Reversed, the King of Pentacles can indicate greed, workaholism, or poor financial management. It may be time to reassess your relationship with money and work, and find better balance in your life."
+        }
       }
       
     ]

@@ -20,7 +20,7 @@ export default function SEO({
   title = 'Tarot Daily – Reveal your fortune',
   description = 'Reveal your daily fortune with a simple 3-card tarot reading – love, career, destiny in one click.',
   image = '/images/mystic-star.svg',
-  url = 'https://tarotdaily.com',
+  url = 'https://www.tarotdaily.club',
   type = 'website',
   publishedTime,
   modifiedTime,

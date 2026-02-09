@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- King of Wands motif: royal king with flaming wand, ornate throne, desert background -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- ornate throne base -->
+    <path d="M-90,80 c-25,0 -50,25 -50,50 c0,25 25,50 50,50 h180 c25,0 50,-25 50,-50 c0,-25 -25,-50 -50,-50"/>
+    
+    <!-- ornate lion heads on throne arms -->
+    <path d="M-90,60 c-8,-15 -15,-25 -25,-25 c-10,0 -20,10 -25,25"/>
+    <path d="M90,60 c8,-15 15,-25 25,-25 c10,0 20,10 25,25"/>
+    
+    <!-- throne back -->
+    <path d="M-80,30 c0,-25 25,-35 50,-35 h60 c25,0 50,10 50,35"/>
+    
+    <!-- king figure -->
+    <circle cx="0" cy="-50" r="14"/>
+    <path d="M0,-36 v60"/>
+    <path d="M-10,-25 h20"/>
+    <path d="M-8,-5 h16"/>
+    <path d="M-6,15 h12"/>
+    <path d="M-4,30 h8"/>
+    <path d="M-2,45 h4"/>
+    
+    <!-- ornate crown with flames -->
+    <path d="M-10,-64 h20"/>
+    <path d="M-8,-64 l0,-10"/>
+    <path d="M-4,-64 l0,-12"/>
+    <path d="M0,-64 l0,-14"/>
+    <path d="M4,-64 l0,-12"/>
+    <path d="M8,-64 l0,-10"/>
+    <!-- crown flames -->
+    <circle cx="-8" cy="-74" r="4"/>
+    <circle cx="-4" cy="-76" r="4"/>
+    <circle cx="0" cy="-78" r="4"/>
+    <circle cx="4" cy="-76" r="4"/>
+    <circle cx="8" cy="-74" r="4"/>
+    
+    <!-- arm holding wand -->
+    <path d="M10,-25 l30,-8"/>
+    
+    <!-- royal flaming wand -->
+    <path d="M40,-33 v-80"/>
+    
+    <!-- large flame at wand tip -->
+    <circle cx="40" cy="-113" r="12"/>
+    <path d="M40,-125 v20 M34,-113 h12 M28,-118 l12,12 M52,-118 l-12,12"/>
+    
+    <!-- intense sparks and flames around wand -->
+    <path d="M40,-125 v12 M34,-119 h12 M28,-121 l12,12 M52,-121 l-12,12" opacity="0.8"/>
+    <path d="M22,-116 l10,-5 M58,-116 l-10,-5" opacity="0.7"/>
+    <path d="M18,-111 l8,-4 M62,-111 l-8,-4" opacity="0.6"/>
+    <path d="M15,-106 l6,-3 M65,-106 l-6,-3" opacity="0.5"/>
+    
+    <!-- ground/desert -->
+    <path d="M-130,100 c50,10 80,10 130,0 c50,10 80,10 130,0" opacity="0.6"/>
+    <path d="M-110,110 c40,8 60,8 100,0 c40,8 60,8 100,0" opacity="0.4"/>
+    
+    <!-- desert landscape -->
+    <path d="M-130,20 c40,10 80,10 120,0 c40,10 80,10 120,0" opacity="0.5"/>
+    <path d="M-110,40 c30,8 60,8 90,0 c30,8 60,8 90,0" opacity="0.4"/>
+    <path d="M-100,60 c25,6 50,6 75,0 c25,6 50,6 75,0" opacity="0.3"/>
+    
+    <!-- decorative flames around throne -->
+    <path d="M-70,50 v8 M-67,54 h8" opacity="0.6"/>
+    <path d="M70,50 v8 M73,54 h8" opacity="0.6"/>
+    <path d="M-50,70 v8 M-47,74 h8" opacity="0.6"/>
+    <path d="M50,70 v8 M53,74 h8" opacity="0.6"/>
+    <path d="M-30,90 v8 M-27,94 h8" opacity="0.6"/>
+    <path d="M30,90 v8 M33,94 h8" opacity="0.6"/>
+  </g>
+
+  <title>Tarot Front - King of Wands</title>
+</svg>

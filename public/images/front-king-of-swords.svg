@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- King of Swords motif: royal king with raised sword, storm cloud throne, winds -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- storm cloud throne base -->
+    <path d="M-90,80 c-25,0 -50,25 -50,50 c0,25 25,50 50,50 h180 c25,0 50,-25 50,-50 c0,-25 -25,-50 -50,-50"/>
+    <!-- cloud details -->
+    <path d="M-110,80 c12,-8 25,-8 38,0 c13,8 26,8 39,0 c13,8 26,8 39,0 c13,8 26,8 39,0" opacity="0.6"/>
+    
+    <!-- throne back -->
+    <path d="M-80,30 c0,-25 25,-35 50,-35 h60 c25,0 50,10 50,35"/>
+    <!-- storm cloud back details -->
+    <path d="M-100,30 c20,-12 40,-12 60,0 c20,12 40,12 60,0" opacity="0.5"/>
+    
+    <!-- king figure -->
+    <circle cx="0" cy="-50" r="14"/>
+    <path d="M0,-36 v60"/>
+    <path d="M-10,-25 h20"/>
+    <path d="M-8,-5 h16"/>
+    <path d="M-6,15 h12"/>
+    <path d="M-4,30 h8"/>
+    <path d="M-2,45 h4"/>
+    
+    <!-- ornate crown -->
+    <path d="M-10,-64 h20"/>
+    <path d="M-8,-64 l0,-10"/>
+    <path d="M-4,-64 l0,-12"/>
+    <path d="M0,-64 l0,-14"/>
+    <path d="M4,-64 l0,-12"/>
+    <path d="M8,-64 l0,-10"/>
+    
+    <!-- arm holding sword -->
+    <path d="M10,-25 l40,-12"/>
+    
+    <!-- royal raised sword -->
+    <path d="M50,-37 v-90"/>
+    <path d="M47,-127 h6"/>
+    <path d="M0,-150 v35"/>
+    
+    <!-- intense wind currents around sword -->
+    <path d="M35,-140 c22,-15 38,-15 54,0 c16,15 32,15 48,0" opacity="0.6"/>
+    <path d="M40,-130 c18,-12 30,-12 42,0 c12,12 24,12 36,0" opacity="0.5"/>
+    <path d="M45,-120 c14,-9 24,-9 34,0 c10,9 20,9 30,0" opacity="0.4"/>
+    
+    <!-- storm clouds background -->
+    <path d="M-130,20 c30,-15 60,-15 90,0 c30,15 60,15 90,0" opacity="0.5"/>
+    <path d="M-110,40 c24,-12 48,-12 72,0 c24,12 48,12 72,0" opacity="0.4"/>
+    <path d="M-90,60 c18,-9 36,-9 54,0 c18,9 36,9 54,0" opacity="0.3"/>
+    
+    <!-- wind lines -->
+    <path d="M-130,100 c50,5 80,5 130,0 c50,5 80,5 130,0" opacity="0.6"/>
+    <path d="M-110,110 c40,3 60,3 100,0 c40,3 60,3 100,0" opacity="0.4"/>
+    
+    <!-- strong wind gusts -->
+    <path d="M-110,70 c20,0 35,0 50,0 c15,0 30,0 45,0" opacity="0.4"/>
+    <path d="M-90,80 c16,0 28,0 40,0 c12,0 24,0 36,0" opacity="0.3"/>
+    <path d="M-70,90 c12,0 21,0 30,0 c9,0 18,0 27,0" opacity="0.3"/>
+    <path d="M-50,100 c8,0 14,0 20,0 c6,0 12,0 18,0" opacity="0.3"/>
+  </g>
+
+  <title>Tarot Front - King of Swords</title>
+</svg>

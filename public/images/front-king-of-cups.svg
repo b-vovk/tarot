@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- King of Cups motif: royal king with ornate cup, water throne, sea background -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- throne base -->
+    <path d="M-90,80 c-25,0 -50,25 -50,50 c0,25 25,50 50,50 h180 c25,0 50,-25 50,-50 c0,-25 -25,-50 -50,-50"/>
+    
+    <!-- throne back -->
+    <path d="M-80,30 c0,-25 25,-35 50,-35 h60 c25,0 50,10 50,35"/>
+    
+    <!-- king figure -->
+    <circle cx="0" cy="-50" r="14"/>
+    <path d="M0,-36 v60"/>
+    <path d="M-10,-25 h20"/>
+    <path d="M-8,-5 h16"/>
+    <path d="M-6,15 h12"/>
+    <path d="M-4,30 h8"/>
+    <path d="M-2,45 h4"/>
+    
+    <!-- crown -->
+    <path d="M-10,-64 h20"/>
+    <path d="M-8,-64 l0,-8"/>
+    <path d="M-4,-64 l0,-10"/>
+    <path d="M0,-64 l0,-12"/>
+    <path d="M4,-64 l0,-10"/>
+    <path d="M8,-64 l0,-8"/>
+    
+    <!-- arm holding cup -->
+    <path d="M-10,-25 l-25,-8"/>
+    <path d="M-35,-33 c-4,0 -8,3 -8,7 c0,4 4,7 8,7 c4,0 8,-3 8,-7 c0,-4 -4,-7 -8,-7"/>
+    
+    <!-- ornate royal cup -->
+    <path d="M-43,-26 h18 c0,10 -6,20 -9,20 c-3,0 -9,-10 -9,-20z"/>
+    <path d="M-36,-26 c0,5 -2,10 -4,15" opacity="0.7"/>
+    <path d="M-30,-26 c0,4 -1,8 -2,12" opacity="0.7"/>
+    <path d="M-24,-26 c0,3 -1,6 -2,9" opacity="0.7"/>
+    
+    <!-- overflowing streams -->
+    <path d="M-36,-26 c-5,12 -5,18 0,30"/>
+    <path d="M-30,-26 c-4,10 -4,15 0,25"/>
+    <path d="M-24,-26 c-3,8 -3,12 0,20"/>
+    
+    <!-- water throne details -->
+    <path d="M-130,100 c50,-10 80,-10 130,0 c50,10 80,10 130,0" opacity="0.6"/>
+    <path d="M-110,110 c40,-8 60,-8 100,0 c40,8 60,8 100,0" opacity="0.4"/>
+    
+    <!-- sea waves background -->
+    <path d="M-100,20 c30,-6 50,-6 80,0 c30,6 50,6 80,0" opacity="0.4"/>
+    <path d="M-80,50 c25,-5 40,-5 65,0 c25,5 40,5 65,0" opacity="0.4"/>
+    <path d="M-90,120 c35,-7 55,-7 90,0 c35,7 55,7 90,0" opacity="0.5"/>
+    
+    <!-- fish swimming -->
+    <path d="M-110,-20 c-8,0 -15,5 -15,12 c0,7 7,12 15,12" opacity="0.6"/>
+    <path d="M110,-10 c8,0 15,5 15,12 c0,7 -7,12 -15,12" opacity="0.6"/>
+  </g>
+
+  <title>Tarot Front - King of Cups</title>
+</svg>

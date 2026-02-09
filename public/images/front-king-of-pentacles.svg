@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6f6f8"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e7c77b"/>
+      <stop offset="100%" stop-color="#b8954d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" ry="24" fill="url(#paper)"/>
+  <rect x="10" y="10" width="380" height="620" rx="20" ry="20" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <rect x="18" y="18" width="364" height="604" rx="18" ry="18" fill="none" stroke="url(#border)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- King of Pentacles motif: royal king with ornate pentacle, vineyard throne, prosperity -->
+  <g transform="translate(200,320)" stroke="#dabb67" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- vineyard throne base -->
+    <path d="M-90,80 c-25,0 -50,25 -50,50 c0,25 25,50 50,50 h180 c25,0 50,-25 50,-50 c0,-25 -25,-50 -50,-50"/>
+    <!-- vineyard details -->
+    <path d="M-110,80 c18,8 36,8 54,0 c18,8 36,8 54,0 c18,8 36,8 54,0 c18,8 36,8 54,0" opacity="0.6"/>
+    
+    <!-- throne back -->
+    <path d="M-80,30 c0,-25 25,-35 50,-35 h60 c25,0 50,10 50,35"/>
+    <!-- vineyard back details -->
+    <path d="M-100,30 c30,12 60,12 90,0 c30,12 60,12 90,0" opacity="0.5"/>
+    
+    <!-- king figure -->
+    <circle cx="0" cy="-50" r="14"/>
+    <path d="M0,-36 v60"/>
+    <path d="M-10,-25 h20"/>
+    <path d="M-8,-5 h16"/>
+    <path d="M-6,15 h12"/>
+    <path d="M-4,30 h8"/>
+    <path d="M-2,45 h4"/>
+    
+    <!-- ornate crown -->
+    <path d="M-10,-64 h20"/>
+    <path d="M-8,-64 l0,-10"/>
+    <path d="M-4,-64 l0,-12"/>
+    <path d="M0,-64 l0,-14"/>
+    <path d="M4,-64 l0,-12"/>
+    <path d="M8,-64 l0,-10"/>
+    
+    <!-- arm holding pentacle -->
+    <path d="M-10,-25 l-30,-10"/>
+    
+    <!-- royal ornate pentacle -->
+    <circle cx="-40" cy="-35" r="22"/>
+    <path d="M-40,-57 L-32,-35 L-48,-35 L-24,-27 L-56,-27 L-40,-9 L-24,-27 L-56,-27 L-48,-35 L-32,-35 L-40,-57 Z"/>
+    
+    <!-- vineyard abundance around throne -->
+    <path d="M-75,50 v-20 M-70,30 h10" opacity="0.6"/>
+    <path d="M-50,50 v-20 M-45,30 h10" opacity="0.6"/>
+    <path d="M-25,50 v-20 M-20,30 h10" opacity="0.6"/>
+    <path d="M25,50 v-20 M30,30 h10" opacity="0.6"/>
+    <path d="M50,50 v-20 M55,30 h10" opacity="0.6"/>
+    <path d="M75,50 v-20 M80,30 h10" opacity="0.6"/>
+    
+    <!-- ground/vineyard -->
+    <path d="M-130,100 c50,15 80,15 130,0 c50,15 80,15 130,0" opacity="0.6"/>
+    <path d="M-110,110 c40,12 60,12 100,0 c40,12 60,12 100,0" opacity="0.4"/>
+    
+    <!-- vineyard rows -->
+    <path d="M-130,80 c35,12 70,12 105,0 c35,12 70,12 105,0" opacity="0.4"/>
+    <path d="M-110,70 c28,10 56,10 84,0 c28,10 56,10 84,0" opacity="0.3"/>
+    <path d="M-90,60 c21,7 42,7 63,0 c21,7 42,7 63,0" opacity="0.3"/>
+    
+    <!-- grape vines -->
+    <path d="M-130,20 v35 M-128,20 l4,0" opacity="0.4"/>
+    <path d="M130,20 v35 M132,20 l4,0" opacity="0.4"/>
+    <path d="M-80,25 v30 M-78,25 l4,0" opacity="0.4"/>
+    <path d="M80,25 v30 M82,25 l4,0" opacity="0.4"/>
+    
+    <!-- grape clusters -->
+    <circle cx="-125" cy="40" r="4" opacity="0.6"/>
+    <circle cx="-120" cy="45" r="3" opacity="0.6"/>
+    <circle cx="-130" cy="45" r="3" opacity="0.6"/>
+    <circle cx="125" cy="40" r="4" opacity="0.6"/>
+    <circle cx="120" cy="45" r="3" opacity="0.6"/>
+    <circle cx="130" cy="45" r="3" opacity="0.6"/>
+    
+    <!-- decorative vines on throne -->
+    <path d="M-75,60 v15 M-70,75 h10" opacity="0.5"/>
+    <path d="M75,60 v15 M80,75 h10" opacity="0.5"/>
+    <path d="M-50,70 v10 M-45,80 h10" opacity="0.5"/>
+    <path d="M50,70 v10 M55,80 h10" opacity="0.5"/>
+    
+    <!-- wealth symbols -->
+    <circle cx="-30" cy="85" r="4" opacity="0.6"/>
+    <circle cx="0" cy="90" r="4" opacity="0.6"/>
+    <circle cx="30" cy="85" r="4" opacity="0.6"/>
+  </g>
+
+  <title>Tarot Front - King of Pentacles</title>
+</svg>
