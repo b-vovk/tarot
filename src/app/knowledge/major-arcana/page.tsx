@@ -42,7 +42,7 @@ export default function MajorArcanaPage() {
         </div>
 
         <div className="cardsGrid">
-          {majorArcana.map((card, index) => (
+          {majorArcana.map((card) => (
             <Link
               key={card.id}
               href={`/knowledge/card/${card.id}`}

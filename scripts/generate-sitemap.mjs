@@ -109,7 +109,6 @@ async function main() {
     fs.writeFile(path.join(publicDir, 'robots.txt'), robotsTxt, 'utf8'),
   ]);
 
-  // eslint-disable-next-line no-console
   console.log(`Generated sitemap.xml (${urls.length} URLs) and robots.txt for ${baseUrl}`);
 }
 
