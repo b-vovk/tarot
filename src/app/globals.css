@@ -64,41 +64,43 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 
-/* Allow scrolling for knowledge pages */
-body.knowledge-page {
-  overflow: auto !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-/* Ensure knowledge pages can scroll */
+/* Knowledge pages: scroll on the page (scrollbar at far right of viewport) */
+html[data-path*="knowledge"],
 html:has(body.knowledge-page) {
-  overflow: auto !important;
   height: auto !important;
+  min-height: 100% !important;
+  overflow: auto !important;
+  overflow-x: hidden !important;
 }
 
-html:has(body.knowledge-page) body.knowledge-page {
+html[data-path*="knowledge"] body,
+body.knowledge-page {
+  height: auto !important;
+  min-height: 100vh !important;
   overflow: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: auto !important;
+}
+
+/* Main stays in flow, no inner scroll */
+body.knowledge-page main.container,
+html[data-path*="knowledge"] main.container {
+  overflow: visible !important;
+  max-height: none !important;
+  padding-top: calc(var(--header-h) + 8px) !important;
+  padding-bottom: 80px !important;
+}
+
+body.knowledge-page .knowledgePage,
+html[data-path*="knowledge"] .knowledgePage {
+  overflow: visible !important;
   height: auto !important;
   min-height: 100vh !important;
 }
 
-/* Ensure knowledge page container allows scrolling */
-body.knowledge-page .container {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
-
-/* Ensure knowledge page content can scroll */
-body.knowledge-page .knowledgePage {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-/* Ensure header stays sticky on knowledge pages */
-body.knowledge-page .siteHeader {
+/* Fixed header so scrollbar runs full height at page edge */
+body.knowledge-page .siteHeader,
+html[data-path*="knowledge"] .siteHeader {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -107,37 +109,14 @@ body.knowledge-page .siteHeader {
   width: 100% !important;
 }
 
-/* Add top padding to main content to account for fixed header */
-body.knowledge-page .container {
-  padding-top: 60px !important;
-}
-
-/* Ensure footer maintains original size on knowledge pages */
-body.knowledge-page .siteFooter {
+body.knowledge-page .siteFooter,
+html[data-path*="knowledge"] .siteFooter {
   padding: 0 !important;
 }
 
-body.knowledge-page .siteFooter .container {
+body.knowledge-page .siteFooter .container,
+html[data-path*="knowledge"] .siteFooter .container {
   padding: calc(10px + env(safe-area-inset-bottom)) 20px 10px !important;
-}
-
-/* Alternative approach: Use URL-based CSS targeting */
-html[data-path*="knowledge"] body {
-  overflow: auto !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-html[data-path*="knowledge"] .container {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
-
-html[data-path*="knowledge"] .knowledgePage {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: 100vh !important;
 }
 body {
   margin: 0;
