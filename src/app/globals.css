@@ -64,41 +64,43 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 
-/* Allow scrolling for knowledge pages */
-body.knowledge-page {
-  overflow: auto !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-/* Ensure knowledge pages can scroll */
+/* Knowledge pages: scroll on the page (scrollbar at far right of viewport) */
+html[data-path*="knowledge"],
 html:has(body.knowledge-page) {
-  overflow: auto !important;
   height: auto !important;
+  min-height: 100% !important;
+  overflow: auto !important;
+  overflow-x: hidden !important;
 }
 
-html:has(body.knowledge-page) body.knowledge-page {
+html[data-path*="knowledge"] body,
+body.knowledge-page {
+  height: auto !important;
+  min-height: 100vh !important;
   overflow: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: auto !important;
+}
+
+/* Main stays in flow, no inner scroll */
+body.knowledge-page main.container,
+html[data-path*="knowledge"] main.container {
+  overflow: visible !important;
+  max-height: none !important;
+  padding-top: calc(var(--header-h) + 8px) !important;
+  padding-bottom: 80px !important;
+}
+
+body.knowledge-page .knowledgePage,
+html[data-path*="knowledge"] .knowledgePage {
+  overflow: visible !important;
   height: auto !important;
   min-height: 100vh !important;
 }
 
-/* Ensure knowledge page container allows scrolling */
-body.knowledge-page .container {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
-
-/* Ensure knowledge page content can scroll */
-body.knowledge-page .knowledgePage {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-/* Ensure header stays sticky on knowledge pages */
-body.knowledge-page .siteHeader {
+/* Fixed header so scrollbar runs full height at page edge */
+body.knowledge-page .siteHeader,
+html[data-path*="knowledge"] .siteHeader {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -107,37 +109,14 @@ body.knowledge-page .siteHeader {
   width: 100% !important;
 }
 
-/* Add top padding to main content to account for fixed header */
-body.knowledge-page .container {
-  padding-top: 60px !important;
-}
-
-/* Ensure footer maintains original size on knowledge pages */
-body.knowledge-page .siteFooter {
+body.knowledge-page .siteFooter,
+html[data-path*="knowledge"] .siteFooter {
   padding: 0 !important;
 }
 
-body.knowledge-page .siteFooter .container {
+body.knowledge-page .siteFooter .container,
+html[data-path*="knowledge"] .siteFooter .container {
   padding: calc(10px + env(safe-area-inset-bottom)) 20px 10px !important;
-}
-
-/* Alternative approach: Use URL-based CSS targeting */
-html[data-path*="knowledge"] body {
-  overflow: auto !important;
-  height: auto !important;
-  min-height: 100vh !important;
-}
-
-html[data-path*="knowledge"] .container {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
-
-html[data-path*="knowledge"] .knowledgePage {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: 100vh !important;
 }
 body {
   margin: 0;
@@ -226,38 +205,139 @@ body, button, select, input, textarea {
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
 }
 
-/* Language switcher */
-.langSwitcher {
+/* Header right: menu + language */
+.headerNav {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
-.langLabel {
-  margin-right: 8px;
-  color: var(--muted);
-  font-size: 12px;
-}
-.langSelect {
-  background: #1a2030;
-  color: var(--text);
-  border-radius: 9999px;
-  height: 34px;
-  padding: 0 14px;
-  line-height: 34px; /* helps vertical centering in many browsers */
-  border: 1px solid rgba(255,255,255,0.12);
+
+/* Shared pill style for header controls (Menu + Language) */
+.headerPill {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
-  background-image: none;
+  background: #1a2030;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 9999px;
+  height: 30px;
+  width: 110px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   outline-offset: 2px;
-  font-size: 14px;
-  vertical-align: middle;
-  text-align: center;           /* horizontal centering for most browsers */
-  text-align-last: center;      /* Firefox: center selected value */
 }
-.langSelect, .langSelect option { font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; }
-.langSelect:focus-visible { box-shadow: var(--ring); outline: none; }
+.headerPill:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
+}
+.headerPill:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* More menu dropdown / inline options */
+.headerMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.headerMenuTrigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.headerMenuTrigger[aria-expanded="true"] {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
+}
+/* Menu option pills (inline when menu is open) */
+.headerMenuOptionPill {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.headerMenuBackPill {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+}
+/* Shared dropdown panel (Menu + Language) */
+.headerDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: rgba(14, 20, 34, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(218,187,103,0.28);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 10px 28px -4px rgba(0,0,0,0.45);
+  padding: 8px 0;
+  z-index: 30;
+}
+.headerDropdownItem {
+  display: block;
+  padding: 10px 18px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.headerDropdownItem:hover {
+  background: rgba(218,187,103,0.14);
+  color: var(--accent);
+}
+a.headerDropdownItem {
+  font-family: inherit;
+}
+
+/* Menu uses .headerDropdown and .headerDropdownItem (see shared styles above) */
+
+/* Language (inline pills when open, same pattern as Menu) */
+.headerLang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.headerLangTrigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.headerLangTrigger[aria-expanded="true"] {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
+}
+.headerLangOptionPill {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
 
 .container {
   max-width: 1040px;
@@ -1314,24 +1394,28 @@ button {
   box-shadow: var(--shadow-sm);
 }
 button:hover { background: #222a40; }
+/* Draw again / Share Reading – match header pill */
 button.primary {
-  background: linear-gradient(180deg, var(--accent-2) 0%, #6f5bd7 100%);
-  color: #0b0b0e;
-  border: none;
-  box-shadow: var(--shadow-md);
-}
-button.primary:hover { filter: brightness(0.98); }
-button.secondary {
-  background: rgba(255,255,255,0.08);
+  background: #1a2030;
   color: var(--text);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--shadow-sm);
+}
+button.primary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
+}
+button.secondary {
+  background: #1a2030;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
   font-size: 14px;
 }
-button.secondary:hover { 
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.3);
+button.secondary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
 }
-button:focus-visible { outline: none; box-shadow: var(--ring); }
+button:focus-visible { outline: none; box-shadow: none; }
 
 .helper {
   color: var(--muted);
@@ -2142,24 +2226,27 @@ html body .deck .cardFront.reversed .cardContent .cardBody {
   }
 }
 
-/* Style the shared deck button to match main page buttons */
-.actions .primary {
-  background: linear-gradient(180deg, var(--accent-2) 0%, #6f5bd7 100%);
-  color: #0b0b0e;
-  border: none;
-  box-shadow: var(--shadow-md);
+/* Style the shared deck / actions buttons to match header pill */
+.actions .primary,
+.actions a.primary {
+  background: #1a2030;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
   display: inline-block;
   padding: 10px 14px;
   border-radius: 9999px;
   font-weight: 500;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
 }
 
-.actions .primary:hover {
-  filter: brightness(0.98);
+.actions .primary:hover,
+.actions a.primary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
 }
 
 .actions .helper {
@@ -3192,6 +3279,273 @@ html body .deck .cardFront.reversed .cardContent .cardBody {
   background: rgba(20, 26, 43, 0.8);
   border-color: var(--accent-2);
   color: var(--accent-2);
+}
+
+/* Card detail page (/knowledge/card/[cardId]) – same width as other pages */
+.cardDetailPage {
+  padding-top: 0;
+}
+
+.cardDetailHeader {
+  margin-bottom: var(--spacing-8);
+  padding-top: 48px;
+}
+
+.cardDetailHero {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: start;
+  margin-top: var(--spacing-6);
+}
+
+.cardDetailCardWrap {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.cardDetailCard {
+  width: 100%;
+  aspect-ratio: 3 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Standalone card: no 3D flip rotation */
+  transform: none;
+}
+
+.cardDetailCard.reversed {
+  transform: scaleY(-1);
+}
+
+.cardDetailCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.cardDetailCard.reversed:hover {
+  transform: scaleY(-1) scale(1.02);
+}
+
+/* Card name higher and a bit smaller on the detail page card */
+.cardDetailCard .cardTitleFixed {
+  top: 48px !important;
+  font-size: clamp(14px, 2.5vw, 22px) !important;
+}
+
+.cardDetailCard.reversed .cardTitleFixed {
+  top: auto !important;
+  bottom: 48px !important;
+}
+
+.cardDetailMeta {
+  min-width: 0;
+}
+
+.cardDetailTitle {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+  margin: 0 0 var(--spacing-2);
+  color: var(--title);
+  line-height: 1.2;
+}
+
+.cardDetailType {
+  color: var(--accent);
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--spacing-4);
+  font-weight: 500;
+}
+
+.cardDetailMeaning {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--border);
+}
+
+.cardDetailMeaningTitle {
+  font-size: var(--font-size-base);
+  color: var(--title);
+  margin: 0 0 var(--spacing-3);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cardDetailMeaningBlock {
+  background: rgba(20, 26, 43, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  backdrop-filter: blur(8px);
+}
+
+.cardDetailMeta .cardPageMeaningLabel {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-2);
+}
+
+.cardDetailMeta .cardPageMeaningText {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.cardPageContent {
+  max-width: 100%;
+  padding-top: var(--spacing-4);
+}
+
+.cardPageSection {
+  margin-bottom: var(--spacing-8);
+}
+
+.cardPageSectionTitle {
+  font-size: var(--font-size-xl);
+  color: var(--title);
+  margin: 0 0 var(--spacing-4);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cardPageKeywordsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.cardPageKeywordBlock {
+  background: rgba(20, 26, 43, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-5);
+  backdrop-filter: blur(8px);
+}
+
+.cardPageKeywordBlock h3 {
+  font-size: var(--font-size-sm);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--spacing-2);
+  font-weight: 600;
+}
+
+.cardPageKeywordBlock p {
+  color: var(--text);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cardPageMeaningBlock {
+  background: rgba(20, 26, 43, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-6);
+  backdrop-filter: blur(8px);
+}
+
+.cardPageMeaningLabel {
+  font-size: var(--font-size-base);
+  color: var(--accent);
+  margin: 0 0 var(--spacing-3);
+  font-weight: 600;
+}
+
+.cardPageMeaningText {
+  color: var(--text);
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cardPageSymbolismContent {
+  background: rgba(20, 26, 43, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-6);
+  backdrop-filter: blur(8px);
+}
+
+.cardPageSymbolismContent p {
+  color: var(--text);
+  line-height: 1.75;
+  margin: 0 0 var(--spacing-4);
+  font-size: var(--font-size-base);
+}
+
+.cardPageSymbolismContent p:last-child {
+  margin-bottom: 0;
+}
+
+.cardPageActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  justify-content: center;
+  margin-top: var(--spacing-10);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .cardDetailHeader {
+    margin-bottom: var(--spacing-6);
+    padding-top: 40px;
+  }
+
+  .cardDetailHero {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    text-align: center;
+  }
+
+  .cardDetailCardWrap {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  .cardDetailMeta {
+    text-align: center;
+  }
+
+  .cardDetailTitle {
+    font-size: clamp(var(--font-size-xl), 5vw, var(--font-size-2xl));
+  }
+
+  .cardDetailType {
+    margin-bottom: var(--spacing-3);
+  }
+
+  .cardPageContent {
+    padding-top: 0;
+  }
+
+  .cardPageSection {
+    margin-bottom: var(--spacing-6);
+  }
+
+  .cardPageKeywordsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardPageKeywordBlock,
+  .cardPageMeaningBlock,
+  .cardPageSymbolismContent {
+    padding: var(--spacing-4);
+  }
+
+  .cardPageActions {
+    margin-top: var(--spacing-8);
+    padding-top: var(--spacing-5);
+  }
+
+  .cardDetailMeaning {
+    margin-top: var(--spacing-3);
+    padding-top: var(--spacing-3);
+  }
 }
 
 /* Suit Header */

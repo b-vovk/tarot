@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Providers from "./providers";
 import ClientHeader from "@/components/ClientHeader";
+import PathTracker from "@/components/PathTracker";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import SEO from "@/components/SEO";
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* Ignore client-only attrs inserted by extensions */}
       <body suppressHydrationWarning className={`${inter.variable} ${cormorant.variable}`}>
         <Providers>
+          <PathTracker />
           <GoogleTagManager />
           <GoogleAnalytics />
           <SEO />

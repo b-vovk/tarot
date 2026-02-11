@@ -62,58 +62,53 @@ export default function CardPageClient({ cardId }: CardPageClientProps) {
       />
       
       <div className="homeBg" aria-hidden="true" />
-      <div className="knowledgePage">
-        <div className="knowledgeHeader">
+      <div className="knowledgePage cardDetailPage">
+        <div className="knowledgeHeader cardDetailHeader">
           <Link href={getBackLink()} className="backLink">← Back to {isMajorArcana ? 'Major Arcana' : suit ? `${suit.charAt(0).toUpperCase() + suit.slice(1)} Suit` : 'Knowledge'}</Link>
-          <div className="cardHeader">
-            <div className="cardHeaderImage">
+          <div className="cardDetailHero">
+            <div className="cardDetailCardWrap">
               <div 
-                className={`cardFront cardFront-${card.id.replace(/_/g, '-')} ${isReversed ? 'reversed' : ''}`}
+                className={`cardDetailCard cardFront cardFront-${card.id.replace(/_/g, '-')} ${isReversed ? 'reversed' : ''}`}
                 onClick={() => setIsReversed(!isReversed)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && setIsReversed(!isReversed)}
+                aria-label={isReversed ? 'Show upright' : 'Show reversed'}
               >
-                <div className="cardTitleFixed">
-                  {card.name}
-                </div>
+                <div className="cardTitleFixed">{card.name}</div>
               </div>
             </div>
-            <div className="cardHeaderContent">
-              <h1>{card.name}</h1>
-              <div className="cardType">{getCardType()}</div>
-              <button 
-                className="flipButton"
-                onClick={() => setIsReversed(!isReversed)}
-              >
-                {isReversed ? 'Show Upright' : 'Show Reversed'}
-              </button>
+            <div className="cardDetailMeta">
+              <h1 className="cardDetailTitle">{card.name}</h1>
+              <div className="cardDetailMeaning">
+                <h2 className="cardDetailMeaningTitle">Meaning</h2>
+                <div className="cardDetailMeaningBlock">
+                  <h3 className="cardPageMeaningLabel">{isReversed ? 'Reversed' : 'Upright'}</h3>
+                  <p className="cardPageMeaningText">{isReversed ? card.description.reversed : card.description.upright}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="cardContent">
-          <div className="cardKeywords">
-            <div className="keywordSection">
-              <h3>Upright Keywords</h3>
-              <p className="keywordText">{card.upright}</p>
-            </div>
-            <div className="keywordSection">
-              <h3>Reversed Keywords</h3>
-              <p className="keywordText">{card.reversed}</p>
-            </div>
-          </div>
-
-          <div className="cardDescription">
-            <h3>Meaning</h3>
-            <div className="descriptionContent">
-              <div className={`descriptionText ${isReversed ? 'reversed' : 'upright'}`}>
-                <h4>{isReversed ? 'Reversed' : 'Upright'}</h4>
-                <p>{isReversed ? card.description.reversed : card.description.upright}</p>
+        <div className="cardPageContent">
+          <section className="cardPageSection cardPageKeywords">
+            <h2 className="cardPageSectionTitle">Keywords</h2>
+            <div className="cardPageKeywordsGrid">
+              <div className="cardPageKeywordBlock">
+                <h3>Upright</h3>
+                <p>{card.upright}</p>
+              </div>
+              <div className="cardPageKeywordBlock">
+                <h3>Reversed</h3>
+                <p>{card.reversed}</p>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="cardSymbolism">
-            <h3>Symbolism & Interpretation</h3>
-            <div className="symbolismContent">
+          <section className="cardPageSection cardPageSymbolism">
+            <h2 className="cardPageSectionTitle">Symbolism & Interpretation</h2>
+            <div className="cardPageSymbolismContent">
               <p>
                 The {card.name} represents a significant aspect of the human experience. 
                 {isMajorArcana ? ' As part of the Major Arcana, this card speaks to life\'s most profound lessons and spiritual journey.' : ` As part of the ${suit} suit, this card relates to ${suit === 'cups' ? 'emotions and relationships' : suit === 'wands' ? 'passion and creativity' : suit === 'swords' ? 'thoughts and communication' : 'material world and work'}.`}
@@ -122,9 +117,9 @@ export default function CardPageClient({ cardId }: CardPageClientProps) {
                 When {isReversed ? 'reversed' : 'upright'}, this card {isReversed ? 'suggests challenges or alternative perspectives' : 'indicates positive energy and growth'} in your current situation.
               </p>
             </div>
-          </div>
+          </section>
 
-          <div className="cardActions">
+          <div className="cardPageActions">
             <Link href="/" className="actionButton primary">
               Get Your Reading
             </Link>
