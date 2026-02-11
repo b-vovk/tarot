@@ -15,7 +15,6 @@ export default function ClientHeader() {
   function handleHomeClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     if (pathname === "/") {
-      // Force a full reload to reset client state on the homepage
       window.location.reload();
     } else {
       router.push("/");
