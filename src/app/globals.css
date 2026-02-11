@@ -213,7 +213,7 @@ body, button, select, input, textarea {
   gap: 6px;
 }
 
-/* Shared pill style for header controls (More menu + Language) */
+/* Shared pill style for header controls (Menu + Language) */
 .headerPill {
   appearance: none;
   -webkit-appearance: none;
@@ -222,21 +222,21 @@ body, button, select, input, textarea {
   color: var(--text);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 9999px;
-  height: 34px;
-  width: 130px;
-  padding: 0 14px;
+  height: 30px;
+  width: 110px;
+  padding: 0 12px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 13px;
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   outline-offset: 2px;
 }
 .headerPill:hover {
   background: #222a3d;
-  border-color: rgba(218,187,103,0.25);
+  border-color: rgba(255,255,255,0.18);
 }
 .headerPill:focus-visible {
   outline: none;
-  box-shadow: var(--ring);
+  box-shadow: none;
 }
 
 /* More menu dropdown / inline options */
@@ -255,7 +255,7 @@ body, button, select, input, textarea {
 }
 .headerMenuTrigger[aria-expanded="true"] {
   background: #222a3d;
-  border-color: rgba(218,187,103,0.3);
+  border-color: rgba(255,255,255,0.18);
 }
 /* Menu option pills (inline when menu is open) */
 .headerMenuOptionPill {
@@ -329,7 +329,7 @@ a.headerDropdownItem {
 }
 .headerLangTrigger[aria-expanded="true"] {
   background: #222a3d;
-  border-color: rgba(218,187,103,0.3);
+  border-color: rgba(255,255,255,0.18);
 }
 .headerLangOptionPill {
   cursor: pointer;
@@ -1394,24 +1394,28 @@ button {
   box-shadow: var(--shadow-sm);
 }
 button:hover { background: #222a40; }
+/* Draw again / Share Reading – match header pill */
 button.primary {
-  background: linear-gradient(180deg, var(--accent-2) 0%, #6f5bd7 100%);
-  color: #0b0b0e;
-  border: none;
-  box-shadow: var(--shadow-md);
-}
-button.primary:hover { filter: brightness(0.98); }
-button.secondary {
-  background: rgba(255,255,255,0.08);
+  background: #1a2030;
   color: var(--text);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--shadow-sm);
+}
+button.primary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
+}
+button.secondary {
+  background: #1a2030;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
   font-size: 14px;
 }
-button.secondary:hover { 
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.3);
+button.secondary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
 }
-button:focus-visible { outline: none; box-shadow: var(--ring); }
+button:focus-visible { outline: none; box-shadow: none; }
 
 .helper {
   color: var(--muted);
@@ -2222,24 +2226,27 @@ html body .deck .cardFront.reversed .cardContent .cardBody {
   }
 }
 
-/* Style the shared deck button to match main page buttons */
-.actions .primary {
-  background: linear-gradient(180deg, var(--accent-2) 0%, #6f5bd7 100%);
-  color: #0b0b0e;
-  border: none;
-  box-shadow: var(--shadow-md);
+/* Style the shared deck / actions buttons to match header pill */
+.actions .primary,
+.actions a.primary {
+  background: #1a2030;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
   display: inline-block;
   padding: 10px 14px;
   border-radius: 9999px;
   font-weight: 500;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
 }
 
-.actions .primary:hover {
-  filter: brightness(0.98);
+.actions .primary:hover,
+.actions a.primary:hover {
+  background: #222a3d;
+  border-color: rgba(255,255,255,0.18);
 }
 
 .actions .helper {
